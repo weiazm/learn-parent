@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hongyan.learn</groupId>
+    <artifactId>learn-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>learn-parent</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+    	<java-build-version>1.8</java-build-version>
+		<bj-bom-all-version>0.0.37</bj-bom-all-version>
+		<jetty-maven-plugin-version>9.3.11.v20160721</jetty-maven-plugin-version>
+		<maven-release-plugin-version>2.5.3</maven-release-plugin-version>
+		<cobertura-maven-plugin-version>2.7</cobertura-maven-plugin-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+		<plugin>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-maven-plugin</artifactId>
+			<version>${jetty-maven-plugin-version}</version>
+		</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java-build-version}</source>
+                    <target>${java-build-version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <modules>
+    <module>learn-biz</module>
+    <module>learn-sal</module>
+    <module>learn-common</module>
+    <module>learn-dao</module>
+    <module>learn-web</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.baijia.bom</groupId>
+                <artifactId>bj-bom-all</artifactId>
+                <version>0.0.30</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
