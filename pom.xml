@@ -43,6 +43,16 @@
     <module>learn-dao</module>
     <module>learn-web</module>
     </modules>
+    <dependencies>
+    	<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+    </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
