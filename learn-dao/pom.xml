@@ -5,9 +5,9 @@
     <artifactId>learn-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>learn-dao</artifactId>
+  <artifactId>learn-dal</artifactId>
   <packaging>jar</packaging>
-  <name>learn-dao</name>
+  <name>learn-dal</name>
   
   <url>http://maven.apache.org</url>
 

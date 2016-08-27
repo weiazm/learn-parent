@@ -166,7 +166,7 @@
 		
 		<dependency>
 			<groupId>com.hongyan.learn</groupId>
-    		<artifactId>learn-dao</artifactId>
+    		<artifactId>learn-dal</artifactId>
     		<version>${version}</version>
 		</dependency>
 		<dependency>

@@ -6,7 +6,7 @@
  * @title package-info
  * @desc 1+1=2
  * @author hongyan
- * @date Aug 26, 2016
+ * @date Aug 27, 2016
  * @version 1.0
  */
-package com.hongyan.learn.dao;
+package com.hongyan.learn.dal.po;
