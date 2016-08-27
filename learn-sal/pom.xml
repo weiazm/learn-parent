@@ -17,5 +17,14 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.hongyan.learn</groupId>
+	  		<artifactId>learn-dal</artifactId>
+	  		<version>${version}</version>
+	</dependency>
   </dependencies>
 </project>

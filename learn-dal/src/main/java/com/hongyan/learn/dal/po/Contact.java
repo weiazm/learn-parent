@@ -10,6 +10,8 @@ import com.baijia.tianxiao.sqlbuilder.annotation.GeneratedValue;
 import com.baijia.tianxiao.sqlbuilder.annotation.Id;
 import com.baijia.tianxiao.sqlbuilder.annotation.Table;
 
+import lombok.Data;
+
 /**
  * @title c
  * @desc 1+1=2
@@ -17,6 +19,7 @@ import com.baijia.tianxiao.sqlbuilder.annotation.Table;
  * @date Aug 27, 2016
  * @version 1.0
  */
+@Data
 @Entity
 @Table(catalog = "test", name = "contact")
 public class Contact {
