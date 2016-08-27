@@ -40,7 +40,7 @@
     <module>learn-biz</module>
     <module>learn-sal</module>
     <module>learn-common</module>
-    <module>learn-dao</module>
+    <module>learn-dal</module>
     <module>learn-web</module>
     </modules>
     <dependencies>
