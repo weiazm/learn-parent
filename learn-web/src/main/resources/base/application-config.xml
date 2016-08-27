@@ -14,8 +14,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:annotation-config />
-    <context:component-scan base-package="com.hongyan.learn.service"/>
-    <context:component-scan base-package="com.hongyan.learn.filter"/>
+    <context:component-scan base-package="com.hongyan.learn"/>
     
 	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:database/hongyan-learn.sql" />
@@ -26,15 +25,18 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.hongyan.learn.po" />
-	</bean>
-	
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.hongyan.learn.mapper" />
-	</bean>
+	<tx:annotation-driven transaction-manager="transacManager"/>
+    <bean id="transacManager"
+          class="org.springframework.jdbc.datasource.MultiDataSourceTransactionManager">
+    </bean>
 
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
 	<bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
