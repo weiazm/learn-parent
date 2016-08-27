@@ -1,4 +1,5 @@
 drop schema if exists test;
+create schema test;
 Create table test.contact(
 	id int(11) unsigned not null auto_increment comment '自增主键',
 	name varchar(100) not null comment '姓名',
