@@ -25,7 +25,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
     @SuppressWarnings("deprecation")
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String home(Locale locale, Model model, HttpServletRequest req) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
