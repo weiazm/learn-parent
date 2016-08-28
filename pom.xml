@@ -10,6 +10,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+    	<pebble.version>2.2.1</pebble.version>
     	<java-build-version>1.8</java-build-version>
 		<bj-bom-all-version>0.0.37</bj-bom-all-version>
 		<jetty-maven-plugin-version>9.3.11.v20160721</jetty-maven-plugin-version>
