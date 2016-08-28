@@ -11,6 +11,8 @@ import com.hongyan.learn.web.dto.ErrorDetail.ErrorCode;
 import com.hongyan.learn.web.dto.ResponseStatus;
 import com.hongyan.learn.web.dto.WebResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +26,11 @@ import lombok.extern.slf4j.Slf4j;
  * @date Aug 27, 2016
  * @version 1.0
  */
-@Slf4j
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
+    private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
+    
     @Autowired
     private ContactService contactService;
 
@@ -40,7 +43,7 @@ public class ContactController {
             resp.setData(result);
             return resp;
         }catch (Exception e){
-            log.error(e.getMessage());
+            logger.info(e.getMessage());
             resp.setError(new ErrorDetail(ErrorCode.system_error,e.getMessage()));
             return resp;
         }
