@@ -36,6 +36,7 @@ public class ContactController {
 
     @RequestMapping("/getByName.json")
     public WebResponse<ContactDto> getContactByName(String name) {
+        logger.info(name);
         WebResponse<ContactDto> resp = new WebResponse<ContactDto>();
         try{
             ContactDto result = contactService.getContactDtoByName(name);

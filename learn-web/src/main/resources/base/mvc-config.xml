@@ -17,7 +17,8 @@
     <context:annotation-config />
 	<context:component-scan base-package="com.hongyan.learn.web.controller" />	
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<bean id="servletContext" class="com.hongyan.learn.web.servlet.ServletContextFactory"/>
+
 	<bean id="templateLoader" class="com.mitchellbosecke.pebble.loader.ServletLoader">
         <constructor-arg ref="servletContext"/>
     </bean>
