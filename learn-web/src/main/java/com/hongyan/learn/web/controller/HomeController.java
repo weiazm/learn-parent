@@ -24,7 +24,6 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-    @SuppressWarnings("deprecation")
     @RequestMapping(value = "/index.do")
     public String home() {
 		logger.info("Welcome home! The client locale is {}.");
