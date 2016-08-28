@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,11 +38,11 @@ public class ContactController {
 
     @RequestMapping("/getByName.json")
     @ResponseBody
-    public WebResponse<ContactDto> getContactByName(String name) {
-        logger.info(name);
+    public WebResponse<ContactDto> getContactByName(String contactName) {
+        logger.info("name={}",contactName);
         WebResponse<ContactDto> resp = new WebResponse<ContactDto>();
         try{
-            ContactDto result = contactService.getContactDtoByName(name);
+            ContactDto result = contactService.getContactDtoByName(contactName);
             resp.setStatus(ResponseStatus.ok);
             resp.setData(result);
             return resp;
