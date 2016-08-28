@@ -25,17 +25,9 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
     @SuppressWarnings("deprecation")
-    @RequestMapping(value = "/index.do", method = RequestMethod.GET)
-    public String home(Locale locale, Model model, HttpServletRequest req) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-        model.addAttribute("path", req.getRealPath("/"));
+    @RequestMapping(value = "/index.do")
+    public String home() {
+		logger.info("Welcome home! The client locale is {}.");
 		return "home";
 	}
 	
