@@ -24,14 +24,14 @@
 
     <bean id="springExtension" class="com.mitchellbosecke.pebble.spring.extension.SpringExtension"/>
 
-    <bean id="pebbleEngine" class="com.baijia.tianxiao.www.servlet.PebbleEngineFactory" factory-method="instance">
+    <bean id="pebbleEngine" class="com.hongyan.learn.web.servlet.PebbleEngineFactory" factory-method="instance">
         <constructor-arg ref="templateLoader"/>
         <constructor-arg ref="springExtension"/>
     </bean>
 
     <bean id="viewResolver" class="com.mitchellbosecke.pebble.spring.PebbleViewResolver">
         <property name="viewClass"
-                  value="com.baijia.tianxiao.www.servlet.PebbleJsonView"/>
+                  value="com.hongyan.learn.web.servlet.PebbleJsonView"/>
         <property name="prefix" value="/views"/>
         <property name="suffix" value=".html"/>
         <property name="pebbleEngine" ref="pebbleEngine"/>
