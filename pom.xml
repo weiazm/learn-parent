@@ -13,7 +13,7 @@
     	<pebble.version>2.2.1</pebble.version>
     	<java-build-version>1.8</java-build-version>
 		<bj-bom-all-version>0.0.37</bj-bom-all-version>
-		<jetty-maven-plugin-version>9.3.11.v20160721</jetty-maven-plugin-version>
+		<jetty-maven-plugin-version>8.1.9.v20130131</jetty-maven-plugin-version>
 		<maven-release-plugin-version>2.5.3</maven-release-plugin-version>
 		<cobertura-maven-plugin-version>2.7</cobertura-maven-plugin-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,11 +21,23 @@
 
     <build>
         <plugins>
-		<plugin>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-maven-plugin</artifactId>
-			<version>${jetty-maven-plugin-version}</version>
-		</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty-maven-plugin-version}</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.bio.SocketConnector">
+							<port>8080</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
