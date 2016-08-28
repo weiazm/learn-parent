@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +36,7 @@ public class ContactController {
     private ContactService contactService;
 
     @RequestMapping("/getByName.json")
+    @ResponseBody
     public WebResponse<ContactDto> getContactByName(String name) {
         logger.info(name);
         WebResponse<ContactDto> resp = new WebResponse<ContactDto>();

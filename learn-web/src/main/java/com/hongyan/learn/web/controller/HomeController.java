@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -25,6 +26,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
     @RequestMapping(value = "/index.do")
+    @ResponseBody
     public String home() {
 		logger.info("Welcome home! The client locale is {}.");
 		return "home";
