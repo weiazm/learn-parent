@@ -20,44 +20,10 @@
 				<directory>src/main/resources/base</directory>
 			</resource>
 			<resource>
-				<!--directory>src/main/resources/${res}</directory -->
-				<directory>src/main/resources/qa</directory>
+				<directory>src/main/resources/${res}</directory>
 			</resource>
 		</resources>
 	</build>
-	<!-- -P参数 资源配置 -->
-	<profiles>
-		<profile>
-			<id>prod</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>res</name>
-					<value>prod</value>
-				</property>
-			</activation>
-		</profile>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>res</name>
-					<value>dev</value>
-				</property>
-			</activation>
-		</profile>
-		<profile>
-			<id>qa</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-				<property>
-					<name>res</name>
-					<value>qa</value>
-				</property>
-			</activation>
-		</profile>
-	</profiles>
 	<dependencies>
 		<!-- Spring MVC -->
 		<dependency>
