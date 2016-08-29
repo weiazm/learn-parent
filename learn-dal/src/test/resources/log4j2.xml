@@ -37,7 +37,8 @@
 			<AppenderRef ref="error" level="error" />
 		</AsyncRoot>
 	</Loggers>
-	<Logger name="com.mitchellbosecke.pebble.spring.PebbleView.timer" level="DEBUG" additivity="false">
+	<Logger name="com.mitchellbosecke.pebble.spring.PebbleView.timer"
+		level="DEBUG" additivity="false">
 		<AppenderRef ref="STDOUT" />
 	</Logger>
 </configuration>

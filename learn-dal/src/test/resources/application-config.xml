@@ -3,7 +3,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -14,21 +14,21 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:annotation-config />
-    <context:component-scan base-package="com.hongyan.learn"/>
-     <context:component-scan base-package="com.baijia.tianxiao.sqlbuilder.*" />
-    
+	<context:component-scan base-package="com.hongyan.learn" />
+	<context:component-scan base-package="com.baijia.tianxiao.sqlbuilder.*" />
+
 	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:database/hongyan-learn.sql" />
 	</jdbc:embedded-database>
-	
+
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transacManager"/>
-    <bean id="transacManager"
-          class="org.springframework.jdbc.datasource.MultiDataSourceTransactionManager">
-    </bean>
+	<tx:annotation-driven transaction-manager="transacManager" />
+	<bean id="transacManager"
+		class="org.springframework.jdbc.datasource.MultiDataSourceTransactionManager">
+	</bean>
 
 </beans>
