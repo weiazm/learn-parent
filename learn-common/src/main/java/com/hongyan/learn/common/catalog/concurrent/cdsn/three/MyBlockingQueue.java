@@ -23,20 +23,6 @@ public class MyBlockingQueue<T> {
         this.box = new LinkedList<T>();
     }
 
-    public synchronized void put(T t) {
-        while (box.size() >= limit) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        box.add(t);
-        notifyAll();
-        System.out.println(Thread.currentThread().getName() + "放入了一个" + " queue大小:" + box.size());
-    }
-
     public synchronized T get() {
         while (box.size() < 1) {
             try {
@@ -50,5 +36,19 @@ public class MyBlockingQueue<T> {
         System.out.println(Thread.currentThread().getName() + "得到了一个" + " queue大小:" + box.size());
         notifyAll();
         return t;
+    }
+
+    public synchronized void put(T t) {
+        while (box.size() >= limit) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        box.add(t);
+        notifyAll();
+        System.out.println(Thread.currentThread().getName() + "放入了一个" + " queue大小:" + box.size());
     }
 }

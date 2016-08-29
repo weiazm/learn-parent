@@ -14,6 +14,14 @@ import java.io.File;
  * @version version
  */
 public class FileOperation {
+    public static void main(String[] args) {
+        File file = new File("/");
+        System.out.println(File.separator);
+        System.out.println(File.pathSeparator);
+        System.out.println(file.getAbsolutePath());
+        print(file);
+    }
+
     private static void print(File file) {
         if (file.exists()) {
             if (!file.isDirectory()) {
@@ -26,14 +34,6 @@ public class FileOperation {
                     }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        File file = new File("/");
-        System.out.println(File.separator);
-        System.out.println(File.pathSeparator);
-        System.out.println(file.getAbsolutePath());
-        print(file);
     }
 
 }

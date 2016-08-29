@@ -19,18 +19,6 @@ import lombok.EqualsAndHashCode;
 // callSuper=false意味着在计算equals或者hashcode时不考虑父类的值
 // callSuper=true 在计算equals或者hashcode时考虑其父类的值
 public class ModAccountRequest extends AddAccountRequest {
-    // txcascadeaccount.id
-    private Integer credentialId;
-    private String code;
-    private Integer targetCampusNumber;
-    private Integer status;
-    private String campusName;
-
-    @Override
-    public boolean validRequest() {
-        return true;
-    }
-
     public static void main(String[] args) {
         AddAccountRequest a = new AddAccountRequest();
         AddAccountRequest b = new AddAccountRequest();
@@ -50,5 +38,17 @@ public class ModAccountRequest extends AddAccountRequest {
         System.out.println(c);
         System.out.println(d);
         System.out.println(c.equals(d));
+    }
+    private String campusName;
+    private String code;
+    // txcascadeaccount.id
+    private Integer credentialId;
+    private Integer status;
+
+    private Integer targetCampusNumber;
+
+    @Override
+    public boolean validRequest() {
+        return true;
     }
 }

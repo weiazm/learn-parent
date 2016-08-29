@@ -15,8 +15,8 @@ import java.lang.reflect.Method;
  */
 public interface BeforeAfter {
 
-    public void before(Object o, Method method, Object[] args);
-
     public void after(Object o, Method method, Object[] args);
+
+    public void before(Object o, Method method, Object[] args);
 
 }

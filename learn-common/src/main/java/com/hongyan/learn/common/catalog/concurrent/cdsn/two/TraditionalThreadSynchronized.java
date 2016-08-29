@@ -13,6 +13,27 @@ package com.hongyan.learn.common.catalog.concurrent.cdsn.two;
  */
 public class TraditionalThreadSynchronized {
 
+    static class Outputter {
+        // Object lock = new Object();
+        /**
+         * @param name
+         */
+        public synchronized void output(String name) {
+            // 锁必须是需要互斥的多个线程间的共享对象.
+            // synchronized (lock) {
+            for (int i = 0; i < name.length(); i++) {
+                System.out.println(name.charAt(i));
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            // }
+        }
+    }
+
     /**
      * @param args
      */
@@ -33,27 +54,6 @@ public class TraditionalThreadSynchronized {
             }
         }.start();
 
-    }
-
-    static class Outputter {
-        // Object lock = new Object();
-        /**
-         * @param name
-         */
-        public synchronized void output(String name) {
-            // 锁必须是需要互斥的多个线程间的共享对象.
-            // synchronized (lock) {
-            for (int i = 0; i < name.length(); i++) {
-                System.out.println(name.charAt(i));
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            // }
-        }
     }
 
 }

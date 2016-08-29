@@ -12,18 +12,12 @@ package com.hongyan.learn.common.catalog.concurrent;
  * @version version
  */
 public class GongDan {
-    protected Integer work;
     protected Integer end;
+    protected Integer work;
 
     public GongDan(Integer work, Integer end) {
         this.work = work;
         this.end = end;
-    }
-
-    public synchronized void process(Integer mod) {
-        while (work < end) {
-            this.proces(mod);
-        }
     }
 
     private void proces(Integer mod) {
@@ -38,6 +32,12 @@ public class GongDan {
             System.out.println(Thread.currentThread().getName() + ": " + work % 3 + "->" + work);
             work++;
             this.notifyAll();
+        }
+    }
+
+    public synchronized void process(Integer mod) {
+        while (work < end) {
+            this.proces(mod);
         }
     }
 }

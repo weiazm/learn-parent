@@ -1,11 +1,13 @@
 package com.hongyan.learn.web.servlet;
 
 import com.mitchellbosecke.pebble.spring.PebbleView;
-import lombok.extern.slf4j.Slf4j;
+
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * freemarker 模板返回专用 render=json是否返回data格式

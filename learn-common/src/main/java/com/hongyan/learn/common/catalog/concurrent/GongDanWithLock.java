@@ -23,16 +23,6 @@ public class GongDanWithLock extends GongDan {
         super(work, end);
     }
 
-    @Override
-    public void process(Integer mod) {// here problem
-
-        while (work < end) {
-            lock.lock();
-            this.proces(mod);
-            lock.unlock();
-        }
-    }
-
     private void proces(Integer mod) {
         if (work % 3 != mod) {
             try {
@@ -46,6 +36,16 @@ public class GongDanWithLock extends GongDan {
             work++;
             cond.signalAll();
             ;
+        }
+    }
+
+    @Override
+    public void process(Integer mod) {// here problem
+
+        while (work < end) {
+            lock.lock();
+            this.proces(mod);
+            lock.unlock();
         }
     }
 }

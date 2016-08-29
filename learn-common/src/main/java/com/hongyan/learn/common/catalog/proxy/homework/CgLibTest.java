@@ -18,16 +18,16 @@ import java.lang.reflect.Method;
  * @version 1.0
  */
 public class CgLibTest {
-    public static class Singer {
-        public void sing() {
-            System.out.println("im singing");
-        }
-    }
-
     public static class MyInterceptor implements MethodInterceptor {
         @Override
         public Object intercept(Object arg0, Method arg1, Object[] arg2, MethodProxy arg3) throws Throwable {
             return arg3.invokeSuper(arg0, arg2);
+        }
+    }
+
+    public static class Singer {
+        public void sing() {
+            System.out.println("im singing");
         }
     }
 

@@ -20,10 +20,10 @@ import java.lang.annotation.Target;
  * @version version
  */
 public @interface HyMark {
+    boolean ifPrint() default false;
+
     // 注意基本类型，()
     int num() default 0;
-
-    boolean ifPrint() default false;
 
     String tag() default "";
 

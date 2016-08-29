@@ -15,7 +15,15 @@ import lombok.Data;
  */
 @Data
 public class 然儿 {
+    public static void main(String[] args) {
+        然儿 傻比 = new 然儿();
+        傻比.健身();
+        傻比.带饭();
+        傻比.搞基();
+        System.out.println("this is in main!");
+    }
     private Integer age;
+
     private Boolean sex;
 
     public void 健身() {
@@ -28,13 +36,5 @@ public class 然儿 {
 
     private void 搞基() {
         System.out.println("我是gay!");
-    }
-
-    public static void main(String[] args) {
-        然儿 傻比 = new 然儿();
-        傻比.健身();
-        傻比.带饭();
-        傻比.搞基();
-        System.out.println("this is in main!");
     }
 }

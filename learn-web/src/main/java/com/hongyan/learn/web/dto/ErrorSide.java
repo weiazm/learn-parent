@@ -12,7 +12,7 @@ package com.hongyan.learn.web.dto;
  * @version 1.0
  */
 public enum ErrorSide {
-    UNKNOW(0), SERVER(2), CLIENT(1);
+    CLIENT(1), SERVER(2), UNKNOW(0);
     private int code;
 
     private ErrorSide(int code) {

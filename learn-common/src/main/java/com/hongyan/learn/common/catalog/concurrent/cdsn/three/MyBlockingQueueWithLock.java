@@ -17,31 +17,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class MyBlockingQueueWithLock<T> extends MyBlockingQueue<T> {
     Lock lock = new ReentrantLock();
-    Condition fullFlag = lock.newCondition();
     Condition emptyFlag = lock.newCondition();
+    Condition fullFlag = lock.newCondition();
 
     public MyBlockingQueueWithLock(int limit) {
         super(limit);
-    }
-
-    @Override
-    public void put(T t) {
-        lock.lock();
-        try {
-            while (box.size() >= limit) {
-                try {
-                    emptyFlag.await();
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            box.add(t);
-            fullFlag.signalAll();
-            System.out.println(Thread.currentThread().getName() + "放入了一个" + " queue大小:" + box.size());
-        } finally {
-            lock.unlock();
-        }
     }
 
     @Override
@@ -60,6 +40,26 @@ public class MyBlockingQueueWithLock<T> extends MyBlockingQueue<T> {
             System.out.println(Thread.currentThread().getName() + "得到了一个" + " queue大小:" + box.size());
             emptyFlag.signalAll();
             return t;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    @Override
+    public void put(T t) {
+        lock.lock();
+        try {
+            while (box.size() >= limit) {
+                try {
+                    emptyFlag.await();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            box.add(t);
+            fullFlag.signalAll();
+            System.out.println(Thread.currentThread().getName() + "放入了一个" + " queue大小:" + box.size());
         } finally {
             lock.unlock();
         }

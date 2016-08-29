@@ -13,11 +13,11 @@ package com.hongyan.learn.common.catalog.inherit;
  */
 public class Father {
 
-    @SuppressWarnings("unused")
-    private int age = 35;
     static {
         System.out.println("im father static block!");
     }
+    @SuppressWarnings("unused")
+    private int age = 35;
 
     {
         System.out.println("im father code block!");

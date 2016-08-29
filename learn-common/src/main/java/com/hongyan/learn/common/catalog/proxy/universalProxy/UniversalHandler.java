@@ -17,12 +17,17 @@ import java.lang.reflect.Proxy;
  */
 public class UniversalHandler implements InvocationHandler {
 
-    private Object target = null;
     private BeforeAfter ba = null;
+    private Object target = null;
 
     public UniversalHandler(Object target, BeforeAfter ba) {
         this.target = target;
         this.ba = ba;
+    }
+
+    public Object getProxy() {
+        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), target.getClass().getInterfaces(),
+            this);
     }
 
     @Override
@@ -31,11 +36,6 @@ public class UniversalHandler implements InvocationHandler {
         Object result = method.invoke(target, args);
         ba.after(target, method, args);
         return result;
-    }
-
-    public Object getProxy() {
-        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), target.getClass().getInterfaces(),
-            this);
     }
 
 }

@@ -17,12 +17,12 @@ import lombok.Data;
  */
 @Data
 public class AddAccountRequest {
+    protected List<Integer> auth;
     protected Integer campusNumber;
-    protected String name;
     protected String mobile;
+    protected String name;
     protected String title;
     protected Integer type;
-    protected List<Integer> auth;
 
     public boolean validRequest() {
         // TODO Auto-generated method stub

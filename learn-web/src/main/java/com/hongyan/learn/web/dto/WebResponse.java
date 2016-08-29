@@ -23,35 +23,35 @@ public class WebResponse<T> implements Serializable {
      *
      */
     private static final long serialVersionUID = -1295557245590009278L;
-    private ResponseStatus status;
-    private ErrorDetail error;
     private T data;
+    private ErrorDetail error;
+    private ResponseStatus status;
 
     public WebResponse() {
         status = ResponseStatus.ok;
-    }
-
-    public int getStatus() {
-        return status == null ? ResponseStatus.ok.getCode() : status.getCode();
-    }
-
-    public void setStatus(ResponseStatus status) {
-        this.status = status;
-    }
-
-    public ErrorDetail getError() {
-        return error;
-    }
-
-    public void setError(ErrorDetail error) {
-        this.error = error;
     }
 
     public T getData() {
         return data;
     }
 
+    public ErrorDetail getError() {
+        return error;
+    }
+
+    public int getStatus() {
+        return status == null ? ResponseStatus.ok.getCode() : status.getCode();
+    }
+
     public void setData(T data) {
         this.data = data;
+    }
+
+    public void setError(ErrorDetail error) {
+        this.error = error;
+    }
+
+    public void setStatus(ResponseStatus status) {
+        this.status = status;
     }
 }

@@ -19,29 +19,6 @@ import lombok.Getter;
  */
 public class PipedStream {
     @Getter
-    static class Outputer implements Runnable {
-        private PipedOutputStream pos = null;
-
-        public Outputer() {
-            pos = new PipedOutputStream();
-        }
-
-        @Override
-        public void run() {
-            try {
-                pos.write("hahaha".getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                pos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Getter
     static class Inputer implements Runnable {
         private PipedInputStream pis = null;
 
@@ -64,6 +41,29 @@ public class PipedStream {
                 e.printStackTrace();
             }
 
+        }
+    }
+
+    @Getter
+    static class Outputer implements Runnable {
+        private PipedOutputStream pos = null;
+
+        public Outputer() {
+            pos = new PipedOutputStream();
+        }
+
+        @Override
+        public void run() {
+            try {
+                pos.write("hahaha".getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                pos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

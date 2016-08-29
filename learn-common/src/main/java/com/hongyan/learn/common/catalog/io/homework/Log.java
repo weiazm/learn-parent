@@ -18,7 +18,7 @@ import lombok.Data;
  */
 @Data
 class Log {
-    String userName;
-    String loginDate;
     String ip;
+    String loginDate;
+    String userName;
 }

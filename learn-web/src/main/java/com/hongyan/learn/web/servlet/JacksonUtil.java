@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author @author@ (@author-email@)
@@ -31,6 +29,11 @@ public abstract class JacksonUtil {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
+    protected static JavaType getJavaType(Type type, Class<?> contextClass) {
+        return (contextClass != null) ? mapper.getTypeFactory().constructType(type, contextClass)
+            : mapper.constructType(type);
+    }
+
     public static final String obj2Str(Object o) {
         try {
             return mapper.writeValueAsString(o);
@@ -38,33 +41,6 @@ public abstract class JacksonUtil {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public static final void writeObj(OutputStream out, Object value)
-        throws JsonGenerationException, JsonMappingException, IOException {
-        mapper.writeValue(out, value);
-    }
-
-    public static final <T> T str2Obj(String s, Class<T> valueType)
-        throws JsonParseException, JsonMappingException, IOException {
-        JavaType javaType = getJavaType(valueType, null);
-        return mapper.readValue(s, javaType);
-    }
-
-    protected static JavaType getJavaType(Type type, Class<?> contextClass) {
-        return (contextClass != null) ? mapper.getTypeFactory().constructType(type, contextClass)
-            : mapper.constructType(type);
-    }
-
-    public static final <T> T str2Obj(String s, TypeReference<T> valueType)
-        throws JsonParseException, JsonMappingException, IOException {
-        return mapper.readValue(s, valueType);
-    }
-
-    public static final <T> List<T> str2List(String s, Class<T> valueType)
-        throws JsonParseException, JsonMappingException, IOException {
-        JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, valueType);
-        return mapper.readValue(s, javaType);
     }
 
     public static final <T> T readObj(InputStream in, Class<T> valueType)
@@ -78,17 +54,26 @@ public abstract class JacksonUtil {
         return (T) mapper.readValue(in, valueType);
     }
 
-    public static void main(String[] args) throws Exception {
-        String resultJson =
-            "{\"code\":1,\"msg\":\"\\u63d0\\u73b0\\u5931\\u8d25!\",\"data\":[],\"ts\":1468325338,\"rid\":\"6d6b74a4692b18a028aa5c6b8cdc212d\"}";
-        RestfulResult restfulResult = JacksonUtil.str2Obj(resultJson, RestfulResult.class);
-        int i = 9;
-
-        Map<String, String> userPwd = new HashMap<>();
-        userPwd.put("orgId", 123 + "");
-        userPwd.put("pwd", "12312");
-
-        System.out.println(obj2Str(userPwd));
+    public static final <T> List<T> str2List(String s, Class<T> valueType)
+        throws JsonParseException, JsonMappingException, IOException {
+        @SuppressWarnings("deprecation")
+        JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, valueType);
+        return mapper.readValue(s, javaType);
     }
 
+    public static final <T> T str2Obj(String s, Class<T> valueType)
+        throws JsonParseException, JsonMappingException, IOException {
+        JavaType javaType = getJavaType(valueType, null);
+        return mapper.readValue(s, javaType);
+    }
+
+    public static final <T> T str2Obj(String s, TypeReference<T> valueType)
+        throws JsonParseException, JsonMappingException, IOException {
+        return mapper.readValue(s, valueType);
+    }
+
+    public static final void writeObj(OutputStream out, Object value)
+        throws JsonGenerationException, JsonMappingException, IOException {
+        mapper.writeValue(out, value);
+    }
 }

@@ -33,7 +33,29 @@ import lombok.Data;
  * @version version
  */
 public class PatternHomework {
+    @Data
+    private static class POInfo {
+        private String catalog;
+        private String javaName;
+        private String name;
+    }
+
     private static BufferedReader reader;
+
+    private static POInfo convertStrTOPOInfo(String str, Pattern javaPattern, Pattern catalogPattern,
+        Pattern namePattern) {
+        POInfo po = new POInfo();
+        Matcher mat1 = javaPattern.matcher(str);
+        Matcher mat2 = catalogPattern.matcher(str);
+        Matcher mat3 = namePattern.matcher(str);
+        mat1.find();
+        mat2.find();
+        mat3.find();
+        po.setJavaName(mat1.group(1));
+        po.setName(mat2.group(1));
+        po.setCatalog(mat3.group(1));
+        return po;
+    }
 
     private static List<File> getAllFiles(String folderPath) throws FileNotFoundException {
         File folder = new File(folderPath);
@@ -43,18 +65,6 @@ public class PatternHomework {
         List<File> files = Lists.newLinkedList();
         getFilesByRecursion(folder, files);
         return files;
-    }
-
-    private static void getFilesByRecursion(File folder, List<File> files) {
-        if (folder.isDirectory()) {
-            File[] subFiles = folder.listFiles();
-            for (File f : subFiles) {
-                getFilesByRecursion(f, files);
-            }
-        } else if (folder.isFile()) {
-            if (folder.getName().endsWith(".java"))// only pick java file
-                files.add(folder);
-        }
     }
 
     private static String getContent(File f) {
@@ -75,6 +85,18 @@ public class PatternHomework {
             e.printStackTrace();
         }
         return builder.toString();
+    }
+
+    private static void getFilesByRecursion(File folder, List<File> files) {
+        if (folder.isDirectory()) {
+            File[] subFiles = folder.listFiles();
+            for (File f : subFiles) {
+                getFilesByRecursion(f, files);
+            }
+        } else if (folder.isFile()) {
+            if (folder.getName().endsWith(".java"))// only pick java file
+                files.add(folder);
+        }
     }
 
     private static List<String> getPOString(List<File> files, Pattern tablePattern, Pattern entityPattern) {
@@ -106,28 +128,6 @@ public class PatternHomework {
             }
         }
         return result;
-    }
-
-    @Data
-    private static class POInfo {
-        private String javaName;
-        private String catalog;
-        private String name;
-    }
-
-    private static POInfo convertStrTOPOInfo(String str, Pattern javaPattern, Pattern catalogPattern,
-        Pattern namePattern) {
-        POInfo po = new POInfo();
-        Matcher mat1 = javaPattern.matcher(str);
-        Matcher mat2 = catalogPattern.matcher(str);
-        Matcher mat3 = namePattern.matcher(str);
-        mat1.find();
-        mat2.find();
-        mat3.find();
-        po.setJavaName(mat1.group(1));
-        po.setName(mat2.group(1));
-        po.setCatalog(mat3.group(1));
-        return po;
     }
 
     public static void main(String[] args) throws IOException {

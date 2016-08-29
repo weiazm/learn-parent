@@ -14,9 +14,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class MultithreadProcessor implements Runnable {
 
-    private LinkedBlockingQueue<Integer> workQueue;
-    private Integer mod;
     private Integer delay;
+    private Integer mod;
+    private LinkedBlockingQueue<Integer> workQueue;
 
     public MultithreadProcessor(LinkedBlockingQueue<Integer> workQueue, Integer mod, Integer delay) {
         this.workQueue = workQueue;

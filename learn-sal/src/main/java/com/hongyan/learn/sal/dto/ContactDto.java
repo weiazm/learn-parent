@@ -16,6 +16,6 @@ import lombok.Data;
 @Data
 public class ContactDto {
     private Integer id;
-    private String name;
     private String mobile;
+    private String name;
 }

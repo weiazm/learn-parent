@@ -13,25 +13,6 @@ package com.hongyan.learn.common.catalog.concurrent.cdsn.two;
  */
 public class TraditionalThreadVolatile {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Thread() {
-            @Override
-            public void run() {
-                Test.one();
-            }
-        }.start();
-        new Thread() {
-            @Override
-            public void run() {
-                Test.two();
-            }
-        }.start();
-
-    }
-
     static class Test {
         static volatile int i = 0;// volatile保证了变量的可见性,保证不了有序性
         static volatile int j = 0;
@@ -51,6 +32,25 @@ public class TraditionalThreadVolatile {
         static /* synchronized */ void two() {
             System.out.println(i + ":" + j);
         }
+    }
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        new Thread() {
+            @Override
+            public void run() {
+                Test.one();
+            }
+        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                Test.two();
+            }
+        }.start();
+
     }
 
 }

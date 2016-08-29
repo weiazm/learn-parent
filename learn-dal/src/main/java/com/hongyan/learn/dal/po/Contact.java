@@ -27,7 +27,7 @@ public class Contact {
     @GeneratedValue
     private Integer id;
     @Column
-    private String name;
-    @Column
     private String mobile;
+    @Column
+    private String name;
 }

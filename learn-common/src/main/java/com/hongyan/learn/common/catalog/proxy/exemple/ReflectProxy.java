@@ -23,6 +23,29 @@ import java.util.Set;
  */
 public class ReflectProxy {
 
+    /**
+     * 构造一个目标对象的代理对象
+     * 
+     * @param target 目标对象（需要实现某个接口）
+     * @return
+     */
+    public static Object buildProxy(final Object target, final AdviceInter advice) {
+        Object proxyObject = Proxy.newProxyInstance(target.getClass().getClassLoader(), // 指定类加载器
+            target.getClass().getInterfaces(), // 指定目标对象实现的接口
+            // handler
+            new InvocationHandler() {
+
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    advice.beforeMethod(target, method, args);
+                    Object result = method.invoke(target, args);
+                    advice.afterMethod(target, method, args);
+                    return result;
+                }
+            });
+        return proxyObject;
+    }
+
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
         // 动态代理类：通用指定类加载器，和接口产生一类
@@ -122,29 +145,6 @@ public class ReflectProxy {
         Set<String> proxySet = (Set<String>) buildProxy(new HashSet<Object>(), new MyAdvice());
         proxySet.add("abc");
         proxySet.size();
-    }
-
-    /**
-     * 构造一个目标对象的代理对象
-     * 
-     * @param target 目标对象（需要实现某个接口）
-     * @return
-     */
-    public static Object buildProxy(final Object target, final AdviceInter advice) {
-        Object proxyObject = Proxy.newProxyInstance(target.getClass().getClassLoader(), // 指定类加载器
-            target.getClass().getInterfaces(), // 指定目标对象实现的接口
-            // handler
-            new InvocationHandler() {
-
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                    advice.beforeMethod(target, method, args);
-                    Object result = method.invoke(target, args);
-                    advice.afterMethod(target, method, args);
-                    return result;
-                }
-            });
-        return proxyObject;
     }
 
 }

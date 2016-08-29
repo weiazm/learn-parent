@@ -62,12 +62,12 @@ public class ErrorDetail implements Serializable {
         return code.getErrorCode();
     }
 
-    public String getMessage() {
-        return code.getErrorDesc();
-    }
-
     public Object getDetail() {
         return detail;
+    }
+
+    public String getMessage() {
+        return code.getErrorDesc();
     }
 
 }

@@ -51,6 +51,14 @@ public class PatternTest {
         testCharacter();
     }
 
+    private static void patternMatch(Pattern pattern, String str) {
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            System.out
+                .println(matcher.group() + " start index:" + matcher.start() + " group count:" + matcher.groupCount());
+        }
+    }
+
     public static void testCharacter() {
         String str =
             "se2323sew.ser[q23/sdwe\\3223<html> xm.chen@126.com 192.168.1.1 255.255.255.255 256.198.198.198 300.1.1.1 sw xm_chen2005@126.com <div> sewe </div>eeeewe</html>abc@123.com";
@@ -60,13 +68,5 @@ public class PatternTest {
         patternMatch(Pattern.compile("https?://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?"), str);
         patternMatch(Pattern.compile("<(\\w+)>.+?</\\1>"), str); // 思考一下，如何匹配最细粒度的html标签和标签中的内容
 
-    }
-
-    private static void patternMatch(Pattern pattern, String str) {
-        Matcher matcher = pattern.matcher(str);
-        while (matcher.find()) {
-            System.out
-                .println(matcher.group() + " start index:" + matcher.start() + " group count:" + matcher.groupCount());
-        }
     }
 }

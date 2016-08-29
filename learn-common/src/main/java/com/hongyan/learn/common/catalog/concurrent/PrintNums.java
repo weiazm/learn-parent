@@ -13,9 +13,9 @@ package com.hongyan.learn.common.catalog.concurrent;
  */
 public class PrintNums implements Runnable {
 
-    private Integer start;
     private Integer end;
     private Integer sleep;
+    private Integer start;
 
     public PrintNums(Integer start, Integer end, Integer sleep) {
         this.start = start;

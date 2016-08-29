@@ -26,13 +26,13 @@ public class ProxyTest {
 
         UniversalHandler handler = new UniversalHandler(new ArrayList<Integer>(), new BeforeAfter() {
             @Override
-            public void before(Object o, Method method, Object[] args) {
-                System.out.println("before");
+            public void after(Object o, Method method, Object[] args) {
+                System.out.println("after");
             }
 
             @Override
-            public void after(Object o, Method method, Object[] args) {
-                System.out.println("after");
+            public void before(Object o, Method method, Object[] args) {
+                System.out.println("before");
             }
         });
 
