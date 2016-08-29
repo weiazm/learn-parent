@@ -12,23 +12,23 @@ package com.hongyan.learn.common.catalog.proxy.homework;
  * @version version
  */
 
-public class Fee {
-    public String hello() {
-        return "hello fee";
-    }
-    public static final void main(String[] args) throws Throwable {
-        ClassProxyFactory factory = new ClassProxyFactoryImpl();
-
-        Fee fee = (Fee) factory.createProxy(new Fee(), (currentMethod, originalInstance, arg) -> {
-            Object ret;
-            try {
-                ret = currentMethod.invokeSuper(originalInstance, args);
-                return ret + " intercept 1";
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-            return " failed! ";
-        });
-        System.out.println(fee.hello());
-    }
-}
+//public class Fee {
+//    public String hello() {
+//        return "hello fee";
+//    }
+//    public static final void main(String[] args) throws Throwable {
+//        ClassProxyFactory factory = new ClassProxyFactoryImpl();
+//
+//        Fee fee = (Fee) factory.createProxy(new Fee(), (currentMethod, originalInstance, arg) -> {
+//            Object ret;
+//            try {
+//                ret = currentMethod.invokeSuper(originalInstance, args);
+//                return ret + " intercept 1";
+//            } catch (Throwable e) {
+//                e.printStackTrace();
+//            }
+//            return " failed! ";
+//        });
+//        System.out.println(fee.hello());
+//    }
+//}
