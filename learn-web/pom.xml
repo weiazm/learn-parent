@@ -20,11 +20,11 @@
 				<directory>src/main/resources/base</directory>
 			</resource>
 			<resource>
-				<!-- <directory>src/main/resources/${res}</directory> -->
-				<directory>src/main/resources/qa</directory>
+				<directory>src/main/resources/${resource.directory}</directory>
 			</resource>
 		</resources>
 	</build>
+	
 	<dependencies>
 		<!-- Spring MVC -->
 		<dependency>

@@ -62,31 +62,37 @@
 			<id>prod</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>res</name>
-					<value>prod</value>
-				</property>
 			</activation>
+				<properties>
+					<resource.directory>prod</resource.directory>
+				</properties>
+		</profile>
+		<profile>
+			<id>beta</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+				<properties>
+					<resource.directory>beta</resource.directory>
+				</properties>
 		</profile>
 		<profile>
 			<id>dev</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>res</name>
-					<value>dev</value>
-				</property>
 			</activation>
+				<properties>
+					<resource.directory>beta</resource.directory>
+				</properties>
 		</profile>
 		<profile>
 			<id>qa</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
-				<property>
-					<name>res</name>
-					<value>qa</value>
-				</property>
 			</activation>
+				<properties>
+					<resource.directory>qa</resource.directory>
+				</properties>
 		</profile>
 	</profiles>
     
