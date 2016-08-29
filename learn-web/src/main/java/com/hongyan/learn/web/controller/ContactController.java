@@ -18,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * @title ContactController
@@ -26,18 +28,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date Aug 27, 2016
  * @version 1.0
  */
+@Slf4j
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
-    private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
-
     @Autowired
     private ContactService contactService;
 
     @RequestMapping("/getByName.json")
     @ResponseBody
     public WebResponse<ContactDto> getContactByName(String contactName) {
-        logger.info("name={}", contactName);
+        log.info("name={}", contactName);
         WebResponse<ContactDto> resp = new WebResponse<ContactDto>();
         try {
             ContactDto result = contactService.getContactDtoByName(contactName);
@@ -45,7 +46,7 @@ public class ContactController {
             resp.setData(result);
             return resp;
         } catch (Exception e) {
-            logger.info(e.getMessage());
+            log.info(e.getMessage());
             resp.setError(new ErrorDetail(ErrorCode.system_error, e.getMessage()));
             return resp;
         }
