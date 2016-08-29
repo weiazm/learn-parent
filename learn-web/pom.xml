@@ -14,8 +14,6 @@
 	<url>http://maven.apache.org</url>
 	<build>
 		<finalName>learn</finalName>
-		<!-- 插件 -->
-
 		<!-- 资源文件 -->
 		<resources>
 			<resource>

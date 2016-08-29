@@ -14,7 +14,6 @@
     	<java-build-version>1.8</java-build-version>
 		<bj-bom-all-version>0.0.37</bj-bom-all-version>
 		<jetty-maven-plugin-version>8.1.9.v20130131</jetty-maven-plugin-version>
-		<cobertura-maven-plugin-version>2.7</cobertura-maven-plugin-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
