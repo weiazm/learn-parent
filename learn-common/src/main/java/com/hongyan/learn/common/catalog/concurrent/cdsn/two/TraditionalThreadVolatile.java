@@ -23,9 +23,9 @@ public class TraditionalThreadVolatile {
                 Test.one();
             }
         }.start();
-        new Thread(){
+        new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 Test.two();
             }
         }.start();

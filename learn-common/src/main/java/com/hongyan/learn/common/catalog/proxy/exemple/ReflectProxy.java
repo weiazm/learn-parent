@@ -76,19 +76,16 @@ public class ReflectProxy {
 
         /**
          * 动态代理：总结如下： 1，通过Proxy.getProxyClass(classLoader,interface)方法产生一个动态类的class字节码(clazz)
-         * 该getProxyClass()方法有两个参数：一个是指定该动态类的类加载器，一个是该动态类的要实现的接口（从这里可以看现JDK的动态代
-         * 理必须要实现一个接口）
+         * 该getProxyClass()方法有两个参数：一个是指定该动态类的类加载器，一个是该动态类的要实现的接口（从这里可以看现JDK的动态代 理必须要实现一个接口）
          * 
          * 2，通过第一步的获取的clazz对象可以获取它的构造方法constructor，那么就可以通用constructor的newInstance()方法构造
          * 出一个动态实体对象但constructor的newInstance()方法需要指定一个实现了InvocationHandler接口的类handler，在该类中
-         * 需要一个目标对象A和实现invoke方法目标对象A要求能对第一步中的接口的实现，因为在invoke方法中将会去调用A中的方法并返回结果。
-         *  过程如下：调用动态代理对象ProxyObject的x方法 ————> 进入构造方法传进的handler的invoke方法————> invoke方法调用
-         *  handler中的target对象的x方法（所以要求target必须要实现构造动态代理类时指定的接口）并返回它的返回值。（其实如果我们代
-         *  理P类，那么target就可以选中P类，只是要求P必需实现一个接口）
+         * 需要一个目标对象A和实现invoke方法目标对象A要求能对第一步中的接口的实现，因为在invoke方法中将会去调用A中的方法并返回结果。 过程如下：调用动态代理对象ProxyObject的x方法 ————>
+         * 进入构造方法传进的handler的invoke方法————> invoke方法调用
+         * handler中的target对象的x方法（所以要求target必须要实现构造动态代理类时指定的接口）并返回它的返回值。（其实如果我们代 理P类，那么target就可以选中P类，只是要求P必需实现一个接口）
          * 
          * 那么上述中x方法有哪些呢？除了从Object继承过来的方法中除toString,hashCode,equals外的方法不交给handler外，其它的方法
-         * 全部交给handler处理如上面proxyBuildCollection.getClass().getName()就没有调用handler的getClass方法，而是调用
-         * 自己的
+         * 全部交给handler处理如上面proxyBuildCollection.getClass().getName()就没有调用handler的getClass方法，而是调用 自己的
          * 
          * 3，在handler的invoke方法中return method.invoke(target,args)就是将方法交给target去完成。那么在这个方法执行之前，
          * 之后，异常时我们都可以做一些操作，并且可以在执行之前检查方法的参数args，执行之后检查方法的结果.
@@ -98,24 +95,24 @@ public class ReflectProxy {
         // proxyBuildColl是对ArrayList进行代理
         Collection<String> proxyBuildCollection2 =
             (Collection<String>) Proxy.newProxyInstance(Collection.class.getClassLoader(), // 指定类加载器
-            new Class[] { Collection.class }, // 指定目标对象实现的接口
-            // 指定handler
-            new InvocationHandler() {
+                new Class[] { Collection.class }, // 指定目标对象实现的接口
+                // 指定handler
+                new InvocationHandler() {
                     ArrayList<Object> target = new ArrayList<Object>();
 
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                    System.out.println(method.getName() + "执行之前...");
-                    if (null != args) {
-                        System.out.println("方法的参数：" + Arrays.asList(args));
-                    } else {
-                        System.out.println("方法的参数：" + null);
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        System.out.println(method.getName() + "执行之前...");
+                        if (null != args) {
+                            System.out.println("方法的参数：" + Arrays.asList(args));
+                        } else {
+                            System.out.println("方法的参数：" + null);
+                        }
+                        Object result = method.invoke(target, args);
+                        System.out.println(method.getName() + "执行之后...");
+                        return result;
                     }
-                    Object result = method.invoke(target, args);
-                    System.out.println(method.getName() + "执行之后...");
-                    return result;
-                }
-            });
+                });
         proxyBuildCollection2.add("abc");
         proxyBuildCollection2.size();
         proxyBuildCollection2.clear();

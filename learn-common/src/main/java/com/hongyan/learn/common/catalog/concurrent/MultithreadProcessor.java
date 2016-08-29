@@ -28,7 +28,6 @@ public class MultithreadProcessor implements Runnable {
     public void run() {
         while (!workQueue.isEmpty()) {
 
-
             Integer top = workQueue.peek();
             System.out.println(Thread.currentThread().getName() + "peek()");
             // 注意队列的peek，队列为空时peek值为null

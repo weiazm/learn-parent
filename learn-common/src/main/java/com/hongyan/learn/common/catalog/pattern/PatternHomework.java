@@ -147,8 +147,8 @@ public class PatternHomework {
         for (String str : list) {
             pos.add(convertStrTOPOInfo(str, javaPattern, catalogPattern, namePattern));// 字符串转化实体类
         }
-        
-        Collections.sort(pos,Ordering.natural().onResultOf(new Function<POInfo, Integer>() {
+
+        Collections.sort(pos, Ordering.natural().onResultOf(new Function<POInfo, Integer>() {
             @Override
             public Integer apply(POInfo input) {
                 return input.toString().length();

@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
 /**
  * @title ContactServiceTest
  * @desc description
@@ -27,9 +26,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ContactServiceTest {
     @Autowired
     private ContactService contactService;
-    
+
     @Test
-    public void contactServiceTest(){
+    public void contactServiceTest() {
         String name = "张三";
         ContactDto contact = contactService.getContactDtoByName(name);
         Assert.assertNotNull(contact);

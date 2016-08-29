@@ -26,5 +26,5 @@ public @interface HyMark {
     boolean ifPrint() default false;
 
     String tag() default "";
-    
+
 }

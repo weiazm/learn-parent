@@ -15,11 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @title ContactController
@@ -32,23 +30,23 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/contact")
 public class ContactController {
     private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
-    
+
     @Autowired
     private ContactService contactService;
 
     @RequestMapping("/getByName.json")
     @ResponseBody
     public WebResponse<ContactDto> getContactByName(String contactName) {
-        logger.info("name={}",contactName);
+        logger.info("name={}", contactName);
         WebResponse<ContactDto> resp = new WebResponse<ContactDto>();
-        try{
+        try {
             ContactDto result = contactService.getContactDtoByName(contactName);
             resp.setStatus(ResponseStatus.ok);
             resp.setData(result);
             return resp;
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(e.getMessage());
-            resp.setError(new ErrorDetail(ErrorCode.system_error,e.getMessage()));
+            resp.setError(new ErrorDetail(ErrorCode.system_error, e.getMessage()));
             return resp;
         }
     }

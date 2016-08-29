@@ -16,28 +16,26 @@ import java.util.regex.Pattern;
  */
 public class PatternTest {
     /**
-     * 写一段代码将tianxiao-service中所有PO的数据库名称和表名列出来，要求如下：
-每个模块一个文件。文件名是模块名.txt
-每个类写一行，格式如下： 类名：OrgInfo 数据库：yunying 表名：org_info
- @Data
-@Table(name = "org_info", catalog = "yunying")   //name表示表名，catelog表示数据库名称，有的表名在@Entity的name属性中
-@Entity
-public class OrgInfo {
+     * 写一段代码将tianxiao-service中所有PO的数据库名称和表名列出来，要求如下： 每个模块一个文件。文件名是模块名.txt 每个类写一行，格式如下： 类名：OrgInfo 数据库：yunying
+     * 表名：org_info
+     * 
+     * @Data
+     * @Table(name = "org_info", catalog = "yunying") //name表示表名，catelog表示数据库名称，有的表名在@Entity的name属性中
+     * @Entity public class OrgInfo {
      * @param args
      */
 
     public static void main(String[] args) {
-//        Pattern pattern = Pattern.compile("^se/w");
-//        String str = "abcsewexcwwabcew";
-//        Matcher matcher = pattern.matcher(str);
-//        System.out.println(matcher.matches());
-//
-//        String[] strs = pattern.split(str);
-//        System.out.println(Arrays.toString(strs));
-//        for (String string : strs) {
-//            System.out.println(string.length());
-//        }
-
+        // Pattern pattern = Pattern.compile("^se/w");
+        // String str = "abcsewexcwwabcew";
+        // Matcher matcher = pattern.matcher(str);
+        // System.out.println(matcher.matches());
+        //
+        // String[] strs = pattern.split(str);
+        // System.out.println(Arrays.toString(strs));
+        // for (String string : strs) {
+        // System.out.println(string.length());
+        // }
 
         String text =
             "<textarea rows=\"20\" cols=\"70\">nexus maven repository index properties updating index central</textarea>";

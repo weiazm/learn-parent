@@ -19,17 +19,17 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+    /**
+     * Simply selects the home view to render by returning its name.
+     */
     @RequestMapping(value = "/index.do")
     @ResponseBody
     public String home() {
-		logger.info("Welcome home! The client locale is {}.");
-		return "home";
-	}
-	
+        logger.info("Welcome home! The client locale is {}.");
+        return "home";
+    }
+
 }

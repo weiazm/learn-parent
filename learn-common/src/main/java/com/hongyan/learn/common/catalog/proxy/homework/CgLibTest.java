@@ -30,6 +30,7 @@ public class CgLibTest {
             return arg3.invokeSuper(arg0, arg2);
         }
     }
+
     public static void main(String[] args) {
         Enhancer enhancer = new Enhancer();
         MyInterceptor interceptor = new MyInterceptor();

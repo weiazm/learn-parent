@@ -13,7 +13,9 @@ package com.hongyan.learn.common.catalog.concurrent;
  */
 public class PrintHello implements Runnable {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Runnable#run()
      */
     @Override

@@ -74,7 +74,6 @@ public class CallableAndFuture {
             System.out.println(result);
         }
 
-
     }
 
 }

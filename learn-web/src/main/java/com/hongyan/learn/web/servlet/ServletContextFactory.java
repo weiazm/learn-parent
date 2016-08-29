@@ -6,11 +6,8 @@ import org.springframework.web.context.ServletContextAware;
 import javax.servlet.ServletContext;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Victor Weng
- * Date: 16/4/12
- * Time: 下午3:25
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: Victor Weng Date: 16/4/12 Time: 下午3:25 To change this template use File | Settings
+ * | File Templates.
  */
 public class ServletContextFactory implements FactoryBean<ServletContext>, ServletContextAware {
 

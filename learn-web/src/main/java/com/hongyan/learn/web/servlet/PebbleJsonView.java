@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
- * freemarker 模板返回专用
- * render=json是否返回data格式
+ * freemarker 模板返回专用 render=json是否返回data格式
  * <p/>
  * Created by wengshengli on 16/1/11.
  */
@@ -18,7 +17,7 @@ public class PebbleJsonView extends PebbleView {
 
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+        throws Exception {
         String render = request.getParameter("render");
         if ("json".equals(render)) {
             log.debug("render json datamodel to response");

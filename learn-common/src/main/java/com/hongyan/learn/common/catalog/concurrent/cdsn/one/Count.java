@@ -12,10 +12,11 @@ package com.hongyan.learn.common.catalog.concurrent.cdsn.one;
  * @version version
  */
 public class Count {
-    public Count(int a, int b){
-        
+    public Count(int a, int b) {
+
     }
-    void count(){
-        
+
+    void count() {
+
     }
 }

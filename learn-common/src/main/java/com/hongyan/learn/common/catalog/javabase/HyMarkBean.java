@@ -28,9 +28,9 @@ public class HyMarkBean {
     private String name2;
     @HyMark(num = 4, tag = "第三个name", ifPrint = true)
     private String name3;
-    
+
     @SuppressWarnings("unused")
-    private void fuck(){
+    private void fuck() {
         System.out.println("老子他妈的是私有的");
     }
 }

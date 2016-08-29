@@ -1,4 +1,5 @@
 package com.hongyan.learn.web.servlet;
+
 /**
  * Created by liuxp on 15/12/3.
  */
@@ -69,5 +70,3 @@ public class RestfulResult<T> {
         return EqualsBuilder.reflectionEquals(this, obj);
     }
 }
-
-

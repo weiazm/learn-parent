@@ -26,19 +26,19 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"classpath:application-config.xml","classpath:mvc-config.xml"})
+@ContextConfiguration(locations = { "classpath:application-config.xml", "classpath:mvc-config.xml" })
 public class ContactControllerTest {
     @Autowired
     private WebApplicationContext context;
     private MockMvc mockMvc;
-    
+
     @Before
-    public void setup(){
+    public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
-    
+
     @Test
-    public void contactControllerTest() throws Exception{
+    public void contactControllerTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/contact/getByName.json?contactName=张三"))
             .andDo(MockMvcResultHandlers.print());
     }

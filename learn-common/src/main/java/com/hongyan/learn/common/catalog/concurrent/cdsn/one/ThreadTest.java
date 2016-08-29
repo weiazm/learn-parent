@@ -19,12 +19,13 @@ public class ThreadTest {
     public static void main(String[] args) {
         Runnable run = new Runnable() {
             Count count = new Count(0, 11);
+
             @Override
             public void run() {
-                count.count();            
+                count.count();
             }
         };
-        
+
         for (int i = 0; i < 10; i++) {
             new Thread(run).start();
         }

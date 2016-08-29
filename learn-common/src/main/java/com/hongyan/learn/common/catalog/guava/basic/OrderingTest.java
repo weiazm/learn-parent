@@ -61,7 +61,6 @@ public class OrderingTest {
             }
         })).greatestOf(list, 4));
 
-
     }
 
 }

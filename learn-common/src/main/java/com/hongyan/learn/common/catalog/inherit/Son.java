@@ -27,8 +27,8 @@ public class Son extends Father {
         System.out.println("im son's constructor!");
     }
 
-    public static int recur(int a, int n){
-        if(n == 1)
+    public static int recur(int a, int n) {
+        if (n == 1)
             return a;
         else if (n % 2 == 0)
             return recur(a, n / 2) * recur(a, n / 2);

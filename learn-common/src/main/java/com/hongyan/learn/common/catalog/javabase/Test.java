@@ -20,6 +20,7 @@ public class Test {
             }
         }
     }
+
     public static void main(String[] args) {
         count(1000);
     }

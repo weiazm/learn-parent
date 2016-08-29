@@ -29,7 +29,7 @@ public class Homework {
         Long t1 = System.currentTimeMillis();
 
         File log = new File("/Users/hongyan/Desktop/homework.log");
-        Map<String,Integer> numMap = Maps.newHashMap();
+        Map<String, Integer> numMap = Maps.newHashMap();
 
         BufferedReader bio = new BufferedReader(new InputStreamReader(new FileInputStream(log), "utf-8"));
         String line = null;
@@ -124,7 +124,6 @@ public class Homework {
                 numMap2.put(userName2, 1);
             }
         }
-
 
         Entry<String, Integer> max2 = null;
         for (Entry<String, Integer> e2 : numMap2.entrySet()) {

@@ -17,15 +17,19 @@ import lombok.Data;
 public class 然儿 {
     private Integer age;
     private Boolean sex;
+
     public void 健身() {
         System.out.println("我正在健身~啊~好累啊!");
     }
+
     public void 带饭() {
         System.out.println("我要下楼吃饭了,老魏你吃啥?");
     }
+
     private void 搞基() {
         System.out.println("我是gay!");
     }
+
     public static void main(String[] args) {
         然儿 傻比 = new 然儿();
         傻比.健身();

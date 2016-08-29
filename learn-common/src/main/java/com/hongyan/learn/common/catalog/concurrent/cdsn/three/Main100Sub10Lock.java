@@ -39,7 +39,7 @@ public class Main100Sub10Lock {
         lock.unlock();
     }
 
-    public  void sub(int loop) {
+    public void sub(int loop) {
         lock.lock();
         while (!flag) {
             try {

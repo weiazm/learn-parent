@@ -21,9 +21,9 @@ public class FileOperation {
             } else {
                 File[] files = file.listFiles();
                 if (null != files)
-                for (File f : files) {
-                    print(f);
-                }
+                    for (File f : files) {
+                        print(f);
+                    }
             }
         }
     }

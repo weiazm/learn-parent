@@ -26,9 +26,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ContactDaoTest {
     @Autowired
     private ContactDao contactDao;
-    
+
     @Test
-    public void testGetContactByName(){
+    public void testGetContactByName() {
         String name = "张三";
         Contact contact = contactDao.getByName(name);
         Assert.assertNotNull(contact);

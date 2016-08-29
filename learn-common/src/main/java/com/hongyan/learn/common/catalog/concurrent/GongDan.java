@@ -19,10 +19,10 @@ public class GongDan {
         this.work = work;
         this.end = end;
     }
-    
+
     public synchronized void process(Integer mod) {
         while (work < end) {
-        this.proces(mod);
+            this.proces(mod);
         }
     }
 
@@ -36,7 +36,7 @@ public class GongDan {
             }
         } else {
             System.out.println(Thread.currentThread().getName() + ": " + work % 3 + "->" + work);
-        work++;
+            work++;
             this.notifyAll();
         }
     }

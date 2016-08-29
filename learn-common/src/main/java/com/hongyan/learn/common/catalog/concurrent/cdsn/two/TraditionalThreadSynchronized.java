@@ -43,15 +43,15 @@ public class TraditionalThreadSynchronized {
         public synchronized void output(String name) {
             // 锁必须是需要互斥的多个线程间的共享对象.
             // synchronized (lock) {
-                for (int i = 0; i < name.length(); i++) {
-                    System.out.println(name.charAt(i));
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+            for (int i = 0; i < name.length(); i++) {
+                System.out.println(name.charAt(i));
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
+            }
             // }
         }
     }

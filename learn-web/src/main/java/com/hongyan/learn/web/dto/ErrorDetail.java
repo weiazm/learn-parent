@@ -18,7 +18,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class ErrorDetail implements Serializable{
+public class ErrorDetail implements Serializable {
     /**
      * @title ErrorCode
      * @description TODO
@@ -51,18 +51,22 @@ public class ErrorDetail implements Serializable{
     private static final long serialVersionUID = 2090086668682261982L;
     private ErrorCode code;
     private Object detail;
+
     public ErrorDetail(ErrorCode code, Object detail) {
         super();
         this.code = code;
         this.detail = detail;
     }
-    public int getCode(){
+
+    public int getCode() {
         return code.getErrorCode();
     }
-    public String getMessage(){
+
+    public String getMessage() {
         return code.getErrorDesc();
     }
-    public Object getDetail(){
+
+    public Object getDetail() {
         return detail;
     }
 

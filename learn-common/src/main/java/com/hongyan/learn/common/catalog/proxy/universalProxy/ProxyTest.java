@@ -29,6 +29,7 @@ public class ProxyTest {
             public void before(Object o, Method method, Object[] args) {
                 System.out.println("before");
             }
+
             @Override
             public void after(Object o, Method method, Object[] args) {
                 System.out.println("after");

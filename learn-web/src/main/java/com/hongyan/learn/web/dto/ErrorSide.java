@@ -6,7 +6,7 @@ package com.hongyan.learn.web.dto;
 
 /**
  * @title ErrorSide
- * @desc TODO 
+ * @desc TODO
  * @author macrohuang
  * @date Nov 30, 2015
  * @version 1.0
@@ -14,10 +14,12 @@ package com.hongyan.learn.web.dto;
 public enum ErrorSide {
     UNKNOW(0), SERVER(2), CLIENT(1);
     private int code;
-    private ErrorSide(int code){
+
+    private ErrorSide(int code) {
         this.code = code;
     }
-    public int getErrorSideCode(){
+
+    public int getErrorSideCode() {
         return code;
     }
 }

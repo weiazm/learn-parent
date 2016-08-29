@@ -25,7 +25,7 @@ public class LoaderTest {
         in.close();
         Class<?> clazz = new MyClassLoader().myLoad(null, b, 0, len);
         Object o = clazz.newInstance();
-        
+
         Method[] ms = clazz.getMethods();
         for (Method m : ms) {
             System.out.println(m.getName());

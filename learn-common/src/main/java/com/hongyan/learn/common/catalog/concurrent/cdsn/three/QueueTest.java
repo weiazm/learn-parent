@@ -23,9 +23,11 @@ public class QueueTest {
 
         class Producer implements Runnable {
             private Integer num;
+
             public Producer(Integer num) {
                 this.num = num;
             }
+
             @Override
             public void run() {
                 try {
@@ -41,9 +43,11 @@ public class QueueTest {
 
         class Consumer implements Runnable {
             private Integer num;
+
             public Consumer(Integer num) {
                 this.num = num;
             }
+
             @Override
             public void run() {
                 try {
