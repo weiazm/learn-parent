@@ -1,6 +1,6 @@
 #!/bin/bash
 tomcatWebappsPath="/Users/weihongyan/Documents/workspace/apache-tomcat-9.0.0.M9/webapps"
-targetWarPath="/Users/weihongyan/Documents/workspace/javaLearnNew/learn-web/target"
+targetWarPath="/Users/weihongyan/Documents/workspace/learn-parent/learn-web/target"
 warName="learn"
 
 cd "${targetWarPath}/../../"
