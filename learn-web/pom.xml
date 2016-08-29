@@ -1,32 +1,33 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.hongyan.learn</groupId>
-    <artifactId>learn-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>learn-web</artifactId>
-  <name>learn-web Maven Webapp</name>
-  <packaging>war</packaging>
-  <url>http://maven.apache.org</url>
-  	<build>
-	  <finalName>learn</finalName>
-	<!-- 插件 -->
-	 
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hongyan.learn</groupId>
+		<artifactId>learn-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>learn-web</artifactId>
+	<name>learn-web Maven Webapp</name>
+	<packaging>war</packaging>
+	<url>http://maven.apache.org</url>
+	<build>
+		<finalName>learn</finalName>
+		<!-- 插件 -->
+
 		<!-- 资源文件 -->
 		<resources>
 			<resource>
 				<directory>src/main/resources/base</directory>
 			</resource>
 			<resource>
-				<!--directory>src/main/resources/${res}</directory-->
+				<!--directory>src/main/resources/${res}</directory -->
 				<directory>src/main/resources/qa</directory>
 			</resource>
-		</resources>  
-  	</build>
-  	<!-- -P参数 资源配置 -->
+		</resources>
+	</build>
+	<!-- -P参数 资源配置 -->
 	<profiles>
 		<profile>
 			<id>prod</id>
@@ -65,13 +66,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-		
+
 		<!-- Spring and Transactions -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		
+
 		<!-- Other Web dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -108,7 +109,7 @@
 			<artifactId>mockito-all</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Other dependencies -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -163,10 +164,10 @@
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-        </dependency>
-        <dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
@@ -183,26 +184,26 @@
 			<artifactId>pebble-spring3</artifactId>
 			<version>${pebble.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.hongyan.learn</groupId>
-    		<artifactId>learn-dal</artifactId>
-    		<version>${version}</version>
+			<artifactId>learn-dal</artifactId>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.hongyan.learn</groupId>
-    		<artifactId>learn-sal</artifactId>
-    		<version>${version}</version>
+			<artifactId>learn-sal</artifactId>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.hongyan.learn</groupId>
-    		<artifactId>learn-biz</artifactId>
-    		<version>${version}</version>
+			<artifactId>learn-biz</artifactId>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.hongyan.learn</groupId>
-    		<artifactId>learn-common</artifactId>
-    		<version>${version}</version>
+			<artifactId>learn-common</artifactId>
+			<version>${version}</version>
 		</dependency>
 	</dependencies>
 </project>
