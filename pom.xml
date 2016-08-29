@@ -50,6 +50,7 @@
             </plugin>
         </plugins>
     </build>
+    
     <modules>
     <module>learn-biz</module>
     <module>learn-sal</module>
@@ -57,6 +58,7 @@
     <module>learn-dal</module>
     <module>learn-web</module>
     </modules>
+    
     <dependencyManagement>
 		<dependencies>
 			<dependency>
