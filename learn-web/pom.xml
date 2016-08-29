@@ -156,6 +156,10 @@
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.mitchellbosecke</groupId>
 			<artifactId>pebble-spring3</artifactId>
 			<version>${pebble.version}</version>
