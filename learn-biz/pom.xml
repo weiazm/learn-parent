@@ -12,19 +12,19 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.hongyan.learn</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>learn-sal</artifactId>
-			<version>${version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.hongyan.learn</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>learn-dal</artifactId>
-			<version>${version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.hongyan.learn</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>learn-common</artifactId>
-			<version>${version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 </project>
