@@ -1,0 +1,146 @@
+2016-08-30 19:56:16.714  INFO main DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+					
+2016-08-30 19:56:16.733  INFO main DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3f197a46, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@636be97c, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@50a638b5, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1817d444, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6ca8564a, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@50b472aa]
+					
+2016-08-30 19:56:16.885  INFO main XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [application-context.xml]
+					
+2016-08-30 19:56:16.887 ERROR main TestContextManager:234 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@50a638b5] to prepare test instance [com.hongyan.learn.test.util.RedisTemplateTest@192c3f1e]
+					
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:230) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:228) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:287) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:289) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:247) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) ~[junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) ~[junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) ~[junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) ~[junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) ~[junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) ~[junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) ~[.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) ~[.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459) ~[.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:678) ~[.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382) ~[.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192) ~[.cp/:?]
+Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: IOException parsing XML document from class path resource [application-context.xml]; nested exception is java.io.FileNotFoundException: class path resource [application-context.xml] cannot be opened because it does not exist
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:344) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:252) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadBeanDefinitions(AbstractGenericContextLoader.java:257) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:124) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:108) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:251) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	... 25 more
+Caused by: java.io.FileNotFoundException: class path resource [application-context.xml] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:172) ~[spring-core-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:330) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:252) ~[spring-beans-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadBeanDefinitions(AbstractGenericContextLoader.java:257) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:124) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:108) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:251) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116) ~[spring-test-4.3.2.RELEASE.jar:4.3.2.RELEASE]
+	... 25 more
+2016-08-30 19:56:58.027  INFO main DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+					
+2016-08-30 19:56:58.038  INFO main DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3f197a46, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@636be97c, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@50a638b5, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1817d444, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6ca8564a, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@50b472aa]
+					
+2016-08-30 19:56:58.144  INFO main XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [application-config.xml]
+					
+2016-08-30 19:56:58.371  INFO main GenericApplicationContext:581 - Refreshing org.springframework.context.support.GenericApplicationContext@359f7cdf: startup date [Tue Aug 30 19:56:58 CST 2016]; root of context hierarchy
+					
+2016-08-30 19:56:58.532  INFO main PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [redis.properties]
+					
+2016-08-30 19:56:58.631  INFO main EmbeddedDatabaseFactory:185 - Starting embedded database: url='jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+					
+2016-08-30 19:56:58.762  INFO main ScriptUtils:444 - Executing SQL script from class path resource [database/hongyan-learn.sql]
+					
+2016-08-30 19:56:58.860  INFO main ScriptUtils:510 - Executed SQL script from class path resource [database/hongyan-learn.sql] in 97 ms.
+					
+2016-08-30 19:56:59.124  INFO main RequestMappingHandlerAdapter:534 - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@359f7cdf: startup date [Tue Aug 30 19:56:58 CST 2016]; root of context hierarchy
+					
+2016-08-30 19:56:59.320  INFO Thread-3 GenericApplicationContext:982 - Closing org.springframework.context.support.GenericApplicationContext@359f7cdf: startup date [Tue Aug 30 19:56:58 CST 2016]; root of context hierarchy
+					
+2016-08-30 19:56:59.322  INFO Thread-3 EmbeddedDatabaseFactory:217 - Shutting down embedded database: url='jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+					
+2016-08-30 20:03:47.602  INFO main DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+					
+2016-08-30 20:03:47.614  INFO main DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6adbc9d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4550bb58, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4ec4f3a0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@223191a6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@49139829, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@9597028]
+					
+2016-08-30 20:03:47.697  INFO main XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [application-config.xml]
+					
+2016-08-30 20:03:47.935  INFO main GenericApplicationContext:581 - Refreshing org.springframework.context.support.GenericApplicationContext@618b19ad: startup date [Tue Aug 30 20:03:47 CST 2016]; root of context hierarchy
+					
+2016-08-30 20:03:48.075  INFO main PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [redis.properties]
+					
+2016-08-30 20:03:48.172  INFO main EmbeddedDatabaseFactory:185 - Starting embedded database: url='jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+					
+2016-08-30 20:03:48.335  INFO main ScriptUtils:444 - Executing SQL script from class path resource [database/hongyan-learn.sql]
+					
+2016-08-30 20:03:48.429  INFO main ScriptUtils:510 - Executed SQL script from class path resource [database/hongyan-learn.sql] in 94 ms.
+					
+2016-08-30 20:03:48.676  INFO main RequestMappingHandlerAdapter:534 - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@618b19ad: startup date [Tue Aug 30 20:03:47 CST 2016]; root of context hierarchy
+					
+2016-08-30 20:04:48.243  INFO main DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+					
+2016-08-30 20:04:48.254  INFO main DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6adbc9d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4550bb58, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4ec4f3a0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@223191a6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@49139829, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@9597028]
+					
+2016-08-30 20:04:48.336  INFO main XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [application-config.xml]
+					
+2016-08-30 20:04:48.575  INFO main GenericApplicationContext:581 - Refreshing org.springframework.context.support.GenericApplicationContext@618b19ad: startup date [Tue Aug 30 20:04:48 CST 2016]; root of context hierarchy
+					
+2016-08-30 20:04:48.725  INFO main PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [redis.properties]
+					
+2016-08-30 20:04:48.817  INFO main EmbeddedDatabaseFactory:185 - Starting embedded database: url='jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+					
+2016-08-30 20:04:48.943  INFO main ScriptUtils:444 - Executing SQL script from class path resource [database/hongyan-learn.sql]
+					
+2016-08-30 20:04:49.031  INFO main ScriptUtils:510 - Executed SQL script from class path resource [database/hongyan-learn.sql] in 88 ms.
+					
+2016-08-30 20:04:49.281  INFO main RequestMappingHandlerAdapter:534 - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@618b19ad: startup date [Tue Aug 30 20:04:48 CST 2016]; root of context hierarchy
+					
+2016-08-30 20:10:53.712  INFO main DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+					
+2016-08-30 20:10:53.731  INFO main DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@72967906, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5b8dfcc1, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2f9f7dcf, org.springframework.test.context.support.DirtiesContextTestExecutionListener@747ddf94, org.springframework.test.context.transaction.TransactionalTestExecutionListener@35e2d654, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1bd4fdd]
+					
+2016-08-30 20:10:53.837  INFO main XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [application-config.xml]
+					
+2016-08-30 20:10:54.098  INFO main GenericApplicationContext:581 - Refreshing org.springframework.context.support.GenericApplicationContext@62379589: startup date [Tue Aug 30 20:10:54 CST 2016]; root of context hierarchy
+					
+2016-08-30 20:10:54.268  INFO main PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [redis.properties]
+					
+2016-08-30 20:10:54.365  INFO main EmbeddedDatabaseFactory:185 - Starting embedded database: url='jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+					
+2016-08-30 20:10:54.538  INFO main ScriptUtils:444 - Executing SQL script from class path resource [database/hongyan-learn.sql]
+					
+2016-08-30 20:10:54.628  INFO main ScriptUtils:510 - Executed SQL script from class path resource [database/hongyan-learn.sql] in 90 ms.
+					
+2016-08-30 20:10:54.949  INFO main RequestMappingHandlerAdapter:534 - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@62379589: startup date [Tue Aug 30 20:10:54 CST 2016]; root of context hierarchy
+					
+2016-08-30 20:10:55.166  INFO Thread-3 GenericApplicationContext:982 - Closing org.springframework.context.support.GenericApplicationContext@62379589: startup date [Tue Aug 30 20:10:54 CST 2016]; root of context hierarchy
+					
+2016-08-30 20:10:55.167  INFO Thread-3 EmbeddedDatabaseFactory:217 - Shutting down embedded database: url='jdbc:h2:mem:dataSource;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false'
+					

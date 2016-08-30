@@ -4,6 +4,11 @@
  */
 package com.hongyan.learn.test.util;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 /**
  * @title RedisTemplateTest
  * @desc description
@@ -11,13 +16,12 @@ package com.hongyan.learn.test.util;
  * @date Aug 30, 2016
  * @version version
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:application-config.xml")
 public class RedisTemplateTest {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
+    @Test
+    public void redisTest() {
 
     }
 

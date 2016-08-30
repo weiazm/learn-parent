@@ -251,6 +251,12 @@
 			<version>${log-version}</version>
 		</dependency>
 		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-web</artifactId>
+		    <version>${log-version}</version>
+		    <scope>runtime</scope>
+  		</dependency>
+		<dependency>
 			<groupId>com.baijia.common</groupId>
 			<artifactId>sql-builder</artifactId>
 			<version>1.0-SNAPSHOT</version>
