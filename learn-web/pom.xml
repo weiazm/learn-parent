@@ -96,6 +96,7 @@
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
+		<!-- 聚合模块 -->
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>learn-dal</artifactId>
