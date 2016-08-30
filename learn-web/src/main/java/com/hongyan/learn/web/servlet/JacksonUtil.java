@@ -29,6 +29,7 @@ public abstract class JacksonUtil {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
+    @SuppressWarnings("deprecation")
     protected static JavaType getJavaType(Type type, Class<?> contextClass) {
         return (contextClass != null) ? mapper.getTypeFactory().constructType(type, contextClass)
             : mapper.constructType(type);
@@ -56,7 +57,6 @@ public abstract class JacksonUtil {
 
     public static final <T> List<T> str2List(String s, Class<T> valueType)
         throws JsonParseException, JsonMappingException, IOException {
-        @SuppressWarnings("deprecation")
         JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, valueType);
         return mapper.readValue(s, javaType);
     }
