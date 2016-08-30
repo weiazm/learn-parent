@@ -9,17 +9,5 @@
 	<artifactId>learn-common</artifactId>
 	<packaging>jar</packaging>
 	<name>learn-common</name>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-	</dependencies>
+	
 </project>
