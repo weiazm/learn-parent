@@ -12,9 +12,10 @@
     	<pebble.version>2.2.1</pebble.version>
     	<java-build-version>1.8</java-build-version>
 		<bj-bom-all-version>0.0.37</bj-bom-all-version>
-		<cargo-maven2-plugin-version>1.4.19</cargo-maven2-plugin-version>
 		<jetty-maven-plugin-version>8.1.9.v20130131</jetty-maven-plugin-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cargo-maven2-plugin-version>1.4.19</cargo-maven2-plugin-version>
+		<cargo-tomcat8-home>/Users/weihongyan/Documents/workspace/apache-tomcat-8.5.4</cargo-tomcat8-home>
     </properties>
 
     <build>
@@ -27,7 +28,7 @@
 				<configuration>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
 					<webAppConfig>
-						<contextPath>/</contextPath>
+						<contextPath>/learn</contextPath>
 					</webAppConfig>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.bio.SocketConnector">
@@ -45,11 +46,11 @@
     			<configuration>
     				<container>
 	    				<containerId>tomcat8x</containerId>
-	    				<home>/Users/weihongyan/Documents/workspace/apache-tomcat-8.5.4</home>
+	    				<home>${cargo-tomcat8-home}</home>
     				</container>
     				<configuration>
     					<type>existing</type>
-    					<home>/Users/weihongyan/Documents/workspace/apache-tomcat-8.5.4</home>
+    					<home>${cargo-tomcat8-home}</home>
     				</configuration>
     			</configuration>
 			</plugin>
