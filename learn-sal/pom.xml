@@ -9,6 +9,18 @@
 	<artifactId>learn-sal</artifactId>
 	<packaging>jar</packaging>
 	<name>learn-sal</name>
+	
+	<build>
+		<!-- 资源文件目录 -->
+		<resources>
+			<resource>
+				<directory>../learn-web/src/main/resources/base</directory>
+			</resource>
+			<resource>
+				<directory>../learn-web/src/main/resources/${resource.directory}</directory>
+			</resource>
+		</resources>
+	</build>
 
 	<dependencies>
 		<dependency>
