@@ -129,6 +129,7 @@
 		</dependency>
     </dependencies>
     
+    <!-- 使用公司的依赖管理 -->
     <dependencyManagement>
 		<dependencies>
 			<dependency>
