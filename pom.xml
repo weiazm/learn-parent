@@ -19,6 +19,7 @@
 
     <build>
         <plugins>
+        	<!-- mvn jetty:run -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -36,6 +37,7 @@
 					</connectors>
 				</configuration>
 			</plugin>
+			<!-- mvn cargo:run -->
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
     			<artifactId>cargo-maven2-plugin</artifactId>
