@@ -95,7 +95,7 @@
 		</profile>
 	</profiles>
     
-    <!-- 公用的一些依赖 -->
+    <!-- 公用的一些测试,日志依赖 -->
     <dependencies>
     	<dependency>
 			<groupId>junit</groupId>
