@@ -6,6 +6,8 @@ package com.hongyan.learn.test.util;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,9 +22,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("classpath:application-config.xml")
 public class RedisTemplateTest {
 
-    @Test
-    public void redisTest() {
 
+    @Autowired
+    RedisTemplate<String, String> jedisTemplate;
+
+    @Test
+    public void putAndGet() {
+        jedisTemplate.opsForHash().put("user", "name", "张三");
+        Object name = jedisTemplate.opsForHash().get("user", "name");
+        System.out.println(name);
+        jedisTemplate.opsForHash().delete("user", "name");
     }
 
 }

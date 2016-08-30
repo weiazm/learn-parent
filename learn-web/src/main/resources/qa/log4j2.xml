@@ -2,42 +2,39 @@
 <configuration status="INFO">
 	<Appenders>
 		<Console name="console" target="SYSTEM_OUT">
-			<PatternLayout
-				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg %X{LOGID}%n" />
-		</Console>
-		<RollingFile name="biz" fileName="${sys:catalina.base}/logs/learn.log"
-			filePattern="/Users/hongyan/Documents/workspace/apache-tomcat-9.0.0.M9/logs/learn.log.%d{yyyy-MM-dd}.log">
 			<PatternLayout>
-				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %t %c{1}:%L - %m
-					%X{LOGID}%n</pattern>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %t %c{1}:%L - %m %n</pattern>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="business" fileName="${sys:catalina.base}/logs/learn.log"
+			filePattern="${sys:catalina.base}/logs/learn.log.%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %t %c{1}:%L - %m %n</pattern>
 			</PatternLayout>
 			<Policies>
-				<TimeBasedTriggeringPolicy interval="1"
-					modulate="true" />
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
 			</Policies>
 		</RollingFile>
 		<RollingFile name="error" fileName="${sys:catalina.base}/logs/error.log"
 			filePattern="${sys:catalina.base}/logs/error.log.%d{yyyy-MM-dd}.log">
 			<PatternLayout>
-				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %t %c{1}:%L - %m
-					%X{LOGID}%n</pattern>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %t %c{1}:%L - %m %n</pattern>
 			</PatternLayout>
 			<Policies>
-				<TimeBasedTriggeringPolicy interval="1"
-					modulate="true" />
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
 			</Policies>
 		</RollingFile>
 	</Appenders>
 	<Loggers>
-		<logger name="com.baijia" level="DEBUG"></logger>
-		<logger name="com.baijia.tianxiao.sqlbuilder.SingleSqlBuilder"
-			level="info"></logger>
+		<logger name="com.hongyan" level="DEBUG"></logger>
+		<logger name="com.baijia.tianxiao.sqlbuilder.SingleSqlBuilder" level="info"></logger>
 		<AsyncRoot level="info" additivity="false" includeLocation="true">
-			<AppenderRef ref="biz" />
+			<AppenderRef ref="console" />
+			<AppenderRef ref="business" />
 			<AppenderRef ref="error" level="error" />
 		</AsyncRoot>
+		<logger name="com.mitchellbosecke.pebble.spring.PebbleView.timer" level="DEBUG" additivity="false">
+		<AppenderRef ref="business" />
+		</logger>
 	</Loggers>
-	<Logger name="com.mitchellbosecke.pebble.spring.PebbleView.timer" level="DEBUG" additivity="false">
-		<AppenderRef ref="STDOUT" />
-	</Logger>
 </configuration>
