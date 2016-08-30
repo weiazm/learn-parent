@@ -47,6 +47,7 @@
         </plugins>
     </build>
     
+    <!-- 聚合 -->
     <modules>
     <module>learn-biz</module>
     <module>learn-sal</module>
