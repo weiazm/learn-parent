@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @title ContactControllerTest
@@ -28,7 +27,7 @@ public class ContactControllerTest extends SuperControllerTest {
     @Test
     public void test2() {
         context = new ClassPathXmlApplicationContext("application-config.xml");
-        StringRedisTemplate redisTemplate = (StringRedisTemplate) context.getBean("redisTemplate");
-        System.out.println(((JedisConnectionFactory) (redisTemplate.getConnectionFactory())).getPassword());
+        JedisConnectionFactory redisTemplate = context.getBean(JedisConnectionFactory.class);
+        System.out.println(redisTemplate.getPassword());
     }
 }
