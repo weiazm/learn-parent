@@ -15,7 +15,7 @@ public class HomeController {
     
     @RequestMapping(value = "/")
     public ModelAndView home(){
-        return home("欢迎来到OST!");
+        return home("欢迎来到NHK!");
     }
 
     @RequestMapping(value = "/index.do")
