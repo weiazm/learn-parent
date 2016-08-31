@@ -14,17 +14,19 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:annotation-config />
-    <context:component-scan base-package="com.hongyan.learn"/>
-     <context:component-scan base-package="com.baijia.tianxiao.sqlbuilder.*" />
-    
-	<jdbc:embedded-database id="dataSource" type="H2">
-		<jdbc:script location="classpath:database/hongyan-learn.sql" />
-	</jdbc:embedded-database>
+    <context:component-scan base-package="com.hongyan.learn.dal.*"/>
+    <context:component-scan base-package="com.hongyan.learn.sal.*"/>
+    <context:component-scan base-package="com.hongyan.learn.biz.*"/>
+    <context:component-scan base-package="com.baijia.tianxiao.sqlbuilder.*" />
 	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+    
+	<jdbc:embedded-database id="dataSource" type="H2">
+		<jdbc:script location="classpath:database/hongyan-learn.sql" />
+	</jdbc:embedded-database>
 
 	<tx:annotation-driven transaction-manager="transacManager"/>
     <bean id="transacManager"

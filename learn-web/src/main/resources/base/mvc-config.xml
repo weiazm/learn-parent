@@ -17,19 +17,6 @@
     <context:annotation-config />
 	<context:component-scan base-package="com.hongyan.learn.web.controller" />	
 
-	<bean id="servletContext" class="com.hongyan.learn.web.servlet.ServletContextFactory"/>
-
-	<bean id="templateLoader" class="com.mitchellbosecke.pebble.loader.ServletLoader">
-        <constructor-arg ref="servletContext"/>
-    </bean>
-
-    <bean id="springExtension" class="com.mitchellbosecke.pebble.spring.extension.SpringExtension"/>
-
-    <bean id="pebbleEngine" class="com.hongyan.learn.web.servlet.PebbleEngineFactory" factory-method="instance">
-        <constructor-arg ref="templateLoader"/>
-        <constructor-arg ref="springExtension"/>
-    </bean>
-
     <bean id="viewResolver" class="com.mitchellbosecke.pebble.spring.PebbleViewResolver">
         <property name="viewClass"
                   value="com.hongyan.learn.web.servlet.PebbleJsonView"/>
@@ -37,5 +24,18 @@
         <property name="suffix" value=".html"/>
         <property name="pebbleEngine" ref="pebbleEngine"/>
     </bean>
+
+    <bean id="pebbleEngine" class="com.hongyan.learn.web.servlet.PebbleEngineFactory" factory-method="instance">
+        <constructor-arg ref="templateLoader"/>
+        <constructor-arg ref="springExtension"/>
+    </bean>
+
+	<bean id="templateLoader" class="com.mitchellbosecke.pebble.loader.ServletLoader">
+        <constructor-arg ref="servletContext"/>
+    </bean>
+
+	<bean id="servletContext" class="com.hongyan.learn.web.servlet.ServletContextFactory"/>
+
+    <bean id="springExtension" class="com.mitchellbosecke.pebble.spring.extension.SpringExtension"/>
 
 </beans>
