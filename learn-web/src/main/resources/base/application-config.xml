@@ -48,9 +48,15 @@
         </property>
     </bean>
     
-    <!-- redis 配置 -->
+    <!-- redis 配置文件 -->
     <context:property-placeholder location="classpath:redis.properties"/>
-	<!-- spring data redis -->
+    
+    <!-- Redis Template -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+    </bean>
+    
+	<!-- 使用spring来装配factoryBean -->
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="usePool" value="true"></property>
         <property name="hostName" value="${redis.host}" />
@@ -61,12 +67,7 @@
         <constructor-arg index="0" ref="jedisPoolConfig" />
     </bean>
 
-    <!-- jedis pool配置 -->
+    <!-- 装配jedis pool -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"></bean>
 
-    <!-- Redis Template -->
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-        <property name="connectionFactory" ref="jedisConnectionFactory" />
-    </bean>
-	
 </beans>
