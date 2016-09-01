@@ -57,7 +57,7 @@
         <property name="connectionFactory" ref="jedisConnectionFactory" />
     </bean>
     <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <constructor-arg ref="jedisConnectionFactory" />
     </bean>
     
 	<!-- 使用spring来装配factoryBean -->
@@ -68,7 +68,7 @@
         <property name="password" value="${redis.pass}" />
         <property name="timeout" value="${redis.timeout}" />
         <property name="database" value="${redis.default.db}" />
-        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg ref="jedisPoolConfig" />
     </bean>
 
     <!-- 装配jedis pool -->
