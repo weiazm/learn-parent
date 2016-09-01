@@ -38,5 +38,10 @@
 			<artifactId>learn-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>learn-config</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
