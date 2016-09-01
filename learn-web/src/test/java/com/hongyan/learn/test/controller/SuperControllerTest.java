@@ -5,7 +5,6 @@
 package com.hongyan.learn.test.controller;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,7 +31,6 @@ public abstract class SuperControllerTest {
     private WebApplicationContext context;
     private MockMvc mockMvc;
     
-    @Test
     public abstract void test();
 
     public final void pathPrintTest(String path) {

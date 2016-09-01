@@ -4,6 +4,7 @@
  */
 package com.hongyan.learn.test.controller;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,6 +20,8 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 public class ContactControllerTest extends SuperControllerTest {
     private static ApplicationContext context;
 
+    @Test
+    @Ignore
     @Override
     public void test() {
         this.pathPrintTest("/contact/getByName.json?contactName=张三");
