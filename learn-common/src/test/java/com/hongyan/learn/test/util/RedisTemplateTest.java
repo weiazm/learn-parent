@@ -4,6 +4,7 @@
  */
 package com.hongyan.learn.test.util;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,18 @@ public class RedisTemplateTest {
 
 
     @Autowired
-    private RedisTemplate<String, String> jedisTemplate;
+    private RedisTemplate<String, Object> jedisTemplate;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Test
+    public void test() {
+        Assert.assertNotNull(jedisTemplate);
+        Assert.assertNotNull(stringRedisTemplate);
+        System.out.println(jedisTemplate.getClass().getName());
+        System.out.println(stringRedisTemplate.getClass().getName());
+    }
 
     @Test
     public void putAndGet() {

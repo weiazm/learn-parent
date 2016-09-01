@@ -52,7 +52,7 @@
     <!-- redis 配置文件 -->
     <context:property-placeholder location="classpath:redis.properties"/>
     
-    <!-- Redis Template -->
+    <!-- Redis 两种 Template -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory" />
     </bean>
