@@ -4,12 +4,12 @@
  */
 package com.hongyan.learn.test.util;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -29,25 +29,24 @@ public class RedisTemplateTest {
 
 
     @Autowired
-    private RedisTemplate<String, Object> jedisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     @Test
     public void test() {
-        Assert.assertNotNull(jedisTemplate);
-        Assert.assertNotNull(stringRedisTemplate);
-        System.out.println(jedisTemplate.getClass().getName());
-        System.out.println(stringRedisTemplate.getClass().getName());
+        String key = "whatsthisfduck?";
+        BoundListOperations<String, String> bo = stringRedisTemplate.boundListOps(key);
+        System.out.println(bo.size());
     }
 
     @Test
     public void putAndGet() {
-        jedisTemplate.opsForHash().put("user", "name", "张三");
-        Object name = jedisTemplate.opsForHash().get("user", "name");
+        redisTemplate.opsForHash().put("user", "name", "张三");
+        Object name = redisTemplate.opsForHash().get("user", "name");
         System.out.println(name);
-        jedisTemplate.opsForHash().delete("user", "name");
+        redisTemplate.opsForHash().delete("user", "name");
     }
 
     @Test
