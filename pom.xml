@@ -71,6 +71,7 @@
     
     <!-- 聚合 -->
     <modules>
+    <module>learn-config</module>
     <module>learn-biz</module>
     <module>learn-sal</module>
     <module>learn-common</module>
