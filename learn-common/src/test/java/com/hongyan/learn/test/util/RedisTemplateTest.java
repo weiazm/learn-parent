@@ -36,7 +36,7 @@ public class RedisTemplateTest {
 
     @Test
     public void test() {
-        String key = "whatsthisfduck?";
+        String key = "whatsthisfuck?";
         BoundListOperations<String, String> bo = stringRedisTemplate.boundListOps(key);
         System.out.println(bo.size());
     }
