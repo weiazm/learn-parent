@@ -4,10 +4,14 @@
  */
 package com.hongyan.learn.test.controller;
 
+import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @title ContactControllerTest
@@ -17,8 +21,21 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
  * @version version
  */
 public class ContactControllerTest extends SuperControllerTest {
-    private static ApplicationContext context;
 
+    @Autowired
+    private ApplicationContext context;
+
+    @Value(value = "#{systemProperties['redis.host']}")
+    private String name;
+
+    @Value(value = "#{jedisConnectionFactory.password}")
+    private String password;
+
+    @Value(value = "#{stringRedisTemplate}") // 真他妈神奇
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Test
+    @Ignore
     @Override
     public void test() {
         this.pathPrintTest("/contact/getByName.json?contactName=张三");
@@ -26,8 +43,11 @@ public class ContactControllerTest extends SuperControllerTest {
 
     @Test
     public void test2() {
-        context = new ClassPathXmlApplicationContext("application-config.xml");
+        // context = new ClassPathXmlApplicationContext("application-config.xml");
         JedisConnectionFactory redisTemplate = context.getBean(JedisConnectionFactory.class);
         System.out.println(redisTemplate.getPassword());
+        System.out.println(name);
+        System.out.println(password);
+        Assert.assertNotNull(stringRedisTemplate);
     }
 }

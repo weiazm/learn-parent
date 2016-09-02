@@ -4,6 +4,8 @@
  */
 package com.hongyan.learn.test.controller;
 
+import org.junit.Test;
+
 /**
  * @title HomeControllerTest
  * @desc 1+1=2
@@ -12,6 +14,7 @@ package com.hongyan.learn.test.controller;
  * @version null
  */
 public class HomeControllerTest extends SuperControllerTest {
+    @Test
     @Override
     public void test() {
         this.pathPrintTest("/");
