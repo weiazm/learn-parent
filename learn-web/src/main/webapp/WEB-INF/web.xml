@@ -29,14 +29,6 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>*.json</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
 
     <!-- filter 解决了汉字编码问题 -->
 	<filter>
