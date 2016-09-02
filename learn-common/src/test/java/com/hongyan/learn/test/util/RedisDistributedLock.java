@@ -4,7 +4,7 @@
  */
 package com.hongyan.learn.test.util;
 
-import com.hongyan.learn.common.springConfig.SpringRedisConfig;
+import com.hongyan.learn.test.springConfig.SpringRedisConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

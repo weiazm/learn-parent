@@ -2,7 +2,7 @@
  * Baijiahulian.com Inc.
  * Copyright (c) 2014-2016 All Rights Reserved.
  */
-package com.hongyan.learn.common.springConfig;
+package com.hongyan.learn.test.springConfig;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
