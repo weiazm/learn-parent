@@ -62,7 +62,7 @@
     
 	<!-- 使用spring来装配factoryBean -->
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <property name="usePool" value="true" />
+        <property name="usePool" value="${redis.usePool}" />
         <property name="hostName" value="${redis.host}" />
         <property name="port" value="${redis.port}" />
         <property name="password" value="${redis.pass}" />
