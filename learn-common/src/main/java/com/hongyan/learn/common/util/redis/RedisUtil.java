@@ -987,7 +987,7 @@ public class RedisUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:ctx-redis.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-config.xml");
         ServiceLocator locator = new ServiceLocator();
         locator.setApplicationContext(context);
 
