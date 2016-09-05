@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import lombok.Getter;
+import lombok.Setter;
 import redis.clients.jedis.Response;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPipeline;
@@ -75,7 +77,10 @@ public class RedisUtil {
 
     private static RedisUtil ins;
 
+    @Getter
+    @Setter
     private ShardedJedisPool jedisPool;
+    
     private int retryTimes = DEF_RETYR_TIMES;
     private long waitTime = DEF_WAIT_TIME;
 
@@ -83,7 +88,6 @@ public class RedisUtil {
      * @param jedisPool
      */
     public RedisUtil(ShardedJedisPool jedisPool) {
-        super();
         this.jedisPool = jedisPool;
     }
 
@@ -93,18 +97,9 @@ public class RedisUtil {
      * @param waitTime 重试等待时间
      */
     public RedisUtil(ShardedJedisPool jedisPool, int retryTimes, long waitTime) {
-        super();
         this.jedisPool = jedisPool;
         this.retryTimes = retryTimes;
         this.waitTime = waitTime;
-    }
-
-    public ShardedJedisPool getJedisPool() {
-        return jedisPool;
-    }
-
-    public void setJedisPool(ShardedJedisPool jedisPool) {
-        this.jedisPool = jedisPool;
     }
 
     /**
@@ -171,7 +166,7 @@ public class RedisUtil {
                 } catch (InterruptedException e1) {
                 }
             } finally {
-                jedisPool.returnResourceObject(jedis);
+                jedis.close();
             }
         }
     }
