@@ -1,7 +1,6 @@
 package com.hongyan.learn.common.util.redis;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 基于心跳的分布式锁，依赖RedisUtil，继承RedisBaseLock
@@ -12,9 +11,8 @@ import org.slf4j.LoggerFactory;
  * @date 2015年9月15日
  * @version 1.0
  */
+@Slf4j
 public class HeartbeatLock extends RedisBaseLock {
-
-    private static final Logger log = LoggerFactory.getLogger(HeartbeatLock.class);
 
     private Heartbeat heartbeat;
 

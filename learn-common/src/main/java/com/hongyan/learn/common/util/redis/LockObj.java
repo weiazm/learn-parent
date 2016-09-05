@@ -15,66 +15,19 @@ import lombok.Data;
  */
 @Data
 public class LockObj implements Serializable {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 970850729790501922L;
+    /**
+     * 锁的拥有者
+     */
     private String owner;
+    /**
+     * 上锁时间
+     */
     private long time;
+    /**
+     * 心跳开始时间
+     */
     private long heartbeatStartAt;
-
-    /**
-     * 锁的拥有者
-     * 
-     * @return
-     */
-    public String getOwner() {
-        return owner;
-    }
-
-    /**
-     * 锁的拥有者
-     * 
-     * @param owner
-     */
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    /**
-     * 上锁时间
-     * 
-     * @return
-     */
-    public long getTime() {
-        return time;
-    }
-
-    /**
-     * 上锁时间
-     * 
-     * @param time
-     */
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    /**
-     * 心跳开始时间
-     * 
-     * @return
-     */
-    public long getHeartbeatStartAt() {
-        return heartbeatStartAt;
-    }
-
-    /**
-     * 心跳开始时间
-     * 
-     * @param heartbeatStartAt
-     */
-    public void setHeartbeatStartAt(long heartbeatStartAt) {
-        this.heartbeatStartAt = heartbeatStartAt;
-    }
 
 }
