@@ -12,6 +12,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 基于redis的分布式锁的抽象类，依赖RedisUtil
  * 
@@ -21,9 +23,8 @@ import java.util.concurrent.locks.Lock;
  * @date 2015年9月15日
  * @version 1.0
  */
+@Slf4j
 public abstract class RedisBaseLock implements Lock {
-
-    private static final Logger log = LoggerFactory.getLogger(RedisBaseLock.class);
 
     protected static final ConcurrentHashMap<String, LockObj> LOCK_MAP = new ConcurrentHashMap<>();
 
