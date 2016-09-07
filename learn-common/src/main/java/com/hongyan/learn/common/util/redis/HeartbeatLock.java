@@ -1,5 +1,6 @@
 package com.hongyan.learn.common.util.redis;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HeartbeatLock extends RedisBaseLock {
 
+    @Getter
     private Heartbeat heartbeat;
 
     public HeartbeatLock(RedisUtil redisUtil, String key) {
@@ -29,10 +31,6 @@ public class HeartbeatLock extends RedisBaseLock {
         super(redisUtil, key, heartbeat.getProcName(), 0);
         this.heartbeat = heartbeat;
 
-    }
-
-    public Heartbeat getHeartbeat() {
-        return heartbeat;
     }
 
     @Override
@@ -71,14 +69,10 @@ public class HeartbeatLock extends RedisBaseLock {
                 }
                 if (needUnlock(key, value, force)) {
                     redisUtil.del(key);
-                    if (log.isDebugEnabled()) {
-                        log.debug("unlock, key[{}]", key);
-                    }
+                    log.debug("unlock, key[{}]", key);
                     return true;
                 } else {
-                    if (log.isDebugEnabled()) {
-                        log.debug("unlock fail, key[{}]", key);
-                    }
+                    log.debug("unlock fail, key[{}]", key);
                     return false;
                 }
             }
@@ -87,7 +81,7 @@ public class HeartbeatLock extends RedisBaseLock {
     }
 
     private boolean needUnlock(final String key, final LockObj value, final boolean force) throws Exception {
-        if (force) {
+        if (force) {//强制 返回true
             return true;
         }
         LockObj last = decodeLock(redisUtil.get(key));
