@@ -2,14 +2,13 @@ package com.hongyan.learn.common.util.redis;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 基于redis的分布式锁的抽象类，依赖RedisUtil
@@ -23,30 +22,28 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class RedisBaseLock implements Lock {
 
+    public static final int DEF_LOCK_EXPIRE = 60;
     protected static final ConcurrentHashMap<String, LockObj> LOCK_MAP = new ConcurrentHashMap<>();
-
+    protected static final long DEF_WAIT_TIME = 100L;
+    protected static final Gson gson = new Gson();
+    protected static final Type LOCK_OBJ_TYPE = new TypeToken<LockObj>() {
+    }.getType();
     private static final String SYN_PREFIX = "syn_";
     private static final int SYN_EXPIRE = 5;
-
-    public static final int DEF_LOCK_EXPIRE = 60;
-    protected static final long DEF_WAIT_TIME = 100L;
-
     protected RedisUtil redisUtil;
-
     protected String key;// 锁的唯一标识
     protected String owner;// 锁的拥有者
     protected int lockExpire;// 加锁过期时间(防止解锁失败)，单位:秒，<=0时，无过期时间
-
-    private String synKey;// 同步锁
     protected LockObj value; // 锁的值
+    private String synKey;// 同步锁
 
     protected RedisBaseLock(RedisUtil redisUtil, String key, String owner) {
         this(redisUtil, key, owner, DEF_LOCK_EXPIRE);
     }
 
     /**
-     * 
-     * @param redisUtil redis连接池
+     *
+     * @param redisUtil redisUtil中包含redis连接池
      * @param key 锁的唯一标识
      * @param owner 锁的拥有者
      * @param lockExpire 加锁过期时间(防止unlock失败) 单位:秒，<=0时，无过期时间
@@ -58,10 +55,6 @@ public abstract class RedisBaseLock implements Lock {
         this.owner = owner;
         this.lockExpire = lockExpire;
         this.synKey = SYN_PREFIX + key;
-    }
-
-    protected static interface RedisLockAction<T> {
-        T doAction(RedisUtil redisUtil) throws Exception;
     }
 
     protected <T> T synAct(RedisLockAction<T> action, T def) throws Exception {
@@ -203,16 +196,15 @@ public abstract class RedisBaseLock implements Lock {
         throw new UnsupportedOperationException("不支持的方法!");
     }
 
-    protected static final Gson gson = new Gson();
-
-    protected static final Type LOCK_OBJ_TYPE = new TypeToken<LockObj>() {
-    }.getType();
-
     protected LockObj decodeLock(String json) {
         return gson.fromJson(json, LOCK_OBJ_TYPE);
     }
 
     protected String encodeLock(LockObj obj) {
         return gson.toJson(obj);
+    }
+
+    protected interface RedisLockAction<T> {
+        T doAction(RedisUtil redisUtil) throws Exception;
     }
 }
