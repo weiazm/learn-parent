@@ -67,7 +67,7 @@ public class HeartbeatLock extends RedisBaseLock {
                 if (redisUtil.exists(key) == false) {
                     return true;
                 }
-                if (needUnlock(key, value, force)) {
+                if (needUnlock(key, value, force)) {//判断是否需要解锁
                     redisUtil.del(key);
                     log.debug("unlock, key[{}]", key);
                     return true;

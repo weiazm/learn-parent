@@ -41,14 +41,10 @@ public class RedisLock extends RedisBaseLock {
                 LockObj last = decodeLock(redisUtil.get(key));
                 if (force || last == null || last.equals(value)) {
                     redisUtil.del(key);
-                    if (log.isDebugEnabled()) {
-                        log.debug("unlock, key[{}], value[{}], last[{}]", key, value, last);
-                    }
+                    log.debug("unlock, key[{}], value[{}], last[{}]", key, value, last);
                     return true;
                 } else {
-                    if (log.isDebugEnabled()) {
-                        log.debug("unlock fail, key[{}], value[{}], last[{}]", key, value, last);
-                    }
+                    log.debug("unlock fail, key[{}], value[{}], last[{}]", key, value, last);
                     return false;
                 }
             }
