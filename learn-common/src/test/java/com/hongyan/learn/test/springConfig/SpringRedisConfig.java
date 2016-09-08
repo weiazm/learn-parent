@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
@@ -50,8 +48,10 @@ public class SpringRedisConfig {
         return new StringRedisTemplate(factory);
     }
 
-    @Bean
-    public RedisConnection redisConnection(JedisConnectionFactory factory) {
-        return factory.getConnection();
-    }
+
+//     RedisConnection绝不能搞成单例公用,卧槽太傻逼了.
+//    @Bean
+//    public RedisConnection redisConnection(JedisConnectionFactory factory) {
+//        return factory.getConnection();
+//    }
 }
