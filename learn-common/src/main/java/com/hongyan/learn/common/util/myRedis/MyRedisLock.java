@@ -7,6 +7,7 @@ package com.hongyan.learn.common.util.myRedis;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.util.concurrent.TimeUnit;
@@ -28,12 +29,12 @@ public class MyRedisLock implements Lock {
     private final String fullLockName;
     private final Long lockExpireSeconds;
 
-    public MyRedisLock(RedisConnection redisConnection, String lockName) {
-        this(redisConnection, lockName, LOCK_DEF_EXP_SECONDS, TimeUnit.SECONDS);
+    public MyRedisLock(RedisConnectionFactory factory, String lockName) {
+        this(factory, lockName, LOCK_DEF_EXP_SECONDS, TimeUnit.SECONDS);
     }
 
-    public MyRedisLock(RedisConnection redisConnection, String lockName, Long expireTime, TimeUnit unit) {
-        this.redisConnection = redisConnection;
+    public MyRedisLock(RedisConnectionFactory factory, String lockName, Long expireTime, TimeUnit unit) {
+        this.redisConnection = factory.getConnection();
         this.lockName = lockName;
         this.fullLockName = LOCK_PRE_NAME + lockName;
         this.lockExpireSeconds = unit.toSeconds(expireTime);
@@ -41,14 +42,21 @@ public class MyRedisLock implements Lock {
 
     @Override
     public void lock() {
-        while (setNX(fullLockName)) {
+        while (!setNX(fullLockName)) {
             //TODO 死循环
         }
+        log.info("i got lock!=========================[{}]", Thread.currentThread().getName());
     }
 
     @Override
     public boolean tryLock() {
-        return setNX(fullLockName);
+        if (setNX(fullLockName)) {
+            log.info("i got lock!=========================[{}]", Thread.currentThread().getName());
+            return true;
+        } else {
+//            log.info("miss lock!-----[{}]", Thread.currentThread().getName());
+            return false;
+        }
     }
 
     @Override
@@ -66,11 +74,15 @@ public class MyRedisLock implements Lock {
 
     @Override
     public void unlock() {
-        try {
-            del(fullLockName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        log.info("unlocked!===================================[{}]", Thread.currentThread().getName());
+        del(fullLockName);
+    }
+
+    /**
+     * 锁不再使用,回收连接
+     */
+    public void distory() {
+        this.redisConnection.close();
     }
 
     private void del(String fullLockName) {

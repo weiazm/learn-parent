@@ -35,12 +35,12 @@ public class MyRedisLockTest {
 
     @Test
     public void main() throws InterruptedException {
-        new MyRedisLock(factory.getConnection(), lockName).unlock();
+        new MyRedisLock(factory, lockName).unlock();
         List<Thread> list = Lists.newArrayList();
         List<RedisRunner> threads = Lists.newArrayList();
 
         for (int i = 0; i < 7; i++) {
-            threads.add(new RedisRunner(new MyRedisLock(factory.getConnection(), lockName)));
+            threads.add(new RedisRunner(new MyRedisLock(factory, lockName)));
         }
 
         ExecutorService threadPool = Executors.newFixedThreadPool(20);
@@ -74,12 +74,10 @@ public class MyRedisLockTest {
             try {
                 while (flag) {
                     if (lock.tryLock()) {
-                        log.info("i got lock!=========================[{}]", Thread.currentThread().getName());
                         log.info("doing things========================[{}]", Thread.currentThread().getName());
                         Thread.sleep(DOING_THINGS_TIME);
                         log.info("things done!========================[{}]", Thread.currentThread().getName());
                         lock.unlock();
-                        log.info("unlocked!===================================[{}]", Thread.currentThread().getName());
                         Thread.sleep(WAIT_TIME);
                     } else {
                         log.info("miss lock!-----[{}]", Thread.currentThread().getName());
