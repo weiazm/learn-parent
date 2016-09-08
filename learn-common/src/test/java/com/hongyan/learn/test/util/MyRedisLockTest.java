@@ -35,7 +35,7 @@ public class MyRedisLockTest {
 
     @Test
     public void main() throws InterruptedException {
-        new MyRedisLock(factory, lockName).lock();
+        new MyRedisLock(factory, lockName).unlock();
         List<Thread> list = Lists.newArrayList();
         List<RedisRunner> threads = Lists.newArrayList();
 
@@ -43,23 +43,25 @@ public class MyRedisLockTest {
             threads.add(new RedisRunner(new MyRedisLock(factory, lockName)));
         }
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(20);
+        ExecutorService threadPool = Executors.newFixedThreadPool(10);
         for (RedisRunner thread : threads) {
             threadPool.submit(thread);
         }
         threadPool.shutdown();
 
-        Thread.sleep(20000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
+        Thread.sleep(30000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
         for (RedisRunner thread : threads) {
             thread.setFlag(false);
         }
         Thread.sleep(2000);
+        log.info("statastic:  lock.timesOfAccessCache:[{}], lock.timesOfSetNX:[{}]", MyRedisLock.timesOfAccessCache, MyRedisLock.timesOfSetNX);
         log.info("main thread closed!");
     }
 
     @Slf4j
     private static class RedisRunner implements Runnable {
-        private static final long DOING_THINGS_TIME = 700L;
+        private static final long DOING_THINGS_TIME = 200L;
+        private static final long BETWEEN_LOOP_TIME = 19L;
         @Setter
         Boolean flag = true;
         private MyRedisLock lock;
@@ -72,14 +74,16 @@ public class MyRedisLockTest {
         public void run() {
             try {
                 while (flag) {
-                    if (lock.tryLock()) {
-                        log.info("doing things========================[{}]", Thread.currentThread().getName());
-                        Thread.sleep(DOING_THINGS_TIME);
-                        log.info("things done!========================[{}]", Thread.currentThread().getName());
-                        lock.unlock();
-                    }
+//                    if (lock.tryLock(/*200L, TimeUnit.MILLISECONDS*/)) {
+                    lock.lock();
+                    log.info("doing things========================[{}]", Thread.currentThread().getName());
+                    Thread.sleep(DOING_THINGS_TIME);
+                    log.info("things done!========================[{}]", Thread.currentThread().getName());
+                    lock.unlock();
+//                    }
+                    Thread.sleep(BETWEEN_LOOP_TIME);
                 }
-                log.info("thread closed!-----[{}]", Thread.currentThread().getName());
+                log.info("thread closed!-----[{}] with timesOfGetLock:{}", Thread.currentThread().getName(), lock.timesOfGetLock);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

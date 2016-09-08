@@ -10,6 +10,7 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -20,15 +21,18 @@ import java.util.concurrent.locks.Lock;
 @Slf4j
 @Getter
 public class MyRedisLock implements Lock {
-
+    private static final ConcurrentHashMap<String, Long> lockCache = new ConcurrentHashMap<String, Long>();//用于减轻redis压力
     private static final StringRedisSerializer serializer = new StringRedisSerializer();
     private static final String LOCK_PRE_NAME = "SYNC_REDIS_LOCK_KEY_";
     private static final Long LOCK_DEF_EXP_SECONDS = 5L;
-    private static final Long PER_LOOP_LAST_MILLS = 100L;
+    private static final Long PER_LOOP_LAST_MILLS = 10L;
+    public static volatile int timesOfSetNX = 0;
+    public static volatile int timesOfAccessCache = 0;
     private final RedisConnection redisConnection;
     private final String lockName;
     private final String fullLockName;
     private final Long lockExpireMills;
+    public int timesOfGetLock = 0;
 
     public MyRedisLock(RedisConnectionFactory factory, String lockName) {
         this(factory, lockName, LOCK_DEF_EXP_SECONDS, TimeUnit.SECONDS);
@@ -43,23 +47,19 @@ public class MyRedisLock implements Lock {
 
     @Override
     public void lock() {
-        while (!setNX(fullLockName)) {
-            try {
-                Thread.sleep(PER_LOOP_LAST_MILLS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            this.tryLock(-1, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        log.info("i got lock!===========================================[{}]", Thread.currentThread().getName());
     }
 
     @Override
     public boolean tryLock() {
-        if (setNX(fullLockName)) {
-            log.info("i got lock!===========================================[{}]", Thread.currentThread().getName());
-            return true;
-        } else {
-//            log.info("miss lock!---[{}]", Thread.currentThread().getName());
+        try {
+            return this.tryLock(0, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -68,8 +68,10 @@ public class MyRedisLock implements Lock {
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
         Long startMills = System.currentTimeMillis();
         Long mills = unit.toMillis(time);
-        while (mills > System.currentTimeMillis() - startMills) {
+        do {
             if (setNX(fullLockName)) {
+                timesOfGetLock++;
+                log.info("i got lock!===========================================[{}]", Thread.currentThread().getName());
                 return true;
             }
             try {
@@ -77,7 +79,8 @@ public class MyRedisLock implements Lock {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        } while (time < 0 || System.currentTimeMillis() < mills + startMills);
+//        log.info("miss lock!---[{}]", Thread.currentThread().getName());
         return false;
     }
 
@@ -85,25 +88,27 @@ public class MyRedisLock implements Lock {
     public void unlock() {
         log.info("unlocked!========================================================[{}]", Thread.currentThread().getName());
         del(fullLockName);
-    }
 
-    /**
-     * 锁不再使用,回收连接
-     */
-    public void distory() {
-        this.redisConnection.close();
     }
 
     private void del(String fullLockName) {
         redisConnection.del(serializer.serialize(fullLockName));
+        lockCache.remove(fullLockName);
     }
 
     private Boolean setNX(String fullLockName) {
+        Long lastLockTime = lockCache.get(fullLockName);
+        if (null != lastLockTime && System.currentTimeMillis() < lastLockTime + lockExpireMills) {//还没到过期时间
+            timesOfAccessCache++;
+            return false;
+        }
         Long current = System.currentTimeMillis();
         Boolean result = redisConnection.setNX(serializer.serialize(fullLockName), serializer.serialize(String.valueOf(current)));
         if (result) {
+            lockCache.put(fullLockName, current);//更新到本地缓存
             redisConnection.pExpireAt(serializer.serialize(fullLockName), current + lockExpireMills);//设置超时时间
         }
+        timesOfSetNX++;
         return result;
     }
 
