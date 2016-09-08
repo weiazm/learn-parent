@@ -23,7 +23,8 @@ public class MyRedisLock implements Lock {
 
     private static final StringRedisSerializer serializer = new StringRedisSerializer();
     private static final String LOCK_PRE_NAME = "SYNC_REDIS_LOCK_KEY_";
-    private static final Long LOCK_DEF_EXP_SECONDS = 60L;//TODO 没用到
+    private static final Long LOCK_DEF_EXP_SECONDS = 10L;//TODO 没用到
+    private static final Long PER_LOOP_LAST_MILLS = 100L;//TODO 没用到
     private final RedisConnection redisConnection;
     private final String lockName;
     private final String fullLockName;
@@ -43,7 +44,11 @@ public class MyRedisLock implements Lock {
     @Override
     public void lock() {
         while (!setNX(fullLockName)) {
-            //TODO 死循环
+            try {
+                Thread.sleep(PER_LOOP_LAST_MILLS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         log.info("i got lock!=========================[{}]", Thread.currentThread().getName());
     }
@@ -67,7 +72,11 @@ public class MyRedisLock implements Lock {
             if (setNX(fullLockName)) {
                 return true;
             }
-            //TODO 反复循环
+            try {
+                Thread.sleep(PER_LOOP_LAST_MILLS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
