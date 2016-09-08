@@ -35,7 +35,7 @@ public class MyRedisLockTest {
 
     @Test
     public void main() throws InterruptedException {
-        new MyRedisLock(factory, lockName).unlock();
+        new MyRedisLock(factory, lockName).lock();
         List<Thread> list = Lists.newArrayList();
         List<RedisRunner> threads = Lists.newArrayList();
 
