@@ -39,7 +39,9 @@ public class SpringRedisConfig {
         factory.setDatabase(database);
         factory.setTimeout(timeout);
         factory.setUsePool(usePool);
-        factory.setPoolConfig(new JedisPoolConfig());
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(50);//尼玛逼 默认值是8 真坑爹.
+        factory.setPoolConfig(config);
         return factory;
     }
 
