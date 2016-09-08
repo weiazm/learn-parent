@@ -60,7 +60,6 @@ public class MyRedisLockTest {
     @Slf4j
     private static class RedisRunner implements Runnable {
         private static final long DOING_THINGS_TIME = 700L;
-        private static final long WAIT_TIME = 200L;
         @Setter
         Boolean flag = true;
         private MyRedisLock lock;
@@ -78,9 +77,6 @@ public class MyRedisLockTest {
                         Thread.sleep(DOING_THINGS_TIME);
                         log.info("things done!========================[{}]", Thread.currentThread().getName());
                         lock.unlock();
-                        Thread.sleep(WAIT_TIME);
-                    } else {
-                        Thread.sleep(WAIT_TIME);
                     }
                 }
                 log.info("thread closed!-----[{}]", Thread.currentThread().getName());
