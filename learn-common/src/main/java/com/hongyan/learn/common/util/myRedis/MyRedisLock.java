@@ -34,6 +34,12 @@ public class MyRedisLock implements Lock {
     private final Long lockExpireMills;
     public int timesOfGetLock = 0;
 
+    /**
+     * 以线程为实例单位,构造器需要传入两个参数.依赖spring-data-redis,lombok包.
+     *
+     * @param factory  spring中的redis连接工厂.
+     * @param lockName 以字符串来区分远程redis锁,相同字符串代表同一把锁.
+     */
     public MyRedisLock(RedisConnectionFactory factory, String lockName) {
         this(factory, lockName, LOCK_DEF_EXP_SECONDS, TimeUnit.SECONDS);
     }
