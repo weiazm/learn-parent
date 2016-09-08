@@ -23,12 +23,12 @@ public class MyRedisLock implements Lock {
 
     private static final StringRedisSerializer serializer = new StringRedisSerializer();
     private static final String LOCK_PRE_NAME = "SYNC_REDIS_LOCK_KEY_";
-    private static final Long LOCK_DEF_EXP_SECONDS = 10L;//TODO 没用到
-    private static final Long PER_LOOP_LAST_MILLS = 100L;//TODO 没用到
+    private static final Long LOCK_DEF_EXP_SECONDS = 5L;
+    private static final Long PER_LOOP_LAST_MILLS = 100L;
     private final RedisConnection redisConnection;
     private final String lockName;
     private final String fullLockName;
-    private final Long lockExpireSeconds;
+    private final Long lockExpireMills;
 
     public MyRedisLock(RedisConnectionFactory factory, String lockName) {
         this(factory, lockName, LOCK_DEF_EXP_SECONDS, TimeUnit.SECONDS);
@@ -38,7 +38,7 @@ public class MyRedisLock implements Lock {
         this.redisConnection = factory.getConnection();
         this.lockName = lockName;
         this.fullLockName = LOCK_PRE_NAME + lockName;
-        this.lockExpireSeconds = unit.toSeconds(expireTime);
+        this.lockExpireMills = unit.toMillis(expireTime);
     }
 
     @Override
@@ -50,16 +50,16 @@ public class MyRedisLock implements Lock {
                 e.printStackTrace();
             }
         }
-        log.info("i got lock!=========================[{}]", Thread.currentThread().getName());
+        log.info("i got lock!===========================================[{}]", Thread.currentThread().getName());
     }
 
     @Override
     public boolean tryLock() {
         if (setNX(fullLockName)) {
-            log.info("i got lock!=========================[{}]", Thread.currentThread().getName());
+            log.info("i got lock!===========================================[{}]", Thread.currentThread().getName());
             return true;
         } else {
-//            log.info("miss lock!-----[{}]", Thread.currentThread().getName());
+//            log.info("miss lock!---[{}]", Thread.currentThread().getName());
             return false;
         }
     }
@@ -83,7 +83,7 @@ public class MyRedisLock implements Lock {
 
     @Override
     public void unlock() {
-        log.info("unlocked!===================================[{}]", Thread.currentThread().getName());
+        log.info("unlocked!========================================================[{}]", Thread.currentThread().getName());
         del(fullLockName);
     }
 
@@ -99,12 +99,12 @@ public class MyRedisLock implements Lock {
     }
 
     private Boolean setNX(String fullLockName) {
-        return redisConnection.setNX(serializer.serialize(fullLockName), serializer.serialize(String.valueOf(System.currentTimeMillis())));
-    }
-
-    private String getSet(String fullLockName) {
-        byte[] bytes = redisConnection.getSet(serializer.serialize(fullLockName), serializer.serialize(String.valueOf(System.currentTimeMillis())));
-        return serializer.deserialize(bytes);
+        Long current = System.currentTimeMillis();
+        Boolean result = redisConnection.setNX(serializer.serialize(fullLockName), serializer.serialize(String.valueOf(current)));
+        if (result) {
+            redisConnection.pExpireAt(serializer.serialize(fullLockName), current + lockExpireMills);//设置超时时间
+        }
+        return result;
     }
 
     @Override

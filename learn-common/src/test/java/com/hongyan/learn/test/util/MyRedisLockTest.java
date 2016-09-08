@@ -49,7 +49,7 @@ public class MyRedisLockTest {
         }
         threadPool.shutdown();
 
-        Thread.sleep(10000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
+        Thread.sleep(20000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
         for (RedisRunner thread : threads) {
             thread.setFlag(false);
         }
@@ -80,7 +80,6 @@ public class MyRedisLockTest {
                         lock.unlock();
                         Thread.sleep(WAIT_TIME);
                     } else {
-                        log.info("miss lock!-----[{}]", Thread.currentThread().getName());
                         Thread.sleep(WAIT_TIME);
                     }
                 }
