@@ -32,6 +32,7 @@ public class MyRedisLock implements Lock {
     private final String lockName;
     private final String fullLockName;
     private final Long lockExpireMills;
+    private final byte[] serializedKey;
     public int timesOfGetLock = 0;
 
     /**
@@ -49,6 +50,7 @@ public class MyRedisLock implements Lock {
         this.lockName = lockName;
         this.fullLockName = LOCK_PRE_NAME + lockName;
         this.lockExpireMills = unit.toMillis(expireTime);
+        this.serializedKey = serializer.serialize(this.fullLockName);
     }
 
     @Override
@@ -98,7 +100,7 @@ public class MyRedisLock implements Lock {
     }
 
     private void del(String fullLockName) {
-        redisConnection.del(serializer.serialize(fullLockName));
+        redisConnection.del(serializedKey);
         lockCache.remove(fullLockName);
     }
 
@@ -109,10 +111,16 @@ public class MyRedisLock implements Lock {
             return false;
         }
         Long current = System.currentTimeMillis();
-        Boolean result = redisConnection.setNX(serializer.serialize(fullLockName), serializer.serialize(String.valueOf(current)));
+        Boolean result = redisConnection.setNX(serializedKey, serializer.serialize(String.valueOf(current)));
         if (result) {
             lockCache.put(fullLockName, current);//更新到本地缓存
-            redisConnection.pExpireAt(serializer.serialize(fullLockName), current + lockExpireMills);//设置超时时间
+            redisConnection.pExpireAt(serializedKey, current + lockExpireMills);//设置超时时间
+        } else {
+            Long expireMills = redisConnection.pTtl(serializedKey);//保险措施
+            if (expireMills == -1) {//说明这个key没设置超时时间
+                lockCache.put(fullLockName, current);//更新到本地缓存
+                redisConnection.pExpireAt(serializedKey, current + lockExpireMills);//设置超时时间
+            }
         }
         timesOfSetNX++;
         return result;

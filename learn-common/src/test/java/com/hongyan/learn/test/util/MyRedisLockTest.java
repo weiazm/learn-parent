@@ -39,19 +39,19 @@ public class MyRedisLockTest {
         List<Thread> list = Lists.newArrayList();
         List<RedisRunner> threads = Lists.newArrayList();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 500; i++) {
             threads.add(new RedisRunner(new MyRedisLock(factory, lockName)));
         }
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(30);
+        ExecutorService threadPool = Executors.newFixedThreadPool(500);
         for (RedisRunner thread : threads) {
             threadPool.submit(thread);
         }
-        Thread.sleep(30000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
+        Thread.sleep(60000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
         for (RedisRunner thread : threads) {
             thread.setFlag(false);
         }
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         log.info("statastic:  lock.timesOfAccessCache:[{}], lock.timesOfSetNX:[{}]", MyRedisLock.timesOfAccessCache, MyRedisLock.timesOfSetNX);
         log.info("main thread closed!");
     }
