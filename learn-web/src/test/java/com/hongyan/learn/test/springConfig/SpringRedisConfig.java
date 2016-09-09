@@ -21,6 +21,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @version null
  */
 @Configuration
+@Deprecated
 @PropertySource(value = { "classpath:redis.properties" })
 public class SpringRedisConfig {
 

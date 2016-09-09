@@ -23,7 +23,7 @@
 
     <!-- 查找类路径下的映射器并自动将它们创建成MapperFactoryBean-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hongyan.learn.dal.mapper.*"/>
+        <property name="basePackage" value="com.hongyan.learn.dal.mapper"/>
     </bean>
 
     <!--内嵌h2数据库-->
@@ -62,7 +62,7 @@
 
     <!-- 装配jedis pool -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="20"/>
+        <property name="maxTotal" value="60"/>
         <property name="maxIdle" value="10"/>
         <property name="testOnBorrow" value="true"/>
     </bean>

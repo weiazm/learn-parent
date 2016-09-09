@@ -7,7 +7,6 @@ package com.hongyan.learn.test.util;
 
 import com.google.common.collect.Lists;
 import com.hongyan.learn.common.util.myRedis.MyRedisLock;
-import com.hongyan.learn.test.springConfig.SpringRedisConfig;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -26,7 +25,8 @@ import java.util.concurrent.Executors;
  */
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringRedisConfig.class)
+//@ContextConfiguration(classes = SpringRedisConfig.class)
+@ContextConfiguration(locations = "classpath:application-config.xml")
 public class MyRedisLockTest {
     private static final String lockName = "weihongyan_lock";
 

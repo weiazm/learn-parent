@@ -6,7 +6,6 @@ package com.hongyan.learn.test.service;
 
 import com.hongyan.learn.sal.dto.ContactDto;
 import com.hongyan.learn.sal.service.ContactService;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
