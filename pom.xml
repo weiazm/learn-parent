@@ -120,14 +120,12 @@
 
 	<!-- 公用的一些测试,日志依赖 -->
 	<dependencies>
-		<!-- Spring MVC -->
+		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework-version}</version>
 		</dependency>
-
-		<!-- Spring and Transactions -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -240,6 +238,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.7</version>
 		</dependency>
+		<!--logging-->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
@@ -261,6 +260,7 @@
 			<version>${log-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!--database-->
 		<dependency>
 			<groupId>com.baijia.common</groupId>
 			<artifactId>sql-builder</artifactId>
