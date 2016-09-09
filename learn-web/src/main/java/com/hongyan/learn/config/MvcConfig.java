@@ -4,9 +4,20 @@
  */
 package com.hongyan.learn.config;
 
+import com.mitchellbosecke.pebble.PebbleEngine;
+import com.mitchellbosecke.pebble.loader.ServletLoader;
+import com.mitchellbosecke.pebble.spring.PebbleViewResolver;
+import com.mitchellbosecke.pebble.spring.extension.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import javax.servlet.ServletContext;
 
 /**
  * Created by weihongyan on 9/9/16.
@@ -14,7 +25,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @ComponentScan(value = {"com.hongyan.learn.web.controller"})
-public class MvcConfig {
+public class MvcConfig extends WebMvcConfigurerAdapter {
 
 //    @Bean
 //    public RequestMappingHandlerAdapter requestMappingHandlerAdapter(){
@@ -25,21 +36,28 @@ public class MvcConfig {
 //        return adapter;
 //    }
 
-//    @Bean
-//    public ViewResolver viewResolver(ServletContext servletContext) throws Exception {
-//        ServletLoader servletLoader = new ServletLoader(servletContext);
-//        PebbleEngine pebbleEngine = PebbleEngineFactory.instance(servletLoader, new SpringExtension());
-//
-//        PebbleViewResolver viewResolver = new PebbleViewResolver();
-//        viewResolver.setViewClass(PebbleJsonView.class);
-//        viewResolver.setPrefix("/views");
-//        viewResolver.setSuffix(".html");
-//        viewResolver.setPebbleEngine(pebbleEngine);
-//        return viewResolver;
-//    }
+    @Autowired
+    private ServletContext servletContext;
 
-//    @Bean(name = "servletContext")
-//    public ServletContextFactory servletContextFactory(){
-//        return new ServletContextFactory();
-//    }
+    @Bean
+    public SpringExtension springExtension() {
+        return new SpringExtension();
+    }
+
+    @Bean
+    public ViewResolver viewResolver() {
+        PebbleViewResolver viewResolver = new PebbleViewResolver();
+        viewResolver.setPrefix("/views");
+        viewResolver.setSuffix(".html");
+        viewResolver.setPebbleEngine(new PebbleEngine.Builder()
+                .loader(new ServletLoader(servletContext))
+                .extension(springExtension())
+                .build());
+        return viewResolver;
+    }
+
+    @Override//配置静态资源的处理
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 }
