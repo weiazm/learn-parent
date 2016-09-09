@@ -8,7 +8,7 @@ import com.hongyan.learn.dal.dao.ContactDao;
 import com.hongyan.learn.dal.po.Contact;
 import com.hongyan.learn.sal.dto.ContactDto;
 import com.hongyan.learn.sal.service.ContactService;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
  * @date Aug 27, 2016
  * @version 1.0
  */
+@Slf4j
 @Service
 public class ContactServiceImpl implements ContactService {
 
@@ -35,6 +36,7 @@ public class ContactServiceImpl implements ContactService {
         result.setId(contact.getId());
         result.setName(contact.getName());
         result.setMobile(contact.getMobile());
+        log.info("卧槽");
         return result;
     }
 
