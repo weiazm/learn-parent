@@ -39,11 +39,11 @@ public class MyRedisLockTest {
         List<Thread> list = Lists.newArrayList();
         List<RedisRunner> threads = Lists.newArrayList();
 
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 50; i++) {
             threads.add(new RedisRunner(new MyRedisLock(factory, lockName)));
         }
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(500);
+        ExecutorService threadPool = Executors.newFixedThreadPool(50);
         for (RedisRunner thread : threads) {
             threadPool.submit(thread);
         }
