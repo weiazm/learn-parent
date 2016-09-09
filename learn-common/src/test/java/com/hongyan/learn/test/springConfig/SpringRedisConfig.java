@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -40,7 +41,9 @@ public class SpringRedisConfig {
         factory.setTimeout(timeout);
         factory.setUsePool(usePool);
         JedisPoolConfig config = new JedisPoolConfig();
-        config.setMaxTotal(550);//尼玛逼 默认值是8 真坑爹.
+        config.setMaxTotal(60);//尼玛逼 默认值是8 真坑爹.
+        config.setMaxIdle(10);
+        config.setTestOnBorrow(true);
         factory.setPoolConfig(config);
         return factory;
     }
@@ -50,6 +53,12 @@ public class SpringRedisConfig {
         return new StringRedisTemplate(factory);
     }
 
+    @Bean
+    public RedisTemplate redisTemplate(JedisConnectionFactory factory) {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.setConnectionFactory(factory);
+        return redisTemplate;
+    }
 
 //     RedisConnection绝不能搞成单例公用,卧槽太傻逼了.
 //    @Bean
