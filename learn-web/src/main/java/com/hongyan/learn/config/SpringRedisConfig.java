@@ -1,8 +1,8 @@
-/**
+/*
  * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Copyright (c) 2014-${year} All Rights Reserved.
  */
-package com.hongyan.learn.test.springConfig;
+package com.hongyan.learn.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,26 +14,21 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * @title SpringRedisConfig
- * @desc thebestisyettocome
- * @author weihongyan
- * @date Sep 2, 2016
- * @version null
+ * Created by weihongyan on 9/9/16.
  */
 @Configuration
-@Deprecated
-@PropertySource(value = { "classpath:redis.properties" })
+@PropertySource(value = {"classpath:redis.properties"})
 public class SpringRedisConfig {
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory(
-        @Value(value = "${redis.host}")String hostName,
-        @Value(value = "${redis.port}")Integer port,
-        @Value(value = "${redis.pass}")String password,
-        @Value(value = "${redis.timeout}")Integer timeout,
-        @Value(value = "${redis.default.db}")Integer database,
-        @Value(value = "${redis.usePool}")Boolean usePool
-        ) {
+            @Value(value = "${redis.host}") String hostName,
+            @Value(value = "${redis.port}") Integer port,
+            @Value(value = "${redis.pass}") String password,
+            @Value(value = "${redis.timeout}") Integer timeout,
+            @Value(value = "${redis.default.db}") Integer database,
+            @Value(value = "${redis.usePool}") Boolean usePool
+    ) {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(hostName);
         factory.setPort(port);
@@ -60,10 +55,4 @@ public class SpringRedisConfig {
         redisTemplate.setConnectionFactory(factory);
         return redisTemplate;
     }
-
-//     RedisConnection绝不能搞成单例公用,卧槽太傻逼了.
-//    @Bean
-//    public RedisConnection redisConnection(JedisConnectionFactory factory) {
-//        return factory.getConnection();
-//    }
 }

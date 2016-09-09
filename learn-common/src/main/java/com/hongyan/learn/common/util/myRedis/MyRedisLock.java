@@ -18,6 +18,7 @@ import java.util.concurrent.locks.Lock;
 /**
  * Created by weihongyan on 9/7/16.
  */
+//paxos zk 存在不同机器上的系统时间不一致问题
 @Slf4j
 @Getter
 public class MyRedisLock implements Lock {
@@ -96,7 +97,6 @@ public class MyRedisLock implements Lock {
     public void unlock() {
         log.info("unlocked!========================================================[{}]", Thread.currentThread().getName());
         del(fullLockName);
-
     }
 
     private void del(String fullLockName) {

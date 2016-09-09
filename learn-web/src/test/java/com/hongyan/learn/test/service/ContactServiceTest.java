@@ -4,6 +4,7 @@
  */
 package com.hongyan.learn.test.service;
 
+import com.hongyan.learn.config.DatabaseConfig;
 import com.hongyan.learn.sal.dto.ContactDto;
 import com.hongyan.learn.sal.service.ContactService;
 import org.junit.Assert;
@@ -21,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @version version
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:application-config.xml")
+@ContextConfiguration(classes = DatabaseConfig.class)
 public class ContactServiceTest {
     @Autowired
     private ContactService contactService;

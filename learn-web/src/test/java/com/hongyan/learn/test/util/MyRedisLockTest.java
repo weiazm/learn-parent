@@ -6,6 +6,7 @@ package com.hongyan.learn.test.util;
 
 import com.google.common.collect.Lists;
 import com.hongyan.learn.common.util.myRedis.MyRedisLock;
+import com.hongyan.learn.config.SpringRedisConfig;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -22,14 +23,17 @@ import java.util.concurrent.Executors;
 /**
  * Created by weihongyan on 9/7/16.
  */
-@Slf4j @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = SpringRedisConfig.class)
-@ContextConfiguration(locations = "classpath:application-config.xml") public class MyRedisLockTest {
+@Slf4j
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = SpringRedisConfig.class)
+public class MyRedisLockTest {
     private static final String lockName = "weihongyan_lock";
 
-    @Autowired private RedisConnectionFactory factory;
+    @Autowired
+    private RedisConnectionFactory factory;
 
-    @Test public void main() throws InterruptedException {
+    @Test
+    public void main() throws InterruptedException {
         new MyRedisLock(factory, lockName).unlock();
         List<Thread> list = Lists.newArrayList();
         List<RedisRunner> threads = Lists.newArrayList();
@@ -42,27 +46,30 @@ import java.util.concurrent.Executors;
         for (RedisRunner thread : threads) {
             threadPool.submit(thread);
         }
-        Thread.sleep(60000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
+        Thread.sleep(6000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
         for (RedisRunner thread : threads) {
             thread.setFlag(false);
         }
         Thread.sleep(5000);
         log.info("statastic:  lock.timesOfAccessCache:[{}], lock.timesOfSetNX:[{}]", MyRedisLock.timesOfAccessCache,
-            MyRedisLock.timesOfSetNX);
+                MyRedisLock.timesOfSetNX);
         log.info("main thread closed!");
     }
 
-    @Slf4j private static class RedisRunner implements Runnable {
+    @Slf4j
+    private static class RedisRunner implements Runnable {
         private static final long DOING_THINGS_TIME = 200L;
         private static final long BETWEEN_LOOP_TIME = 19L;
-        @Setter Boolean flag = true;
+        @Setter
+        Boolean flag = true;
         private MyRedisLock lock;
 
         public RedisRunner(MyRedisLock lock) {
             this.lock = lock;
         }
 
-        @Override public void run() {
+        @Override
+        public void run() {
             try {
                 while (flag) {
                     //                    if (lock.tryLock(/*200L, TimeUnit.MILLISECONDS*/)) {
@@ -75,7 +82,7 @@ import java.util.concurrent.Executors;
                     Thread.sleep(BETWEEN_LOOP_TIME);
                 }
                 log.info("thread closed!-----[{}] with timesOfGetLock:{}", Thread.currentThread().getName(),
-                    lock.timesOfGetLock);
+                        lock.timesOfGetLock);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

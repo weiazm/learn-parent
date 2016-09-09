@@ -4,6 +4,7 @@
  */
 package com.hongyan.learn.test.dao;
 
+import com.hongyan.learn.config.DatabaseConfig;
 import com.hongyan.learn.dal.dao.ContactDao;
 import com.hongyan.learn.dal.mapper.ContactMapper;
 import com.hongyan.learn.dal.po.Contact;
@@ -22,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date Aug 29, 2016
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:application-config.xml")
+@ContextConfiguration(classes = DatabaseConfig.class)
 public class ContactDaoTest {
     @Autowired
     private ContactDao contactDao;
