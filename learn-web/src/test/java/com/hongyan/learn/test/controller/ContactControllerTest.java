@@ -25,7 +25,8 @@ public class ContactControllerTest extends SuperControllerTest {
     @Autowired
     private ApplicationContext context;
 
-    @Value(value = "#{systemProperties['redis.host']}")
+    //    @Value(value = "#{systemProperties['redis.host']}")
+    @Value(value = "${redis.host}")
     private String name;
 
     @Value(value = "#{jedisConnectionFactory.password}")

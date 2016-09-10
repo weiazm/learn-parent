@@ -1,8 +1,8 @@
-/**
+/*
  * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Copyright (c) 2014-${year} All Rights Reserved.
  */
-package com.hongyan.learn.test.util;
+package com.hongyan.learn.test.util.redis;
 
 import com.hongyan.learn.config.SpringRedisConfig;
 import org.junit.Test;

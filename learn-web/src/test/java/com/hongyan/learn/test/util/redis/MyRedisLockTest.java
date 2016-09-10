@@ -2,12 +2,13 @@
  * Baijiahulian.com Inc.
  * Copyright (c) 2014-${year} All Rights Reserved.
  */
-package com.hongyan.learn.test.util;
+package com.hongyan.learn.test.util.redis;
 
 import com.google.common.collect.Lists;
 import com.hongyan.learn.common.util.myRedis.MyRedisLock;
 import com.hongyan.learn.config.SpringRedisConfig;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,8 @@ public class MyRedisLockTest {
     private RedisConnectionFactory factory;
 
     @Test
-    public void main() throws InterruptedException {
+    @SneakyThrows
+    public void main() {
         new MyRedisLock(factory, lockName).unlock();
         List<Thread> list = Lists.newArrayList();
         List<RedisRunner> threads = Lists.newArrayList();
@@ -69,23 +71,20 @@ public class MyRedisLockTest {
         }
 
         @Override
+        @SneakyThrows
         public void run() {
-            try {
-                while (flag) {
-                    //                    if (lock.tryLock(/*200L, TimeUnit.MILLISECONDS*/)) {
-                    lock.lock();
-                    log.info("doing things========================[{}]", Thread.currentThread().getName());
-                    Thread.sleep(DOING_THINGS_TIME);
-                    log.info("things done!========================[{}]", Thread.currentThread().getName());
-                    lock.unlock();
-                    //                    }
-                    Thread.sleep(BETWEEN_LOOP_TIME);
-                }
-                log.info("thread closed!-----[{}] with timesOfGetLock:{}", Thread.currentThread().getName(),
-                        lock.timesOfGetLock);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while (flag) {
+//                if (lock.tryLock(/*200L, TimeUnit.MILLISECONDS*/)) {
+                lock.lock();
+                log.info("doing things========================[{}]", Thread.currentThread().getName());
+                Thread.sleep(DOING_THINGS_TIME);
+                log.info("things done!========================[{}]", Thread.currentThread().getName());
+                lock.unlock();
+//                }
+                Thread.sleep(BETWEEN_LOOP_TIME);
             }
+            log.info("thread closed!-----[{}] with timesOfGetLock:{}", Thread.currentThread().getName(),
+                    lock.timesOfGetLock);
         }
     }
 }

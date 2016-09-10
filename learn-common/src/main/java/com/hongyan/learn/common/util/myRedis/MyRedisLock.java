@@ -5,6 +5,7 @@
 package com.hongyan.learn.common.util.myRedis;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -55,22 +56,15 @@ public class MyRedisLock implements Lock {
     }
 
     @Override
+    @SneakyThrows
     public void lock() {
-        try {
-            this.tryLock(-1, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        this.tryLock(-1, TimeUnit.MILLISECONDS);
     }
 
     @Override
+    @SneakyThrows
     public boolean tryLock() {
-        try {
-            return this.tryLock(0, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        }
+        return this.tryLock(0, TimeUnit.MILLISECONDS);
     }
 
     @Override
