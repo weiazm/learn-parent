@@ -83,11 +83,7 @@ public class MyRedisLock implements Lock {
                 log.info("i got lock!===========================================[{}]", Thread.currentThread().getName());
                 return true;
             }
-            try {
-                Thread.sleep(PER_LOOP_LAST_MILLS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread.sleep(PER_LOOP_LAST_MILLS);
         } while (time < 0 || System.currentTimeMillis() < mills + startMills);
 //        log.info("miss lock!---[{}]", Thread.currentThread().getName());
         return false;
