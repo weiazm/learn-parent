@@ -7,6 +7,7 @@ package com.hongyan.learn.config;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -21,6 +22,12 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
+@ComponentScan(basePackages = {
+        "com.hongyan.learn.dal.*",
+        "com.hongyan.learn.sal.*",
+        "com.hongyan.learn.biz.*",
+        "com.baijia.tianxiao.sqlbuilder.*"
+})
 public class DatabaseConfig {
 
     @Bean
