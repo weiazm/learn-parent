@@ -28,14 +28,11 @@
 	<Loggers>
 		<logger name="com.hongyan" level="DEBUG"></logger>
 		<logger name="com.baijia.tianxiao.sqlbuilder.SingleSqlBuilder" level="info"></logger>
+		<logger name="com.mitchellbosecke.pebble.spring.PebbleView.timer" level="DEBUG" additivity="true"></logger>
 		<AsyncRoot level="info" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="business" />
 			<AppenderRef ref="error" level="error" />
 		</AsyncRoot>
-		<logger name="com.mitchellbosecke.pebble.spring.PebbleView.timer" level="DEBUG" additivity="false">
-		<AppenderRef ref="console" />
-		<AppenderRef ref="business" />
-		</logger>
 	</Loggers>
 </configuration>

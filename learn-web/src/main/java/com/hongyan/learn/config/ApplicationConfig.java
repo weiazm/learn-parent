@@ -5,16 +5,21 @@
 package com.hongyan.learn.config;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 
 /**
  * Created by weihongyan on 9/9/16.
  */
 @Configuration
-@Import(value = {DatabaseConfig.class, SpringRedisConfig.class})
+@ImportResource(value = "classpath:ctx-hag-all.xml")
+@Import(value = {SpringRedisConfig.class, DatabaseConfig.class})
+@ComponentScan(basePackages = {
+        "com.hongyan.learn.dal.*",
+        "com.hongyan.learn.sal.*",
+        "com.hongyan.learn.biz.*",
+        "com.baijia.tianxiao.sqlbuilder.*"
+})
 public class ApplicationConfig {
 
     @Bean(name = "properties")
