@@ -56,6 +56,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
+//    @Bean//设置文件上传处理器
+//    public MultipartResolver multipartResolver(){
+//        return new StandardServletMultipartResolver();
+//    }
+
     @Override//配置静态资源的处理
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

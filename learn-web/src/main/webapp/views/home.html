@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<title>这是java培训作业</title>
 </head>
@@ -7,7 +7,11 @@
 	{{msg}}
 </h1>
 
-<P>  The time on the server is {{serverTime}}. </P>
-<P>  The path of the server is {{path}}. </P>
+<form method="post" th:object="${spitter}" enctype="multipart/form-data">
+    <p>来吧~~大胸弟~~上传个文件:</p>
+    <label>上传文件:</label>:
+    <input type="file" name="uploadFile" accept="*/*">
+</form>
+
 </body>
 </html>

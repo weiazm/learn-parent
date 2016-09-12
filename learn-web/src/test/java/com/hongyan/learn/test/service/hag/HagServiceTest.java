@@ -29,5 +29,7 @@ public class HagServiceTest {
     public void test() {
         Assert.notNull(hagService);
         System.out.println(hagService.getEntityKeyOfResource("train_resource_1"));//根据资源名获取名单
+//        WebResponse<String> response = hagService.addResource(1000002L,"fcefac09183c49af91849d18d1e",resource);
+//        System.out.println(response);
     }
 }

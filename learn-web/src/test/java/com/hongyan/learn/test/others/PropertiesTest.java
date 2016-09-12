@@ -7,7 +7,6 @@ package com.hongyan.learn.test.others;
 import com.hongyan.learn.config.ApplicationConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -18,8 +17,8 @@ import org.springframework.util.Assert;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 public class PropertiesTest {
-    @Value("#{properties.creater}")
-    private String creater;
+    //    @Value("#{properties.creater}")
+    private String creater = "";
 
     @Test
     public void test() {
