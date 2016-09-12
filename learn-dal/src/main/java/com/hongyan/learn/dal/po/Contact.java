@@ -4,12 +4,7 @@
  */
 package com.hongyan.learn.dal.po;
 
-import com.baijia.tianxiao.sqlbuilder.annotation.Column;
-import com.baijia.tianxiao.sqlbuilder.annotation.Entity;
-import com.baijia.tianxiao.sqlbuilder.annotation.GeneratedValue;
-import com.baijia.tianxiao.sqlbuilder.annotation.Id;
-import com.baijia.tianxiao.sqlbuilder.annotation.Table;
-
+import com.baijia.tianxiao.sqlbuilder.annotation.*;
 import lombok.Data;
 
 /**
@@ -20,7 +15,7 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-@Entity
+@Entity(dataSourceBeanName = "h2DataSource")
 @Table(catalog = "test", name = "contact")
 public class Contact {
     @Id
