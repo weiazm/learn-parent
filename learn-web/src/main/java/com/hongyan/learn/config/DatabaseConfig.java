@@ -43,7 +43,7 @@ public class DatabaseConfig {
     @Bean(name = "h2DataSource", destroyMethod = "shutdown")
     public EmbeddedDatabase dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .addScript("classpath:database/hongyan-learn.sql")
+                .addScript("classpath:databaseScript/hongyan-learn.sql")
                 .setType(EmbeddedDatabaseType.H2)
                 .build();
     }
