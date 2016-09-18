@@ -35,9 +35,7 @@ import java.util.concurrent.TimeUnit;
         "com.hongyan.learn.biz.*",
         "com.baijia.tianxiao.sqlbuilder.*"
 })
-@PropertySource(value = {
-        "classpath:jdbc-mysql.properties",
-})
+@PropertySource(value = {"classpath:jdbc-mysql.properties"})
 public class DatabaseConfig {
 
     @Bean(name = "h2DataSource", destroyMethod = "shutdown")
