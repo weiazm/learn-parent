@@ -29,7 +29,6 @@ import java.util.concurrent.Executors;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ZookeeperCuratorConfig.class)
 public class CuratorLockTest {
-    private static final String lockName = "weihongyan_lock";
 
     @Value("${zookeeper.lockDir}")
     private String lockDir;
@@ -42,7 +41,7 @@ public class CuratorLockTest {
     public void test() {
         client.start();
 
-        InterProcessMutex lock = new InterProcessMutex(client,lockDir);
+        InterProcessMutex lock = new InterProcessMutex(client, lockDir);
         lock.acquire();//死锁了
 
         List<ZookeeperRunner> threads = Lists.newArrayList();
@@ -60,7 +59,7 @@ public class CuratorLockTest {
             thread.setFlag(false);
         }
         log.info("send stop signal done!");
-        Thread.sleep(5000);
+        Thread.sleep(50000);
         log.info("main thread closed!");
 
         client.close();
