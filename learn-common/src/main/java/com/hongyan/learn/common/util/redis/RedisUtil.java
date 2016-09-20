@@ -28,7 +28,7 @@ import redis.clients.jedis.ShardedJedisPool;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
 /**
- * redis工具类，依赖{@link redis.clients.jedis.ShardedJedisPool ShardedJedisPool}和
+ * redis工具类，依赖{@link redis.clients.jedis. ShardedJedisPool}和
  * {@link com.baijia.commons.lang.utils.ServiceLocator ServiceLocator}，配置好这两个bean后，可自动加载ShardedJedisPool实例，自动重试，避免闪断故障
  * 
  * @title RedisUtil
