@@ -7,23 +7,14 @@ package com.hongyan.learn.common.catalog.pattern;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import lombok.Data;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import lombok.Data;
 
 /**
  * @title PatternHomework
@@ -131,9 +122,9 @@ public class PatternHomework {
     }
 
     public static void main(String[] args) throws IOException {
-        Pattern tablePattern = Pattern.compile("@[ ]*Table[ ]*\\(*.*\\)*");// @Table识别正则
-        Pattern entityPattern = Pattern.compile("@[ ]*Entity[ ]*\\(*.*\\)*");// @Entity识别正则
-        List<File> files = getAllFiles("/Users/hongyan/Documents/workspace/tianxiao-service");// 扫描路径
+        Pattern tablePattern = Pattern.compile("@[ ]*Table[ ]*\\(.*\\)*");// @Table识别正则
+        Pattern entityPattern = Pattern.compile("@[ ]*Entity[ ]*\\(.*\\)*");// @Entity识别正则
+        List<File> files = getAllFiles("/Users/weihongyan/Documents/workspace/tianxiao-service");// 扫描路径
 
         System.out.println("待扫描的文件数量:" + files.size());
         List<String> list = getPOString(files, tablePattern, entityPattern);// 正则抓取指定文件内容
@@ -155,7 +146,7 @@ public class PatternHomework {
             }
         }));
 
-        writeIntoFile(pos, "/Users/hongyan/Desktop/javaTestFile");// 写文件
+        writeIntoFile(pos, "/Users/weihongyan/Desktop/javaPO列表.txt");// 写文件
 
     }
 
