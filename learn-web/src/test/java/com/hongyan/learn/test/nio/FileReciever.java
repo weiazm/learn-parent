@@ -7,8 +7,9 @@ package com.hongyan.learn.test.nio;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -18,13 +19,17 @@ import java.nio.channels.SocketChannel;
 public class FileReciever {
     @SneakyThrows
     public static void main(String[] args) {
-        ServerSocket server = new ServerSocket(9999);
-        log.info("listening port 9999  waiting to connect...");
-        Socket socket = server.accept();
-        log.info("connected ...");
-        SocketChannel channel = socket.getChannel();
+        ServerSocketChannel server = ServerSocketChannel.open();
+        server.bind(new InetSocketAddress(9999));
+        log.info("prepare to be connected from port 9999...");
+        SocketChannel channel = server.accept();
         log.info("get channel from socket...");
-
-
+        ByteBuffer buffer = ByteBuffer.allocate(2);
+        while (channel.read(buffer) != -1) {
+            buffer.flip();
+            System.out.print(new String(buffer.array()));
+            buffer.clear();
+        }
+        log.info("recieve done!");
     }
 }

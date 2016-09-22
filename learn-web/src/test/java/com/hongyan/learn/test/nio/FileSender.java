@@ -7,7 +7,7 @@ package com.hongyan.learn.test.nio;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.net.Socket;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
@@ -18,15 +18,16 @@ import java.nio.channels.SocketChannel;
 public class FileSender {
     @SneakyThrows
     public static void main(String[] args) {
-        Socket socket = new Socket("localhost",9999);
-        log.info("connect to localhost:9999...");
-        SocketChannel channel = socket.getChannel();
-        log.info("get channel form socket...");
-
-        String msg = "hello !";
+        SocketChannel channel = SocketChannel.open();
+        channel.connect(new InetSocketAddress(9999));
+        log.info("get channel from 9999");
+        String msg = "hello !\n";
         ByteBuffer buffer = ByteBuffer.allocate(msg.getBytes().length);
         buffer.put(msg.getBytes());
+        buffer.flip();// remember to flip after write
         channel.write(buffer);
+        channel.finishConnect();
         channel.close();
+        log.info("send done!");
     }
 }
