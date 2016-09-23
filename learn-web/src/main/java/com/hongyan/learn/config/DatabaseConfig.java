@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 @PropertySource(value = {"classpath:jdbc-mysql.properties"})
 public class DatabaseConfig {
 
-    @Bean(name = "h2DataSource", destroyMethod = "shutdown")
+    @Bean(name = "dataSource", destroyMethod = "shutdown")
     public EmbeddedDatabase dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .addScript("classpath:databaseScript/hongyan-learn.sql")
@@ -46,7 +46,7 @@ public class DatabaseConfig {
                 .build();
     }
 
-    @Bean(name = "dataSource", destroyMethod = "close")
+    @Bean(name = "dataSource2", destroyMethod = "close")
     public BoneCPDataSource boneCPDataSource(
             @Value("${jdbc.driverClass}") String driverClass,
             @Value("${jdbc.jdbcUrl}") String jdbcUrl,

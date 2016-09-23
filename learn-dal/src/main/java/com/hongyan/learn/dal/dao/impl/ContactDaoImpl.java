@@ -23,6 +23,11 @@ import lombok.NonNull;
  */
 @Repository
 public class ContactDaoImpl extends JdbcTemplateDaoSupport<Contact> implements ContactDao {
+
+    public ContactDaoImpl(){
+        super(Contact.class);
+    }
+
     @Override
     public Contact getByName(@NonNull String name) {
         SingleSqlBuilder<Contact> builder = createSqlBuilder();

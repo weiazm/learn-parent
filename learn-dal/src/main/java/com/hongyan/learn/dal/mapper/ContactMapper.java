@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Select;
  * Created by weihongyan on 9/9/16.
  */
 public interface ContactMapper {
-    @Select("SELECT * FROM yunying.temp WHERE id = #{name}")
+    @Select("SELECT * FROM test.contact WHERE name = #{name}")
     Contact getContact(@Param("name") String contactName);
 }
