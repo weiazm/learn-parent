@@ -6,14 +6,12 @@ package com.hongyan.learn.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 
 /**
  * Created by weihongyan on 9/9/16.
  */
 @Configuration
-@ImportResource(value = "classpath:ctx-hag-all.xml")
-@Import(value = {SpringRedisConfig.class, DatabaseConfig.class})
+@Import(value = {SpringRedisConfig.class, DatabaseConfig.class ,HagConfig.class})
 public class ApplicationConfig {
 
 //    @Bean(name = "properties")
