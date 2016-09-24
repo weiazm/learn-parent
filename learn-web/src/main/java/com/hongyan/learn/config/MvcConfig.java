@@ -4,6 +4,7 @@
  */
 package com.hongyan.learn.config;
 
+import com.google.common.collect.Lists;
 import com.mitchellbosecke.pebble.PebbleEngine;
 import com.mitchellbosecke.pebble.loader.ServletLoader;
 import com.mitchellbosecke.pebble.spring.PebbleViewResolver;
@@ -12,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import javax.servlet.ServletContext;
 
@@ -27,14 +31,14 @@ import javax.servlet.ServletContext;
 @ComponentScan(value = {"com.hongyan.learn.web.controller"})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
-//    @Bean
-//    public RequestMappingHandlerAdapter requestMappingHandlerAdapter(){
-//        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-//        converter.setSupportedMediaTypes(Lists.newArrayList(new MediaType("application/json;charset=UTF-8")));
-//        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
-//        adapter.setMessageConverters(Lists.newArrayList(converter));
-//        return adapter;
-//    }
+    @Bean
+    public RequestMappingHandlerAdapter requestMappingHandlerAdapter(){
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Lists.newArrayList(new MediaType("application/json;charset=UTF-8")));
+        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+        adapter.setMessageConverters(Lists.newArrayList(converter));
+        return adapter;
+    }
 
     @Autowired
     private ServletContext servletContext;
