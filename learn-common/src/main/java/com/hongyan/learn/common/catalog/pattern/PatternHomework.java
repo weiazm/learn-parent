@@ -142,7 +142,7 @@ public class PatternHomework {
         Collections.sort(pos, Ordering.natural().onResultOf(new Function<POInfo, Integer>() {
             @Override
             public Integer apply(POInfo input) {
-                return input.toString().length();
+                return input.getCatalog().length();
             }
         }));
 
