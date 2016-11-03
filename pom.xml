@@ -131,6 +131,12 @@
             <artifactId>spring-context</artifactId>
             <version>${spring-framework-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${spring-framework-version}</version>
+        </dependency>
+
 
         <!-- Other Web dependencies -->
         <dependency>
