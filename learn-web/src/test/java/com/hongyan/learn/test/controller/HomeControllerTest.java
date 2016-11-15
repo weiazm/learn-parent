@@ -19,5 +19,6 @@ public class HomeControllerTest extends SuperControllerTest {
     public void test() {
         this.pathPrintTest("/");
         this.pathPrintTest("/index.do");
+
     }
 }
