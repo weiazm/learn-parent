@@ -35,7 +35,7 @@ public class OrderingTest {
         list.add("misado");
         list.add("appleTree");
         list.add("null");
-        Collections.sort(list, Ordering.natural().reverse().nullsFirst().onResultOf(new Function<String, Integer>() {
+        Collections.sort(list, Ordering.usingToString().reverse().nullsFirst().onResultOf(new Function<String, Integer>() {
             @Override
             public Integer apply(String input) {
                 Integer i = 0;
