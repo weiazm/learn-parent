@@ -2,6 +2,7 @@ package com.hongyan.learn.test.dataStructures;
 
 import lombok.NonNull;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -58,7 +59,18 @@ public class BinarySearchTree {
      * @param result
      */
     public void inOrder(@NonNull List<TreeNode> result) {
-        this.inOrder(this.root, result);
+//        this.inOrder(this.root, result);
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        TreeNode temp = this.root;
+        while(temp != null || stack.size() > 0){
+            while(temp != null){
+                stack.push(temp);
+                temp = temp.left;
+            }
+            temp = stack.pop();
+            result.add(temp);
+            temp = temp.right;
+        }
     }
 
     private void inOrder(TreeNode node, @NonNull List<TreeNode> result) {
