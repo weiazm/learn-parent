@@ -192,7 +192,6 @@ public class BuildTreeFromTraversalAndConvertTreeToTraversal {
      * @param inEnd
      * @return
      */
-    // FIXME 未完成
     public TreeNode postOrderInOrderBuild(int[] postOrder, int postEnd, int[] inOrder, int inStart, int inEnd) {
         if (postEnd < 0 || inStart > inEnd) {
             return null;
@@ -205,7 +204,7 @@ public class BuildTreeFromTraversalAndConvertTreeToTraversal {
                 break;
             }
         }
-        root.left = this.postOrderInOrderBuild(postOrder, postEnd - (inEnd - pos) + 1, inOrder, inStart, pos - 1);
+        root.left = this.postOrderInOrderBuild(postOrder, postEnd - (inEnd - pos) - 1, inOrder, inStart, pos - 1);
         root.right = this.postOrderInOrderBuild(postOrder, postEnd - 1, inOrder, pos + 1, inEnd);
         return root;
     }
