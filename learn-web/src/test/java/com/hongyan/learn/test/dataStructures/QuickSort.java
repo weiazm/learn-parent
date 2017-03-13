@@ -26,20 +26,19 @@ public class QuickSort {
         Integer key = nums[low];
         Integer temp = null;
         while (low < high) {
-            while (nums[high] >= key && low < high) {
+            while (nums[high] <= key && low < high) {
                 high--;
             }
             temp = nums[high];
             nums[high] = nums[low];
             nums[low] = temp;
-            while (nums[low] <= key && low < high) {
+            while (nums[low] >= key && low < high) {
                 low++;
             }
             temp = nums[high];
             nums[high] = nums[low];
             nums[low] = temp;
         }
-        nums[high] = key;
         return high;
     }
 
