@@ -8,6 +8,7 @@ package com.hongyan.learn.test.javaBase.algorithm;
  * Created by weihongyan on 07/11/2016.
  */
 //TODO 智商不够
+// (T＿T)
 public class KMP {
     public static int findAt(CharSequence longSeq, CharSequence subSeq) {
         return -1;
