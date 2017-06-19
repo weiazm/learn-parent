@@ -29,7 +29,7 @@ public class PreInPostExpressions {
     }
 
     private static List<String> parseToList(String exp) {
-        PreInPostExpressions.removeBlank(exp);
+        exp = PreInPostExpressions.removeBlank(exp);
         List<String> parseExp = Lists.newArrayList();
         StringBuilder builder = new StringBuilder();
         for (Character c : exp.toCharArray()) {
@@ -49,11 +49,8 @@ public class PreInPostExpressions {
         return parseExp;
     }
 
-    private static void removeBlank(String exp) {
-        exp.replace(" ", "");
-        exp.replace("\t", "");
-        exp.replace("\n", "");
-        exp.replace("\r", "");
+    private static String removeBlank(String exp) {
+        return exp.replace(" ", "").replace("\t", "").replace("\n", "").replace("\r", "");
     }
 
     /**
