@@ -163,3 +163,10 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+.idea/
+learn-biz/learn-biz.iml
+learn-common/learn-common.iml
+learn-dal/learn-dal.iml
+learn-parent.iml
+learn-sal/learn-sal.iml
+learn-web/learn-web.iml
