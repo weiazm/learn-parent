@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.proxy.csdn.compilerAPI;
 
@@ -15,6 +14,9 @@ import lombok.Data;
  */
 @Data
 public class 然儿 {
+    private Integer age;
+    private Boolean sex;
+
     public static void main(String[] args) {
         然儿 傻比 = new 然儿();
         傻比.健身();
@@ -22,9 +24,6 @@ public class 然儿 {
         傻比.搞基();
         System.out.println("this is in main!");
     }
-    private Integer age;
-
-    private Boolean sex;
 
     public void 健身() {
         System.out.println("我正在健身~啊~好累啊!");

@@ -1,20 +1,28 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.pattern;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
-import lombok.Data;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import lombok.Data;
 
 /**
  * @title PatternHomework
@@ -24,13 +32,6 @@ import java.util.regex.Pattern;
  * @version version
  */
 public class PatternHomework {
-    @Data
-    private static class POInfo {
-        private String catalog;
-        private String javaName;
-        private String name;
-    }
-
     private static BufferedReader reader;
 
     private static POInfo convertStrTOPOInfo(String str, Pattern javaPattern, Pattern catalogPattern,
@@ -167,6 +168,13 @@ public class PatternHomework {
         }
         System.out.println("写入文件done!");
 
+    }
+
+    @Data
+    private static class POInfo {
+        private String catalog;
+        private String javaName;
+        private String name;
     }
 
 }

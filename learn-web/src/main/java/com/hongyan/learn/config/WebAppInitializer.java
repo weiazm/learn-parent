@@ -1,6 +1,5 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.config;
 
@@ -17,20 +16,20 @@ import javax.servlet.ServletRegistration;
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{ApplicationConfig.class};
+        return new Class<?>[] { ApplicationConfig.class };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{MvcConfig.class};
+        return new Class<?>[] { MvcConfig.class };
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[] { "/" };
     }
 
-    @Override//设置文件上传目录
+    @Override // 设置文件上传目录
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         registration.setMultipartConfig(new MultipartConfigElement("/Users/weihongyan", 104857600, -1, 0));
     }
@@ -40,6 +39,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
-        return new Filter[]{filter};
+        return new Filter[] { filter };
     }
 }

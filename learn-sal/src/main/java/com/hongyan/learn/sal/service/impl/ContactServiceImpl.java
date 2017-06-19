@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.sal.service.impl;
 
@@ -8,9 +7,11 @@ import com.hongyan.learn.dal.dao.ContactDao;
 import com.hongyan.learn.dal.po.Contact;
 import com.hongyan.learn.sal.dto.ContactDto;
 import com.hongyan.learn.sal.service.ContactService;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @title ContactServiceImpl

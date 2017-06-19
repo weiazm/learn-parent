@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.concurrent.cdsn.six;
 
@@ -16,16 +15,6 @@ import java.util.concurrent.Executors;
  */
 public class ThreadPool {
 
-    public static void main(String[] args) {
-        ThreadPool tp = new ThreadPool();
-        ExecutorService threadPool = Executors.newFixedThreadPool(4);
-        threadPool.submit(tp.thread1);
-        threadPool.submit(tp.thread2);
-        threadPool.submit(tp.thread3);
-        threadPool.submit(tp.thread4);
-        threadPool.submit(tp.thread5);
-        threadPool.shutdown();
-    }
     Runnable thread1 = new Runnable() {
         @Override
         public void run() {
@@ -58,7 +47,6 @@ public class ThreadPool {
             }
         }
     };
-
     Runnable thread5 = new Runnable() {
         @Override
         public void run() {
@@ -67,5 +55,16 @@ public class ThreadPool {
             }
         }
     };
+
+    public static void main(String[] args) {
+        ThreadPool tp = new ThreadPool();
+        ExecutorService threadPool = Executors.newFixedThreadPool(4);
+        threadPool.submit(tp.thread1);
+        threadPool.submit(tp.thread2);
+        threadPool.submit(tp.thread3);
+        threadPool.submit(tp.thread4);
+        threadPool.submit(tp.thread5);
+        threadPool.shutdown();
+    }
 
 }

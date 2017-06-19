@@ -1,10 +1,10 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.others;
 
 import com.hongyan.learn.config.ApplicationConfig;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 public class PropertiesTest {
-    //    @Value("#{properties.creater}")
+    // @Value("#{properties.creater}")
     private String creater = "";
 
     @Test

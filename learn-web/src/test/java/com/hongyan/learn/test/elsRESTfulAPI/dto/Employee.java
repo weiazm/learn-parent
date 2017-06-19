@@ -1,8 +1,8 @@
 package com.hongyan.learn.test.elsRESTfulAPI.dto;
 
-import lombok.Data;
-
 import java.util.List;
+
+import lombok.Data;
 
 /**
  * @author weihongyan

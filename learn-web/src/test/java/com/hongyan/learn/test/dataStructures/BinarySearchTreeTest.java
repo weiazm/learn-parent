@@ -1,6 +1,7 @@
 package com.hongyan.learn.test.dataStructures;
 
 import com.beust.jcommander.internal.Lists;
+
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
  */
 public class BinarySearchTreeTest {
     @Test
-    public void testInsert(){
+    public void testInsert() {
         BinarySearchTree bst = new BinarySearchTree();
         bst.insert(1);
         bst.insert(4);
@@ -42,19 +43,19 @@ public class BinarySearchTreeTest {
 
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         Map<Integer, Integer> CplusD = new HashMap<>();
-        for(int i=0;i<C.length;i++){
-            for(int j=0;j<D.length;j++){
+        for (int i = 0; i < C.length; i++) {
+            for (int j = 0; j < D.length; j++) {
                 int sum = C[i] + D[j];
-                CplusD.put(sum, CplusD.getOrDefault(sum,0));
+                CplusD.put(sum, CplusD.getOrDefault(sum, 0));
             }
         }
 
         int result = 0;
 
-        for(int i=0;i<A.length;i++){
-            for(int j=0;j<B.length;j++){
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < B.length; j++) {
                 int sum = A[i] + B[j];
-                result += CplusD.getOrDefault(0-sum, 0);
+                result += CplusD.getOrDefault(0 - sum, 0);
             }
         }
 

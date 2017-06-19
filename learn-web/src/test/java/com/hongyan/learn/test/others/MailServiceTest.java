@@ -1,10 +1,10 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.others;
 
 import com.hongyan.learn.config.MailSenderConfig;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class MailServiceTest {
     private MailSender mailSender;
 
     @Test
-    public void sendMail(){
+    public void sendMail() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("weiazm@163.com");
         message.setTo("995227004@qq.com");

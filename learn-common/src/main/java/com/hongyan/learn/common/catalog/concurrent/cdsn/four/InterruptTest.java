@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.concurrent.cdsn.four;
 
@@ -12,6 +11,13 @@ package com.hongyan.learn.common.catalog.concurrent.cdsn.four;
  * @version version
  */
 public class InterruptTest {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new MyThread();
+        t.start();
+        Thread.sleep(1000);
+        t.interrupt();// 只有Thread有该中断标志.
+    }
+
     static class MyThread extends Thread {
         @Override
         public void run() {
@@ -20,13 +26,6 @@ public class InterruptTest {
             }
         }
 
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread t = new MyThread();
-        t.start();
-        Thread.sleep(1000);
-        t.interrupt();// 只有Thread有该中断标志.
     }
 
 }

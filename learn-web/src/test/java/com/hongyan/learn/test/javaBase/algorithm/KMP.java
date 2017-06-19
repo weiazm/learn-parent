@@ -1,13 +1,12 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.javaBase.algorithm;
 
 /**
  * Created by weihongyan on 07/11/2016.
  */
-//TODO 智商不够
+// TODO 智商不够
 // (T＿T)
 public class KMP {
     public static int findAt(CharSequence longSeq, CharSequence subSeq) {

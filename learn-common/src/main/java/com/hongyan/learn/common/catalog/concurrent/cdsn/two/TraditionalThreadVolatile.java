@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.concurrent.cdsn.two;
 
@@ -12,6 +11,25 @@ package com.hongyan.learn.common.catalog.concurrent.cdsn.two;
  * @version version
  */
 public class TraditionalThreadVolatile {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        new Thread() {
+            @Override
+            public void run() {
+                Test.one();
+            }
+        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                Test.two();
+            }
+        }.start();
+
+    }
 
     static class Test {
         static volatile int i = 0;// volatile保证了变量的可见性,保证不了有序性
@@ -32,25 +50,6 @@ public class TraditionalThreadVolatile {
         static /* synchronized */ void two() {
             System.out.println(i + ":" + j);
         }
-    }
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Thread() {
-            @Override
-            public void run() {
-                Test.one();
-            }
-        }.start();
-        new Thread() {
-            @Override
-            public void run() {
-                Test.two();
-            }
-        }.start();
-
     }
 
 }

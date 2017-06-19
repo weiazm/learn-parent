@@ -2,7 +2,6 @@ package com.hongyan.learn.common.util.redis;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,9 +9,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
- * 基于redis的分布式锁的抽象类，依赖RedisUtil
- * 可以创建个单例工厂类,用于针对相同的key,返回相同的lock.
+ * 基于redis的分布式锁的抽象类，依赖RedisUtil 可以创建个单例工厂类,用于针对相同的key,返回相同的lock.
  *
  * @author purerboy
  * @version 1.0
@@ -43,9 +43,9 @@ public abstract class RedisBaseLock implements Lock {
     }
 
     /**
-     * @param redisUtil  redisUtil中包含redis连接池
-     * @param key        锁的唯一标识
-     * @param owner      锁的拥有者
+     * @param redisUtil redisUtil中包含redis连接池
+     * @param key 锁的唯一标识
+     * @param owner 锁的拥有者
      * @param lockExpire 加锁过期时间(防止unlock失败) 单位:秒，<=0时，无过期时间
      */
     protected RedisBaseLock(RedisUtil redisUtil, String key, String owner, int lockExpire) {
@@ -85,7 +85,6 @@ public abstract class RedisBaseLock implements Lock {
         throw new UnsupportedOperationException("不支持的方法!");
     }
 
-
     /**
      * 尝试不等待获取锁
      *
@@ -105,7 +104,7 @@ public abstract class RedisBaseLock implements Lock {
      * 尝试在一定时间内获取锁
      *
      * @param timeout 时间长度
-     * @param unit    时间单位
+     * @param unit 时间单位
      * @return 是否获取到了锁
      */
     @Override
@@ -119,8 +118,8 @@ public abstract class RedisBaseLock implements Lock {
                 } else {
                     log.debug("key[{}] is locked by owner[{}]", key, redisUtil.get(key));
                 }
-                Thread.sleep(DEF_WAIT_TIME);//循环间隔毫秒
-                //timeout小于0,一直等待循环获取锁,超时时间内一直循环获取锁.
+                Thread.sleep(DEF_WAIT_TIME);// 循环间隔毫秒
+                // timeout小于0,一直等待循环获取锁,超时时间内一直循环获取锁.
             } while (timeout < 0 || (System.nanoTime() - start) < unit.toNanos(timeout));
             return false;
         } catch (Exception e) {
@@ -130,8 +129,7 @@ public abstract class RedisBaseLock implements Lock {
     }
 
     /**
-     * 将锁的时间戳保存在本地的map中,每次查询上锁时间时不必使用redis来查询,挡掉了一些对redis的访问.
-     * 单redis客户端中map中的值与远程的redis中的锁一致.
+     * 将锁的时间戳保存在本地的map中,每次查询上锁时间时不必使用redis来查询,挡掉了一些对redis的访问. 单redis客户端中map中的值与远程的redis中的锁一致.
      * 多redis客户端使用相同锁时,map为redis锁的子集.
      *
      * @param key 锁的字符串key
@@ -140,34 +138,34 @@ public abstract class RedisBaseLock implements Lock {
      */
     protected boolean lock(final String key) throws Exception {
         boolean succ = false;
-        LockObj obj = createLockObj();//锁对象
-        LockObj last = LOCK_MAP.putIfAbsent(key, obj);//map里没有再放入,返回null;map里有则不更新,返回原来的值,(返回null或redis中保存的锁)
-        if (lockExpire > 0) {//如果指定了超时时间
-            if (last != null) {//如果redis锁没有被释放
-                if (System.currentTimeMillis() - last.getTime() < lockExpire) {//锁还未超时,返回false.
+        LockObj obj = createLockObj();// 锁对象
+        LockObj last = LOCK_MAP.putIfAbsent(key, obj);// map里没有再放入,返回null;map里有则不更新,返回原来的值,(返回null或redis中保存的锁)
+        if (lockExpire > 0) {// 如果指定了超时时间
+            if (last != null) {// 如果redis锁没有被释放
+                if (System.currentTimeMillis() - last.getTime() < lockExpire) {// 锁还未超时,返回false.
                     return false;
-                } else {//锁超时了
-                    LOCK_MAP.remove(key, last);//删掉超时的锁
-                    last = LOCK_MAP.putIfAbsent(key, obj);//更新当前的新锁
-                    if (last != null) {//冗余操作,这步肯定是空
+                } else {// 锁超时了
+                    LOCK_MAP.remove(key, last);// 删掉超时的锁
+                    last = LOCK_MAP.putIfAbsent(key, obj);// 更新当前的新锁
+                    if (last != null) {// 冗余操作,这步肯定是空
                         return false;
                     }
                     try {
-                        succ = redisUtil.setnx(key, encodeLock(obj), lockExpire) == RedisUtil.OK_RESULT;//更新远程redis的新锁
+                        succ = redisUtil.setnx(key, encodeLock(obj), lockExpire) == RedisUtil.OK_RESULT;// 更新远程redis的新锁
                     } catch (Exception e) {
-                        LOCK_MAP.remove(key, obj);//发生异常失败了,锁没更新上
+                        LOCK_MAP.remove(key, obj);// 发生异常失败了,锁没更新上
                         throw e;
                     }
                 }
             }
-        } else {//如果超时时间无限期
-            if (last != null) {//如果redis锁没有被释放,返回false
+        } else {// 如果超时时间无限期
+            if (last != null) {// 如果redis锁没有被释放,返回false
                 return false;
-            } else {//redis中的锁被释放了
+            } else {// redis中的锁被释放了
                 try {
-                    succ = redisUtil.setnx(key, encodeLock(obj)) == RedisUtil.OK_RESULT;//更新远程redis的新锁
+                    succ = redisUtil.setnx(key, encodeLock(obj)) == RedisUtil.OK_RESULT;// 更新远程redis的新锁
                 } catch (Exception e) {
-                    LOCK_MAP.remove(key, obj);//发生异常失败了,锁没更新上
+                    LOCK_MAP.remove(key, obj);// 发生异常失败了,锁没更新上
                     throw e;
                 }
             }
@@ -175,8 +173,8 @@ public abstract class RedisBaseLock implements Lock {
         if (succ) {
             value = obj;
         } else {
-            //单机冗余操作,理论上用不到,万一以为超时了实际未超时,这步可以纠错,保证map与redis中的锁一致.
-            //当有并发redis客户端获取相同锁的情况产生时,这句能保证map是redis中的锁的子集
+            // 单机冗余操作,理论上用不到,万一以为超时了实际未超时,这步可以纠错,保证map与redis中的锁一致.
+            // 当有并发redis客户端获取相同锁的情况产生时,这句能保证map是redis中的锁的子集
             LOCK_MAP.remove(key, obj);
         }
         return succ;
@@ -210,10 +208,10 @@ public abstract class RedisBaseLock implements Lock {
         } catch (Exception e) {
             log.error("release lock key[" + key + "] error!", e);
         } finally {
-            if (force) {//强制解锁会强制移除map中对应key的锁
+            if (force) {// 强制解锁会强制移除map中对应key的锁
                 LockObj obj = LOCK_MAP.get(key);
                 LOCK_MAP.remove(key, obj);
-            } else {//非强制解锁会尝试移除对应的key-value
+            } else {// 非强制解锁会尝试移除对应的key-value
                 LOCK_MAP.remove(key, value);
             }
         }

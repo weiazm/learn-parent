@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.dal.dao.impl;
 
@@ -24,7 +23,7 @@ import lombok.NonNull;
 @Repository
 public class ContactDaoImpl extends JdbcTemplateDaoSupport<Contact> implements ContactDao {
 
-    public ContactDaoImpl(){
+    public ContactDaoImpl() {
         super(Contact.class);
     }
 

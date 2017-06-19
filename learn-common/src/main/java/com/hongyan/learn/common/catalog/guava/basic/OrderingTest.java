@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.guava.basic;
 
@@ -35,16 +34,17 @@ public class OrderingTest {
         list.add("misado");
         list.add("appleTree");
         list.add("null");
-        Collections.sort(list, Ordering.usingToString().reverse().nullsFirst().onResultOf(new Function<String, Integer>() {
-            @Override
-            public Integer apply(String input) {
-                Integer i = 0;
-                for (char c : input.toCharArray()) {
-                    i += c;
+        Collections.sort(list,
+            Ordering.usingToString().reverse().nullsFirst().onResultOf(new Function<String, Integer>() {
+                @Override
+                public Integer apply(String input) {
+                    Integer i = 0;
+                    for (char c : input.toCharArray()) {
+                        i += c;
+                    }
+                    return i;
                 }
-                return i;
-            }
-        }));
+            }));
         System.out.println(list);
 
         System.out.println(Ordering.usingToString().reverse().greatestOf(list, 2));

@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.concurrent.cdsn.three;
 
@@ -15,8 +14,8 @@ import java.util.List;
  * @version version
  */
 public class MyBlockingQueue<T> {
-    List<T> box;
     protected Integer limit;
+    List<T> box;
 
     public MyBlockingQueue(int limit) {
         this.limit = limit;

@@ -1,10 +1,10 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.config;
 
 import com.jolbox.bonecp.BoneCPDataSource;
+
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,38 +21,30 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
 import java.util.concurrent.TimeUnit;
+
+import javax.sql.DataSource;
 
 /**
  * Created by weihongyan on 9/9/16.
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {
-        "com.hongyan.learn.dal.*",
-        "com.hongyan.learn.sal.*",
-        "com.hongyan.learn.biz.*",
-        "com.baijia.tianxiao.sqlbuilder.*"
-})
-@PropertySource(value = {"classpath:jdbc-mysql.properties"})
+@ComponentScan(basePackages = { "com.hongyan.learn.dal.*", "com.hongyan.learn.sal.*", "com.hongyan.learn.biz.*",
+    "com.baijia.tianxiao.sqlbuilder.*" })
+@PropertySource(value = { "classpath:jdbc-mysql.properties" })
 public class DatabaseConfig {
 
     @Bean(name = "dataSource", destroyMethod = "shutdown")
     public EmbeddedDatabase dataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .addScript("classpath:databaseScript/hongyan-learn.sql")
-                .setType(EmbeddedDatabaseType.H2)
-                .build();
+        return new EmbeddedDatabaseBuilder().addScript("classpath:databaseScript/hongyan-learn.sql")
+            .setType(EmbeddedDatabaseType.H2).build();
     }
 
     @Bean(name = "dataSource2", destroyMethod = "close")
-    public BoneCPDataSource boneCPDataSource(
-            @Value("${jdbc.driverClass}") String driverClass,
-            @Value("${jdbc.jdbcUrl}") String jdbcUrl,
-            @Value("${jdbc.username}") String username,
-            @Value("${jdbc.password}") String Password
-    ) {
+    public BoneCPDataSource boneCPDataSource(@Value("${jdbc.driverClass}") String driverClass,
+        @Value("${jdbc.jdbcUrl}") String jdbcUrl, @Value("${jdbc.username}") String username,
+        @Value("${jdbc.password}") String Password) {
         BoneCPDataSource dataSource = new BoneCPDataSource();
         dataSource.setDriverClass(driverClass);
         dataSource.setJdbcUrl(jdbcUrl);

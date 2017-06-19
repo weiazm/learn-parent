@@ -3,17 +3,15 @@ package com.hongyan.learn.test.leetcode.answers;
 import java.util.ArrayList;
 
 /*
- * Given a string containing only digits, restore it by returning all possible 
- * valid IP address combinations.
-
- * For example:
- * Given "25525511135",
-
+ * Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+ * 
+ * For example: Given "25525511135",
+ * 
  * return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
  */
 public class RestoreIPAddresses {
 
-/**************************** updated 2014.04.09 *****************************/
+    /**************************** updated 2014.04.09 *****************************/
 
     public ArrayList<String> restoreIpAddresses(String s) {
         ArrayList<String> res = new ArrayList<String>();
@@ -26,7 +24,7 @@ public class RestoreIPAddresses {
             res.add(ip);
         } else if (n > 0) {
             for (int i = 0; i < Math.min(subStr.length(), 3); i++) {
-                if (i > 0 && subStr.charAt(0) == '0')  // heading zeros are not allowed.
+                if (i > 0 && subStr.charAt(0) == '0') // heading zeros are not allowed.
                     continue;
                 if (Integer.parseInt(subStr.substring(0, i + 1)) <= 255) {
                     String temp = ip;

@@ -1,6 +1,5 @@
 /**
- * Baidu.com Inc.
- * Copyright (c) 2000-2015 All Rights Reserved.
+ * Baidu.com Inc. Copyright (c) 2000-2015 All Rights Reserved.
  */
 package com.hongyan.learn.web.dto;
 
@@ -35,20 +34,20 @@ public class WebResponse<T> implements Serializable {
         return data;
     }
 
-    public ErrorDetail getError() {
-        return error;
-    }
-
-    public int getStatus() {
-        return status == null ? ResponseStatus.ok.getCode() : status.getCode();
-    }
-
     public void setData(T data) {
         this.data = data;
     }
 
+    public ErrorDetail getError() {
+        return error;
+    }
+
     public void setError(ErrorDetail error) {
         this.error = error;
+    }
+
+    public int getStatus() {
+        return status == null ? ResponseStatus.ok.getCode() : status.getCode();
     }
 
     public void setStatus(ResponseStatus status) {

@@ -1,33 +1,18 @@
 package com.hongyan.learn.test.leetcode.answers;/*
- * Sort a linked list in O(n log n) time using constant space complexity.
- */
+                                                 * Sort a linked list in O(n log n) time using constant space
+                                                 * complexity.
+                                                 */
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Definition for singly-linked list.
- * class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ * Definition for singly-linked list. class ListNode { int val; ListNode next; ListNode(int x) { val = x; next = null; }
  * }
  */
 public class SortList {
 
-    class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) {
-          val = x;
-          next = null;
-      }
-  }
-
-/**************************** cheating method *******************************/
+    /**************************** cheating method *******************************/
 
     public ListNode sortList(ListNode head) {
         if (head == null || head.next == null)
@@ -47,5 +32,15 @@ public class SortList {
             i++;
         }
         return head;
+    }
+
+    class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }

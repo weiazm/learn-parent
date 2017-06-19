@@ -1,10 +1,10 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.util.redis;
 
 import com.hongyan.learn.config.SpringRedisConfig;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringRedisConfig.class)
 public class RedisTemplateTest {
-
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;

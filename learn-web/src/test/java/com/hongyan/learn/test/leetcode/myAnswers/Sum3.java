@@ -1,6 +1,13 @@
 package com.hongyan.learn.test.leetcode.myAnswers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,11 +46,11 @@ public class Sum3 {
             hi = nums.length - 1;
             while (lo < hi && (nums[start] + nums[lo] + nums[hi] > 0 || nums[hi - 1] == nums[hi])) {
                 hi--;
-                System.out.println("hi:"+hi);
+                System.out.println("hi:" + hi);
             }
             while (lo < hi && (nums[start] + nums[lo] + nums[hi] < 0 || nums[lo + 1] == nums[lo])) {
                 lo++;
-                System.out.println("lo:"+lo);
+                System.out.println("lo:" + lo);
             }
             if (0 == nums[start] + nums[lo] + nums[hi]) {
                 result.add(Arrays.asList(nums[start], nums[lo], nums[hi]));

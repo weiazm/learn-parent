@@ -1,31 +1,14 @@
 package com.hongyan.learn.test.leetcode.answers;/*
- * Given a linked list, determine if it has a cycle in it.
+                                                 * Given a linked list, determine if it has a cycle in it.
+                                                 * 
+                                                 * Follow up: Can you solve it without using extra space?
+                                                 */
 
- * Follow up:
- * Can you solve it without using extra space? 
- */
 /**
- * Definition for singly-linked list.
- * class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ * Definition for singly-linked list. class ListNode { int val; ListNode next; ListNode(int x) { val = x; next = null; }
  * }
  */
 public class LinkedListCycle {
-
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 
     public boolean hasCycle(ListNode head) {
         ListNode cur1 = head;
@@ -37,6 +20,16 @@ public class LinkedListCycle {
                 return true;
         }
         return false;
+    }
+
+    class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 
 }

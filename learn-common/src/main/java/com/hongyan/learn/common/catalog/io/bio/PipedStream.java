@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.io.bio;
 
@@ -18,6 +17,17 @@ import lombok.Getter;
  * @version version
  */
 public class PipedStream {
+    public static void main(String[] args) throws IOException {
+        Outputer out = new Outputer();
+        Inputer in = new Inputer();
+
+        out.getPos().connect(in.getPis());
+
+        new Thread(out).start();
+        new Thread(in).start();
+
+    }
+
     @Getter
     static class Inputer implements Runnable {
         private PipedInputStream pis = null;
@@ -65,16 +75,5 @@ public class PipedStream {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        Outputer out = new Outputer();
-        Inputer in = new Inputer();
-
-        out.getPos().connect(in.getPis());
-
-        new Thread(out).start();
-        new Thread(in).start();
-
     }
 }

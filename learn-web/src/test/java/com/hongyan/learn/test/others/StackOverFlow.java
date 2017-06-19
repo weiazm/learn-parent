@@ -1,6 +1,5 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.others;
 
@@ -12,15 +11,15 @@ import org.junit.Test;
 public class StackOverFlow {
 
     @Test
-    public void stack(){
+    public void stack() {
         long f = 1L;
         stack();
     }
 
     @Test
-    public void heap(){
+    public void heap() {
         StringBuffer sb = new StringBuffer("1");
-        for (int i = 0;  ; i++) {
+        for (int i = 0;; i++) {
             sb.append(i);
         }
     }

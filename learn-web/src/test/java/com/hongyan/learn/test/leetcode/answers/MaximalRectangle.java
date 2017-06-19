@@ -1,7 +1,7 @@
 package com.hongyan.learn.test.leetcode.answers;/*
- * Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle 
- * containing all ones and return its area.
- */
+                                                 * Given a 2D binary matrix filled with 0's and 1's, find the largest
+                                                 * rectangle containing all ones and return its area.
+                                                 */
 
 import java.util.Stack;
 
@@ -21,12 +21,10 @@ public class MaximalRectangle {
             int k = 0;
             Stack<Integer> stack = new Stack<Integer>();
             while (k < colLen || !stack.isEmpty()) {
-                if (k < colLen && (stack.isEmpty() || 
-                            height[k] >= height[stack.peek()]))
+                if (k < colLen && (stack.isEmpty() || height[k] >= height[stack.peek()]))
                     stack.push(k++);
                 else
-                    maxArea = Math.max(maxArea, height[stack.pop()] * 
-                            (stack.isEmpty() ? k : k - stack.peek() - 1));
+                    maxArea = Math.max(maxArea, height[stack.pop()] * (stack.isEmpty() ? k : k - stack.peek() - 1));
             }
         }
         return maxArea;

@@ -1,13 +1,14 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.common.util.myRedis;
 
 import com.google.gson.Gson;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by weihongyan on 9/20/16.
@@ -42,9 +43,8 @@ public class MyRedisUtil {
     }
 
     public static Object getMap(RedisConnection connection, String key, Object field, Class<?> clazz) {
-        return deSerialize(connection.hGet(serialize(key),serialize(field)),clazz);
+        return deSerialize(connection.hGet(serialize(key), serialize(field)), clazz);
     }
-
 
     public static byte[] serialize(Object value) {
         return serializer.serialize(gson.toJson(value));

@@ -13,7 +13,7 @@ public class HeapOOM {
 
     public static void main(String[] args) {
         List<Object> list = Lists.newArrayList();
-        while(true){
+        while (true) {
             list.add(new Object());
         }
     }

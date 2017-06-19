@@ -14,6 +14,6 @@ public class Temp {
         }
         System.out.println(sum);
         System.out.println(System.currentTimeMillis() - l);
-        System.out.println(Integer.bitCount(1^4));
+        System.out.println(Integer.bitCount(1 ^ 4));
     }
 }

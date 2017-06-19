@@ -1,12 +1,8 @@
 package com.hongyan.learn.test.dataStructures;
 
-import com.beust.jcommander.internal.Lists;
 import org.junit.Test;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author weihongyan
@@ -16,11 +12,11 @@ import java.util.List;
 public class QuickSort {
 
     @Test
-    public void test() {                                                                   
+    public void test() {
         Integer[] nums = { 6, 6, 1, 4, 5, 7, 6, 8, 3, 4, 2, 9, 0, 1, 2 };
         this.recor(nums, 0, nums.length - 1);
-        System.out.println(Arrays.<Integer>asList(nums).toString());
-    }   
+        System.out.println(Arrays.<Integer> asList(nums).toString());
+    }
 
     private Integer quicksort(Integer[] nums, int low, int high) {
         Integer key = nums[low];

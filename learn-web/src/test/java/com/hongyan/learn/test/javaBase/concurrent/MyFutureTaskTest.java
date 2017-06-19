@@ -1,6 +1,5 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.javaBase.concurrent;
 
@@ -19,7 +18,7 @@ public class MyFutureTaskTest {
             return "fuck";
         });
         ExecutorService pool = Executors.newCachedThreadPool();
-//        Future<String> future = pool.submit(futureTask);
+        // Future<String> future = pool.submit(futureTask);
 
     }
 }

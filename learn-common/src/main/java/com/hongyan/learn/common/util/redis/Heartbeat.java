@@ -22,11 +22,8 @@ import java.net.UnknownHostException;
 public class Heartbeat extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(Heartbeat.class);
-
-    private static Heartbeat myHeartbeat;
-
     public static int DEF_EXPIRE_TIME = 5 * 60;
-
+    private static Heartbeat myHeartbeat;
     private RedisUtil redisUtil;
 
     private String procName;
@@ -63,6 +60,83 @@ public class Heartbeat extends Thread {
         this.setDaemon(true);
     }
 
+    private static String genDefProcName() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(System.getProperty("user.name"));
+        try {
+            InetAddress ia = InetAddress.getLocalHost();
+            sb.append("@").append(ia.getHostName());
+        } catch (UnknownHostException e) {
+        }
+        sb.append(":").append(System.getProperty("user.dir"));
+        return sb.toString();
+    }
+
+    /**
+     * 读取指定进程名的心跳信息
+     * 
+     * @param procName
+     * @param redisUtil
+     * @return
+     */
+    public static HeartbeatBaseInfo readHeartbeatInfo(String procName, RedisUtil redisUtil) {
+        String json = null;
+        try {
+            json = redisUtil.get(procName);
+        } catch (Exception e) {
+            log.error("read heartbeat error!", e);
+        }
+        return HeartbeatBaseInfo.fromJson(json);
+    }
+
+    /**
+     * 写进程心跳
+     * 
+     * @param obj
+     * @param expireTime
+     * @param redisUtil
+     * @throws Exception
+     */
+    protected static void writeHeartbeatInfo(HeartbeatBaseInfo obj, int expireTime, RedisUtil redisUtil)
+        throws Exception {
+        redisUtil.set(obj.getProcName(), obj.toJson());
+        redisUtil.expire(obj.getProcName(), expireTime);
+    }
+
+    /**
+     * 获取当前进程心跳实例，先通过Locater获取配置的
+     * 
+     * @return
+     */
+    public static Heartbeat getMyHeartbeat() {
+        BaseUtils.setSingleton(new DoubleCheckSingleton<Heartbeat>() {
+
+            @Override
+            public Heartbeat create() {
+                Heartbeat heartbeat = null;
+                try {
+                    heartbeat = ServiceLocator.getBean(Heartbeat.class);
+                } catch (Exception e) {
+                    log.info("undefine heartbeat! new a default one!", e);
+                    heartbeat = new Heartbeat(RedisUtil.getIns(), DEF_EXPIRE_TIME);
+                }
+                heartbeat.init();
+                return heartbeat;
+            }
+
+            @Override
+            public Heartbeat getSingleton() {
+                return myHeartbeat;
+            }
+
+            @Override
+            public void setSingleton(Heartbeat t) {
+                myHeartbeat = t;
+            }
+        }, Heartbeat.class);
+        return myHeartbeat;
+    }
+
     /**
      * 进程名
      * 
@@ -83,18 +157,6 @@ public class Heartbeat extends Thread {
 
     public void setInterval(long interval) {
         this.interval = interval;
-    }
-
-    private static String genDefProcName() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(System.getProperty("user.name"));
-        try {
-            InetAddress ia = InetAddress.getLocalHost();
-            sb.append("@").append(ia.getHostName());
-        } catch (UnknownHostException e) {
-        }
-        sb.append(":").append(System.getProperty("user.dir"));
-        return sb.toString();
     }
 
     /**
@@ -177,71 +239,6 @@ public class Heartbeat extends Thread {
      */
     public HeartbeatBaseInfo readHeartbeatInfo() {
         return readHeartbeatInfo(getProcName(), redisUtil);
-    }
-
-    /**
-     * 读取指定进程名的心跳信息
-     * 
-     * @param procName
-     * @param redisUtil
-     * @return
-     */
-    public static HeartbeatBaseInfo readHeartbeatInfo(String procName, RedisUtil redisUtil) {
-        String json = null;
-        try {
-            json = redisUtil.get(procName);
-        } catch (Exception e) {
-            log.error("read heartbeat error!", e);
-        }
-        return HeartbeatBaseInfo.fromJson(json);
-    }
-
-    /**
-     * 写进程心跳
-     * 
-     * @param obj
-     * @param expireTime
-     * @param redisUtil
-     * @throws Exception
-     */
-    protected static void writeHeartbeatInfo(HeartbeatBaseInfo obj, int expireTime, RedisUtil redisUtil)
-        throws Exception {
-        redisUtil.set(obj.getProcName(), obj.toJson());
-        redisUtil.expire(obj.getProcName(), expireTime);
-    }
-
-    /**
-     * 获取当前进程心跳实例，先通过Locater获取配置的
-     * 
-     * @return
-     */
-    public static Heartbeat getMyHeartbeat() {
-        BaseUtils.setSingleton(new DoubleCheckSingleton<Heartbeat>() {
-
-            @Override
-            public Heartbeat create() {
-                Heartbeat heartbeat = null;
-                try {
-                    heartbeat = ServiceLocator.getBean(Heartbeat.class);
-                } catch (Exception e) {
-                    log.info("undefine heartbeat! new a default one!", e);
-                    heartbeat = new Heartbeat(RedisUtil.getIns(), DEF_EXPIRE_TIME);
-                }
-                heartbeat.init();
-                return heartbeat;
-            }
-
-            @Override
-            public Heartbeat getSingleton() {
-                return myHeartbeat;
-            }
-
-            @Override
-            public void setSingleton(Heartbeat t) {
-                myHeartbeat = t;
-            }
-        }, Heartbeat.class);
-        return myHeartbeat;
     }
 
 }

@@ -35,7 +35,7 @@ public class FindMinMaxDiffInOrder {
 
     @Test
     public void test() {
-        Integer[] numbers = { 7,6,4,3,1 };
+        Integer[] numbers = { 7, 6, 4, 3, 1 };
         Integer result = FindMinMaxDiffInOrder.solve(numbers);
         System.out.println(result);
         new ArrayList<Integer>().toArray();

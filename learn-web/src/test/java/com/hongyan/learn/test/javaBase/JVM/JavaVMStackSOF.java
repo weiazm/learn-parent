@@ -8,11 +8,6 @@ package com.hongyan.learn.test.javaBase.JVM;
 public class JavaVMStackSOF {
     private static int recorTile;
 
-    public void recor() {
-        int i = recorTile++;
-        recor();
-    }
-
     public static void main(String[] args) {
         JavaVMStackSOF stackSOF = new JavaVMStackSOF();
         try {
@@ -21,5 +16,10 @@ public class JavaVMStackSOF {
             System.out.println(recorTile);
             throw t;
         }
+    }
+
+    public void recor() {
+        int i = recorTile++;
+        recor();
     }
 }

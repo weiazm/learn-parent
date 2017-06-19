@@ -1,9 +1,9 @@
 package com.hongyan.learn.test.dataStructures;
 
-import lombok.NonNull;
-
 import java.util.LinkedList;
 import java.util.List;
+
+import lombok.NonNull;
 
 /**
  * @author weihongyan
@@ -13,20 +13,6 @@ import java.util.List;
 public class BinarySearchTree {
 
     private TreeNode root;
-
-    static class TreeNode {
-        Integer value;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(Integer value) {
-            this.value = value;
-        }
-
-        @Override public String toString() {
-            return this.value.toString();
-        }
-    }
 
     /**
      * 二叉查找树插入
@@ -59,11 +45,11 @@ public class BinarySearchTree {
      * @param result
      */
     public void inOrder(@NonNull List<TreeNode> result) {
-//        this.inOrder(this.root, result);
+        // this.inOrder(this.root, result);
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode temp = this.root;
-        while(temp != null || stack.size() > 0){
-            while(temp != null){
+        while (temp != null || stack.size() > 0) {
+            while (temp != null) {
                 stack.push(temp);
                 temp = temp.left;
             }
@@ -168,6 +154,21 @@ public class BinarySearchTree {
                 }
             }
             return node;
+        }
+    }
+
+    static class TreeNode {
+        Integer value;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(Integer value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value.toString();
         }
     }
 

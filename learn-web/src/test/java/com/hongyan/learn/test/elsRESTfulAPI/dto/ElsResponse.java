@@ -10,13 +10,6 @@ import lombok.Data;
 
 @Data
 public class ElsResponse {
-    @Data
-    public static class Shards {
-        private Integer total;
-        private Integer successful;
-        private Integer failed;
-    }
-
     private String _index;
     private String _type;
     private String _id;
@@ -24,4 +17,11 @@ public class ElsResponse {
     private String result;
     private Shards _shards;
     private Boolean created;
+
+    @Data
+    public static class Shards {
+        private Integer total;
+        private Integer successful;
+        private Integer failed;
+    }
 }

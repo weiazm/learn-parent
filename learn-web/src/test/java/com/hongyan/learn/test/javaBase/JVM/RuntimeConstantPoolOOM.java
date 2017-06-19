@@ -12,7 +12,7 @@ import java.util.List;
 public class RuntimeConstantPoolOOM {
     public static void main(String[] args) {
         List<String> stringList = Lists.newArrayList();
-        for (int i = 0; ; i++) {
+        for (int i = 0;; i++) {
             stringList.add(String.valueOf(i).intern());
         }
     }

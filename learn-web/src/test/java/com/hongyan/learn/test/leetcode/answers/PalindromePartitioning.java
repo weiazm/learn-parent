@@ -1,22 +1,18 @@
 package com.hongyan.learn.test.leetcode.answers;/*
- * Given a string s, partition s such that every substring of the partition is 
- * a palindrome.
+                                                 * Given a string s, partition s such that every substring of the
+                                                 * partition is a palindrome.
+                                                 * 
+                                                 * Return all possible palindrome partitioning of s.
+                                                 * 
+                                                 * For example, given s = "aab", Return
+                                                 * 
+                                                 * [ ["aa","b"], ["a","a","b"] ]
+                                                 */
 
- * Return all possible palindrome partitioning of s.
-
- * For example, given s = "aab",
- * Return
-
- *  [
- *    ["aa","b"],
- *    ["a","a","b"]
- *  ]
- */
-
-import java.util.*;
+import java.util.ArrayList;
 
 public class PalindromePartitioning {
-    
+
     public ArrayList<ArrayList<String>> partition(String s) {
         ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
         ArrayList<String> list = new ArrayList<String>();
@@ -42,7 +38,7 @@ public class PalindromePartitioning {
     }
 
     public boolean isPalindrome(String s) {
-        for (int i = 0; i < s.length() / 2; i++) 
+        for (int i = 0; i < s.length() / 2; i++)
             if (s.charAt(i) != s.charAt(s.length() - 1 - i))
                 return false;
         return true;

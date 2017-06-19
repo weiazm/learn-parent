@@ -1,14 +1,11 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.util.curator;
 
 import com.google.common.collect.Lists;
 import com.hongyan.learn.config.ZookeeperCuratorConfig;
-import lombok.Setter;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.junit.Ignore;
@@ -22,6 +19,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import lombok.Setter;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by weihongyan on 9/14/16.
@@ -44,7 +45,7 @@ public class CuratorLockTest {
         client.start();
 
         InterProcessMutex lock = new InterProcessMutex(client, lockDir);
-        lock.acquire();//死锁了
+        lock.acquire();// 死锁了
 
         List<ZookeeperRunner> threads = Lists.newArrayList();
         for (int i = 0; i < 50; i++) {
@@ -56,7 +57,7 @@ public class CuratorLockTest {
             threadPool.submit(thread);
         }
         log.info("threads start done!");
-        Thread.sleep(60000);//这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
+        Thread.sleep(60000);// 这里很坑爹,主线程需保持运行态,否则junit会回收掉context导致其他线程挂掉.
         for (ZookeeperRunner thread : threads) {
             thread.setFlag(false);
         }

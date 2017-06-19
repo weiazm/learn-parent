@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2015 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2015 All Rights Reserved.
  */
 package com.hongyan.learn.common.util;
 
@@ -20,6 +19,10 @@ public class ServiceLocator implements ApplicationContextAware, InitializingBean
 
     private static ApplicationContext context;
 
+    public static <T> T getBean(Class<T> requiredType) {
+        return context.getBean(requiredType);
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         if (null == context) {
@@ -30,9 +33,5 @@ public class ServiceLocator implements ApplicationContextAware, InitializingBean
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ServiceLocator.context = applicationContext;
-    }
-
-    public static <T> T getBean(Class<T> requiredType) {
-        return context.getBean(requiredType);
     }
 }

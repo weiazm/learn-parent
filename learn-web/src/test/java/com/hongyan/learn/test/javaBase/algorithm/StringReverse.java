@@ -6,7 +6,7 @@ package com.hongyan.learn.test.javaBase.algorithm;
  * @date 18/11/2016
  */
 public class StringReverse {
-    
+
     public static String reverseWord(String word) {
         StringBuilder sb = new StringBuilder();
         for (int i = word.length() - 1; i >= 0; i--) {

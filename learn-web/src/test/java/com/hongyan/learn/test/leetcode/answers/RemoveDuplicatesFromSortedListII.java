@@ -1,33 +1,16 @@
 package com.hongyan.learn.test.leetcode.answers;/*
- * Given a sorted linked list, delete all nodes that have duplicate numbers, 
- * leaving only distinct numbers from the original list.
+                                                 * Given a sorted linked list, delete all nodes that have duplicate
+                                                 * numbers, leaving only distinct numbers from the original list.
+                                                 * 
+                                                 * For example, Given 1->2->3->3->4->4->5, return 1->2->5. Given
+                                                 * 1->1->1->2->3, return 2->3.
+                                                 */
 
- * For example,
- * Given 1->2->3->3->4->4->5, return 1->2->5.
- * Given 1->1->1->2->3, return 2->3.
- */
 /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
+ * Definition for singly-linked list. public class ListNode { int val; ListNode next; ListNode(int x) { val = x; next =
+ * null; } }
  */
 public class RemoveDuplicatesFromSortedListII {
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 
     public ListNode deleteDuplicates(ListNode head) {
         ListNode dummy = new ListNode(0);
@@ -45,41 +28,51 @@ public class RemoveDuplicatesFromSortedListII {
         return dummy.next;
     }
 
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
+
     /**************************** 2014.02.24 *************************************/
 
-//    public ListNode deleteDuplicates(ListNode head) {
-//        if (head == null || head.next == null)
-//            return head;
-//        ListNode cur1 = head;
-//        ListNode cur2 = head.next;
-//        if (cur1.val != cur2.val) {
-//            cur1.next = deleteDuplicates(cur2);
-//            return head;
-//        } else {
-//            while (cur2 != null && cur1.val == cur2.val)
-//                cur2 = cur2.next;
-//            return deleteDuplicates(cur2);
-//        }
-//    }
+    // public ListNode deleteDuplicates(ListNode head) {
+    // if (head == null || head.next == null)
+    // return head;
+    // ListNode cur1 = head;
+    // ListNode cur2 = head.next;
+    // if (cur1.val != cur2.val) {
+    // cur1.next = deleteDuplicates(cur2);
+    // return head;
+    // } else {
+    // while (cur2 != null && cur1.val == cur2.val)
+    // cur2 = cur2.next;
+    // return deleteDuplicates(cur2);
+    // }
+    // }
 
     /**************************** updated 20141019 *******************************/
 
-//    public ListNode deleteDuplicates(ListNode head) {
-//        ListNode dummy = new ListNode(0);
-//        dummy.next = head;
-//        ListNode prev = dummy;
-//        ListNode cur = prev.next;
-//        while (cur != null) {
-//            if (cur.next != null && cur.val == cur.next.val) {
-//                cur = cur.next;
-//            } else {
-//                if (prev.next == cur)
-//                    prev = prev.next;
-//                else
-//                    prev.next = cur.next;
-//                cur = prev.next;
-//            }
-//        }
-//        return dummy.next;
-//    }
+    // public ListNode deleteDuplicates(ListNode head) {
+    // ListNode dummy = new ListNode(0);
+    // dummy.next = head;
+    // ListNode prev = dummy;
+    // ListNode cur = prev.next;
+    // while (cur != null) {
+    // if (cur.next != null && cur.val == cur.next.val) {
+    // cur = cur.next;
+    // } else {
+    // if (prev.next == cur)
+    // prev = prev.next;
+    // else
+    // prev.next = cur.next;
+    // cur = prev.next;
+    // }
+    // }
+    // return dummy.next;
+    // }
 }

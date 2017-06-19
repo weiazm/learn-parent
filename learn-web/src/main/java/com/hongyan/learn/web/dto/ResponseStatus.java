@@ -1,6 +1,5 @@
 /**
- * Baidu.com Inc.
- * Copyright (c) 2000-2015 All Rights Reserved.
+ * Baidu.com Inc. Copyright (c) 2000-2015 All Rights Reserved.
  */
 package com.hongyan.learn.web.dto;
 

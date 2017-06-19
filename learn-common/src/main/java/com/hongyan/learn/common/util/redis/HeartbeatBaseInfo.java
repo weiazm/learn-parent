@@ -20,12 +20,11 @@ import lombok.Data;
 @Data
 public class HeartbeatBaseInfo implements Serializable {
 
+    public static final Type type = new TypeToken<HeartbeatBaseInfo>() {
+    }.getType();
     private static final long serialVersionUID = -5228727793705760815L;
-
     private static final int THRESHOLD = 10;
-
     protected static Gson gson = new Gson();
-
     /**
      * 进程名
      */
@@ -47,8 +46,13 @@ public class HeartbeatBaseInfo implements Serializable {
      */
     private long count;
 
+    public static HeartbeatBaseInfo fromJson(String json) {
+        return gson.fromJson(json, type);
+    }
+
     /**
      * 生成json
+     * 
      * @return
      */
     public String toJson() {
@@ -57,6 +61,7 @@ public class HeartbeatBaseInfo implements Serializable {
 
     /**
      * 是否合法，如果返回FALSE，认为进程已挂
+     * 
      * @return
      */
     public boolean isValid() {
@@ -66,12 +71,5 @@ public class HeartbeatBaseInfo implements Serializable {
     @Override
     public String toString() {
         return toJson();
-    }
-
-    public static final Type type = new TypeToken<HeartbeatBaseInfo>() {
-    }.getType();
-
-    public static HeartbeatBaseInfo fromJson(String json) {
-        return gson.fromJson(json, type);
     }
 }

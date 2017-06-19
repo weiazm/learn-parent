@@ -1,12 +1,13 @@
 package com.hongyan.learn.test.dataStructures;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author weihongyan
@@ -15,16 +16,6 @@ import java.util.List;
  */
 @Slf4j
 public class BuildTreeFromTraversalAndConvertTreeToTraversal {
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-    }
-
     @Test
     public void test() {
         int[] preOrder = { 1, 2, 4, 5, 6, 7, 3, 8, 9 };
@@ -212,7 +203,8 @@ public class BuildTreeFromTraversalAndConvertTreeToTraversal {
     }
 
     /**
-     * fucking failed!  can not build a tree from preOrder and postOrder
+     * fucking failed! can not build a tree from preOrder and postOrder
+     * 
      * @param preOrder
      * @param preStart
      * @param preEnd
@@ -221,8 +213,9 @@ public class BuildTreeFromTraversalAndConvertTreeToTraversal {
      * @param postEnd
      * @return
      */
-    public TreeNode preOrderPostOrderBuild(int[] preOrder, int preStart, int preEnd, int[] postOrder, int postStart, int postEnd){
-        if (preStart >preEnd || postStart > postEnd){
+    public TreeNode preOrderPostOrderBuild(int[] preOrder, int preStart, int preEnd, int[] postOrder, int postStart,
+        int postEnd) {
+        if (preStart > preEnd || postStart > postEnd) {
             return null;
         }
         TreeNode root = new TreeNode(preOrder[preStart]);
@@ -231,27 +224,38 @@ public class BuildTreeFromTraversalAndConvertTreeToTraversal {
 
     /**
      * level traversal
+     * 
      * @param root
      * @return
      */
-    public List<Integer> levelTraversal(TreeNode root){
+    public List<Integer> levelTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         Deque<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         TreeNode temp;
-        while(queue.size()>0){
-            for(int i = queue.size() ; i > 0 ; i--){
+        while (queue.size() > 0) {
+            for (int i = queue.size(); i > 0; i--) {
                 temp = queue.poll();
                 result.add(temp.val);
-                if(null != temp.left){
+                if (null != temp.left) {
                     queue.offer(temp.left);
                 }
-                if(null != temp.right){
+                if (null != temp.right) {
                     queue.offer(temp.right);
                 }
             }
         }
         return result;
+    }
+
+    private static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
     }
 
 }

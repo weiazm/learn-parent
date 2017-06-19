@@ -1,12 +1,12 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.test.service;
 
 import com.hongyan.learn.config.DatabaseConfig;
 import com.hongyan.learn.sal.dto.ContactDto;
 import com.hongyan.learn.sal.service.ContactService;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

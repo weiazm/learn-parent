@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.proxy.homework;
 
@@ -18,6 +17,15 @@ import java.lang.reflect.Method;
  * @version 1.0
  */
 public class CgLibTest {
+    public static void main(String[] args) {
+        Enhancer enhancer = new Enhancer();
+        MyInterceptor interceptor = new MyInterceptor();
+        enhancer.setSuperclass(Singer.class);
+        enhancer.setCallback(interceptor);
+        Singer singer = (Singer) enhancer.create();
+        singer.sing();
+    }
+
     public static class MyInterceptor implements MethodInterceptor {
         @Override
         public Object intercept(Object arg0, Method arg1, Object[] arg2, MethodProxy arg3) throws Throwable {
@@ -29,15 +37,6 @@ public class CgLibTest {
         public void sing() {
             System.out.println("im singing");
         }
-    }
-
-    public static void main(String[] args) {
-        Enhancer enhancer = new Enhancer();
-        MyInterceptor interceptor = new MyInterceptor();
-        enhancer.setSuperclass(Singer.class);
-        enhancer.setCallback(interceptor);
-        Singer singer = (Singer) enhancer.create();
-        singer.sing();
     }
 
 }

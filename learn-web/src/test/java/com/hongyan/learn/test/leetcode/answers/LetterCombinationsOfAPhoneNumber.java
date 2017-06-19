@@ -4,20 +4,18 @@ import java.util.ArrayList;
 
 /*
  * Given a digit string, return all possible letter combinations that the number could represent.
-
+ * 
  * A mapping of digit to letters (just like on the telephone buttons) is given below.
-
+ * 
  * http://oj.leetcode.com/problems/letter-combinations-of-a-phone-number/
-
- * Input:Digit string "23"
- * Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
- * Note:
- * Although the above answer is in lexicographical order, your answer could be in any order you want. 
+ * 
+ * Input:Digit string "23" Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]. Note: Although the above
+ * answer is in lexicographical order, your answer could be in any order you want.
  */
 public class LetterCombinationsOfAPhoneNumber {
     public ArrayList<String> letterCombinations(String digits) {
         ArrayList<String> result = new ArrayList<String>();
-        if(digits.length() == 0) {
+        if (digits.length() == 0) {
             result.add("");
             return result;
         }
@@ -59,7 +57,7 @@ public class LetterCombinationsOfAPhoneNumber {
         list9.add("z");
         list1.add("");
         list0.add(" ");
-    
+
         ArrayList<ArrayList<String>> lists = new ArrayList<ArrayList<String>>();
         lists.add(list0);
         lists.add(list1);
@@ -72,12 +70,12 @@ public class LetterCombinationsOfAPhoneNumber {
         lists.add(list8);
         lists.add(list9);
 
-        if(digits.length() == 1)
+        if (digits.length() == 1)
             return lists.get(Integer.parseInt(digits));
         ArrayList<String> firstChar = lists.get(digits.charAt(0) - '0');
         ArrayList<String> sub = letterCombinations(digits.substring(1));
-        for(int i = 0; i < firstChar.size(); i++) {
-            for(int j = 0; j < sub.size(); j++) {
+        for (int i = 0; i < firstChar.size(); i++) {
+            for (int j = 0; j < sub.size(); j++) {
                 String temp = firstChar.get(i);
                 temp += sub.get(j);
                 result.add(temp);

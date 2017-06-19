@@ -67,7 +67,7 @@ public class HeartbeatLock extends RedisBaseLock {
                 if (redisUtil.exists(key) == false) {
                     return true;
                 }
-                if (needUnlock(key, value, force)) {//判断是否需要解锁
+                if (needUnlock(key, value, force)) {// 判断是否需要解锁
                     redisUtil.del(key);
                     log.debug("unlock, key[{}]", key);
                     return true;
@@ -81,14 +81,14 @@ public class HeartbeatLock extends RedisBaseLock {
     }
 
     private boolean needUnlock(final String key, final LockObj value, final boolean force) throws Exception {
-        if (force) {//强制 返回true
+        if (force) {// 强制 返回true
             return true;
         }
         LockObj last = decodeLock(redisUtil.get(key));
-        if (last == null
-            || last.equals(value)
-            || (last.getOwner().equals(heartbeat.getHeartbeatInfo().getProcName()) && (LOCK_MAP.containsKey(key) == false || last
-                .getHeartbeatStartAt() != heartbeat.getHeartbeatInfo().getStartAt()))) {
+        if (last == null || last.equals(value)
+            || (last.getOwner().equals(heartbeat.getHeartbeatInfo().getProcName())
+                && (LOCK_MAP.containsKey(key) == false
+                    || last.getHeartbeatStartAt() != heartbeat.getHeartbeatInfo().getStartAt()))) {
             return true;
         }
         HeartbeatBaseInfo ownerHeartbeat = Heartbeat.readHeartbeatInfo(last.getOwner(), redisUtil);

@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.io.file;
 
@@ -22,16 +21,16 @@ public class FileOperation {
         File[] files = file.listFiles();
         int del = 0;
         int all = 0;
-        for(File temp : files){
+        for (File temp : files) {
             all++;
             String name = temp.getName();
-            if(name.endsWith(" 4.jpg")){
+            if (name.endsWith(" 4.jpg")) {
                 System.out.println(name);
                 temp.delete();
                 del++;
             }
         }
-        System.out.println(del+":"+all);
+        System.out.println(del + ":" + all);
     }
 
     private static void print(File file) {

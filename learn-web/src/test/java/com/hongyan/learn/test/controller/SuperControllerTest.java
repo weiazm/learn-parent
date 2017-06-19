@@ -1,11 +1,11 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.test.controller;
 
 import com.hongyan.learn.config.ApplicationConfig;
 import com.hongyan.learn.config.MvcConfig;
+
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,13 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {ApplicationConfig.class, MvcConfig.class})
+@ContextConfiguration(classes = { ApplicationConfig.class, MvcConfig.class })
 public abstract class SuperControllerTest {
     @Autowired
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
-    
+
     public abstract void test();
 
     public final void pathPrintTest(String path) {

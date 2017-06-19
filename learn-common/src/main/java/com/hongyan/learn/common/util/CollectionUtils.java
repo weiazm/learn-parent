@@ -52,10 +52,6 @@ public class CollectionUtils {
         return map;
     }
 
-    public interface Extracter<K, E> {
-        K extract(E obj);
-    }
-
     /**
      * 按指定大小拆分集合，按原集合顺序拆分
      * 
@@ -77,8 +73,8 @@ public class CollectionUtils {
             list = new ArrayList<>(orig);
         }
         for (int i = 0; i < len; i++) {
-            result.add(new ArrayList<>(list.subList(i * batchSize, ((i + 1) * batchSize) < size ? (i + 1) * batchSize
-                : size)));
+            result.add(new ArrayList<>(
+                list.subList(i * batchSize, ((i + 1) * batchSize) < size ? (i + 1) * batchSize : size)));
         }
         return result;
     }
@@ -102,6 +98,10 @@ public class CollectionUtils {
 
     private static int calSplitLen(int batchSize, int size) {
         return ((size - 1) / batchSize) + 1;
+    }
+
+    public interface Extracter<K, E> {
+        K extract(E obj);
     }
 
 }

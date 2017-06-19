@@ -1,6 +1,5 @@
 package com.hongyan.learn.common.util.redis;
 
-
 import com.google.common.primitives.Longs;
 import com.hongyan.learn.common.util.BaseUtils;
 import com.hongyan.learn.common.util.CollectionUtils;
@@ -28,8 +27,8 @@ import redis.clients.jedis.ShardedJedisPool;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
 /**
- * redis工具类，依赖{@link redis.clients.jedis. ShardedJedisPool}和
- * {@link com.baijia.commons.lang.utils.ServiceLocator ServiceLocator}，配置好这两个bean后，可自动加载ShardedJedisPool实例，自动重试，避免闪断故障
+ * redis工具类，依赖{@link redis.clients.jedis. ShardedJedisPool}和 {@link com.baijia.commons.lang.utils.ServiceLocator
+ * ServiceLocator}，配置好这两个bean后，可自动加载ShardedJedisPool实例，自动重试，避免闪断故障
  * 
  * @title RedisUtil
  * @desc
@@ -39,51 +38,24 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
  */
 public class RedisUtil {
 
-    public static interface RedisAction<T> {
-        String getName();
-
-        T doAction(ShardedJedis jedis);
-    }
-
-    /**
-     * redis批量操作接口，K为参数类型，V为返回值类型
-     * 
-     * @title PipelineAction
-     * @desc description
-     * @author purerboy
-     * @date 2015年12月15日
-     * @version version
-     */
-    public static interface PipelineAction<K, V> {
-        String getName();
-
-        Response<V> doAction(ShardedJedisPipeline p, K key);
-    }
-
-    private static final Logger log = LoggerFactory.getLogger(RedisUtil.class);
-
     /**
      * redis操作执行成功返回值：{@value}
      */
     public static final long OK_RESULT = 1;
-
     /**
      * redis操作执行失败返回值：{@value}
      */
     public static final long NOT_OK_RESULT = 0;
-
     public static final int DEF_RETYR_TIMES = 10;
     public static final long DEF_WAIT_TIME = 100;
-
+    private static final Logger log = LoggerFactory.getLogger(RedisUtil.class);
+    private static final int batch_size = 1000;
     private static RedisUtil ins;
-
     @Getter
     @Setter
     private ShardedJedisPool jedisPool;
-    
     private int retryTimes = DEF_RETYR_TIMES;
     private long waitTime = DEF_WAIT_TIME;
-
     /**
      * @param jedisPool
      */
@@ -126,6 +98,85 @@ public class RedisUtil {
             }
         }, RedisUtil.class);
         return ins;
+    }
+
+    public static void main(String[] args) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-config.xml");
+        ServiceLocator locator = new ServiceLocator();
+        locator.setApplicationContext(context);
+
+        RedisUtil redisUtil = RedisUtil.getIns();
+
+        testRetry(redisUtil);
+
+        testSetExpireExpire(redisUtil);
+
+        testSetExpireSet(redisUtil);
+
+    }
+
+    private static void testRetry(RedisUtil redisUtil) throws Exception {
+        System.out.println("==============================================");
+        log.info("test retry");
+        final String key = "ljx-20150909-test-key";
+        redisUtil.doRedisAction(new RedisAction<String>() {
+
+            @Override
+            public String getName() {
+                return "retry get";
+            }
+
+            @Override
+            public String doAction(ShardedJedis jedis) {
+                return jedis.get(key);
+            }
+        }, 3, 200);
+    }
+
+    private static void testSetExpireExpire(RedisUtil redisUtil) throws Exception {
+        final String key = "ljx-20150909-test-key";
+        final String value = "ljx-20150909-test-value";
+        final int expireTime = 2;
+
+        System.out.println("==============================================");
+        log.info("test set expire expire");
+        redisUtil.setnx(key, value);
+        redisUtil.expire(key, expireTime);
+        long start = System.currentTimeMillis();
+        Thread.sleep(1000L);
+        log.info("is expire:" + (redisUtil.get(key) == null));
+        redisUtil.expire(key, expireTime);
+        while (redisUtil.get(key) != null) {
+            Thread.sleep(100L);
+        }
+        long end = System.currentTimeMillis();
+        log.info("expire after:" + (end - start));
+    }
+
+    private static void testSetExpireSet(RedisUtil redisUtil) throws Exception {
+        final String key = "ljx-20150909-test-key";
+        final String value = "ljx-20150909-test-value";
+        final int expireTime = 2;
+
+        System.out.println("==============================================");
+        log.info("test set expire set");
+        redisUtil.setnx(key, value);
+        redisUtil.expire(key, expireTime);
+        long start = System.currentTimeMillis();
+        Thread.sleep(1000L);
+        log.info("is expire:" + (redisUtil.get(key) == null));
+        redisUtil.set(key, value);
+        int count = 0;
+        while (redisUtil.get(key) != null && count++ < 100) {
+            Thread.sleep(100L);
+        }
+        long end = System.currentTimeMillis();
+        if (redisUtil.get(key) != null) {
+            redisUtil.del(key);
+            log.info("unexpire,del it!");
+        } else {
+            log.info("expire after:" + (end - start));
+        }
     }
 
     /**
@@ -407,8 +458,6 @@ public class RedisUtil {
             }
         });
     }
-
-    private static final int batch_size = 1000;
 
     /**
      * 向set中add一组val
@@ -812,7 +861,8 @@ public class RedisUtil {
      * @return
      * @throws Exception
      */
-    public Map<String, Long> expire(final Collection<String> keys, final int value, final String name) throws Exception {
+    public Map<String, Long> expire(final Collection<String> keys, final int value, final String name)
+        throws Exception {
         return pipeline(keys, new PipelineAction<String, Long>() {
 
             @Override
@@ -986,82 +1036,24 @@ public class RedisUtil {
         jedisPool.destroy();
     }
 
-    public static void main(String[] args) throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-config.xml");
-        ServiceLocator locator = new ServiceLocator();
-        locator.setApplicationContext(context);
+    public static interface RedisAction<T> {
+        String getName();
 
-        RedisUtil redisUtil = RedisUtil.getIns();
-
-        testRetry(redisUtil);
-
-        testSetExpireExpire(redisUtil);
-
-        testSetExpireSet(redisUtil);
-
+        T doAction(ShardedJedis jedis);
     }
 
-    private static void testRetry(RedisUtil redisUtil) throws Exception {
-        System.out.println("==============================================");
-        log.info("test retry");
-        final String key = "ljx-20150909-test-key";
-        redisUtil.doRedisAction(new RedisAction<String>() {
+    /**
+     * redis批量操作接口，K为参数类型，V为返回值类型
+     * 
+     * @title PipelineAction
+     * @desc description
+     * @author purerboy
+     * @date 2015年12月15日
+     * @version version
+     */
+    public static interface PipelineAction<K, V> {
+        String getName();
 
-            @Override
-            public String getName() {
-                return "retry get";
-            }
-
-            @Override
-            public String doAction(ShardedJedis jedis) {
-                return jedis.get(key);
-            }
-        }, 3, 200);
-    }
-
-    private static void testSetExpireExpire(RedisUtil redisUtil) throws Exception {
-        final String key = "ljx-20150909-test-key";
-        final String value = "ljx-20150909-test-value";
-        final int expireTime = 2;
-
-        System.out.println("==============================================");
-        log.info("test set expire expire");
-        redisUtil.setnx(key, value);
-        redisUtil.expire(key, expireTime);
-        long start = System.currentTimeMillis();
-        Thread.sleep(1000L);
-        log.info("is expire:" + (redisUtil.get(key) == null));
-        redisUtil.expire(key, expireTime);
-        while (redisUtil.get(key) != null) {
-            Thread.sleep(100L);
-        }
-        long end = System.currentTimeMillis();
-        log.info("expire after:" + (end - start));
-    }
-
-    private static void testSetExpireSet(RedisUtil redisUtil) throws Exception {
-        final String key = "ljx-20150909-test-key";
-        final String value = "ljx-20150909-test-value";
-        final int expireTime = 2;
-
-        System.out.println("==============================================");
-        log.info("test set expire set");
-        redisUtil.setnx(key, value);
-        redisUtil.expire(key, expireTime);
-        long start = System.currentTimeMillis();
-        Thread.sleep(1000L);
-        log.info("is expire:" + (redisUtil.get(key) == null));
-        redisUtil.set(key, value);
-        int count = 0;
-        while (redisUtil.get(key) != null && count++ < 100) {
-            Thread.sleep(100L);
-        }
-        long end = System.currentTimeMillis();
-        if (redisUtil.get(key) != null) {
-            redisUtil.del(key);
-            log.info("unexpire,del it!");
-        } else {
-            log.info("expire after:" + (end - start));
-        }
+        Response<V> doAction(ShardedJedisPipeline p, K key);
     }
 }

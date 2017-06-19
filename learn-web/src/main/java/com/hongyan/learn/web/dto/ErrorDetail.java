@@ -1,6 +1,5 @@
 /**
- * Baidu.com Inc.
- * Copyright (c) 2000-2015 All Rights Reserved.
+ * Baidu.com Inc. Copyright (c) 2000-2015 All Rights Reserved.
  */
 package com.hongyan.learn.web.dto;
 
@@ -19,6 +18,30 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class ErrorDetail implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2090086668682261982L;
+    private ErrorCode code;
+    private Object detail;
+    public ErrorDetail(ErrorCode code, Object detail) {
+        super();
+        this.code = code;
+        this.detail = detail;
+    }
+
+    public int getCode() {
+        return code.getErrorCode();
+    }
+
+    public Object getDetail() {
+        return detail;
+    }
+
+    public String getMessage() {
+        return code.getErrorDesc();
+    }
+
     /**
      * @title ErrorCode
      * @description TODO
@@ -43,31 +66,6 @@ public class ErrorDetail implements Serializable {
         public String getErrorDesc() {
             return desc;
         }
-    }
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 2090086668682261982L;
-    private ErrorCode code;
-    private Object detail;
-
-    public ErrorDetail(ErrorCode code, Object detail) {
-        super();
-        this.code = code;
-        this.detail = detail;
-    }
-
-    public int getCode() {
-        return code.getErrorCode();
-    }
-
-    public Object getDetail() {
-        return detail;
-    }
-
-    public String getMessage() {
-        return code.getErrorDesc();
     }
 
 }

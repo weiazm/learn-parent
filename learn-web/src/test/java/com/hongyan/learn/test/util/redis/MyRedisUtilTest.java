@@ -1,11 +1,11 @@
 /*
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-${year} All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-${year} All Rights Reserved.
  */
 package com.hongyan.learn.test.util.redis;
 
 import com.hongyan.learn.common.util.myRedis.MyRedisUtil;
 import com.hongyan.learn.config.SpringRedisConfig;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,40 +28,40 @@ public class MyRedisUtilTest {
     private RedisConnectionFactory factory;
 
     @Test
-    public void test(){
+    public void test() {
         RedisConnection connection = factory.getConnection();
-        Long result = MyRedisUtil.rightAddList(connection,listKey,"redis作业");
+        Long result = MyRedisUtil.rightAddList(connection, listKey, "redis作业");
         System.out.println(result);
     }
 
     @Test
-    public void test2(){
+    public void test2() {
         RedisConnection connection = factory.getConnection();
-        Object o = MyRedisUtil.leftGetList(connection,listKey,String.class);
+        Object o = MyRedisUtil.leftGetList(connection, listKey, String.class);
         System.out.println(o);
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         RedisConnection connection = factory.getConnection();
-        Object o = MyRedisUtil.putMap(connection,mapKey,"field","hahaha");
+        Object o = MyRedisUtil.putMap(connection, mapKey, "field", "hahaha");
         System.out.println(o);
     }
 
     @Test
-    public void test4(){
+    public void test4() {
         RedisConnection connection = factory.getConnection();
-        Object o = MyRedisUtil.getMap(connection,mapKey,"field",String.class);
+        Object o = MyRedisUtil.getMap(connection, mapKey, "field", String.class);
         System.out.println(o);
     }
 
     @Test
-    public void transaction(){
+    public void transaction() {
         RedisConnection connection = factory.getConnection();
-        connection.watch(MyRedisUtil.serialize(mapKey),MyRedisUtil.serialize(listKey));
+        connection.watch(MyRedisUtil.serialize(mapKey), MyRedisUtil.serialize(listKey));
         connection.multi();
-        System.out.println(MyRedisUtil.rightAddList(connection,listKey,"redis作业2"));
-        System.out.println(MyRedisUtil.putMap(connection,mapKey,"field","hahaha2"));
+        System.out.println(MyRedisUtil.rightAddList(connection, listKey, "redis作业2"));
+        System.out.println(MyRedisUtil.putMap(connection, mapKey, "field", "hahaha2"));
         System.out.println(connection.exec());
     }
 

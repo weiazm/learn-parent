@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.test.controller;
 
@@ -25,7 +24,7 @@ public class ContactControllerTest extends SuperControllerTest {
     @Autowired
     private ApplicationContext context;
 
-    //    @Value(value = "#{systemProperties['redis.host']}")
+    // @Value(value = "#{systemProperties['redis.host']}")
     @Value(value = "${redis.host}")
     private String name;
 

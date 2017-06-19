@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.test.dao;
 
@@ -8,8 +7,8 @@ import com.hongyan.learn.config.DatabaseConfig;
 import com.hongyan.learn.dal.dao.ContactDao;
 import com.hongyan.learn.dal.mapper.ContactMapper;
 import com.hongyan.learn.dal.po.Contact;
+
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 /**
- * Baijiahulian.com Inc.
- * Copyright (c) 2014-2016 All Rights Reserved.
+ * Baijiahulian.com Inc. Copyright (c) 2014-2016 All Rights Reserved.
  */
 package com.hongyan.learn.common.catalog.inherit;
 
@@ -16,6 +15,17 @@ public class Son extends Father {
         System.out.println("im son's static block!");
     }
 
+    @SuppressWarnings("unused")
+    private int age = 5;
+
+    {
+        System.out.println("im son's code block!");
+    }
+
+    public Son() {
+        System.out.println("im son's constructor!");
+    }
+
     public static void main(String[] args) {
         System.out.println(recur(2, 5));
     }
@@ -27,16 +37,5 @@ public class Son extends Father {
             return recur(a, n / 2) * recur(a, n / 2);
         else
             return recur(a, (n - 1) / 2) * recur(a, (n - 1) / 2) * a;
-    }
-
-    @SuppressWarnings("unused")
-    private int age = 5;
-
-    {
-        System.out.println("im son's code block!");
-    }
-
-    public Son() {
-        System.out.println("im son's constructor!");
     }
 }
