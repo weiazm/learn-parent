@@ -1,6 +1,6 @@
 package com.hongyan.learn.test.elsRESTfulAPI;
 
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 import com.hongyan.learn.test.elsRESTfulAPI.dto.Employee;
 
 import org.junit.Test;

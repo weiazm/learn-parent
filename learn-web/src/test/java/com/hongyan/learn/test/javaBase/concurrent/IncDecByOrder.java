@@ -3,7 +3,7 @@
  */
 package com.hongyan.learn.test.javaBase.concurrent;
 
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 
 import java.util.List;

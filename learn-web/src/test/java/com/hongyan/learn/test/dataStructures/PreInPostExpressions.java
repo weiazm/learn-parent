@@ -1,7 +1,7 @@
 package com.hongyan.learn.test.dataStructures;
 
-import com.beust.jcommander.internal.Lists;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 

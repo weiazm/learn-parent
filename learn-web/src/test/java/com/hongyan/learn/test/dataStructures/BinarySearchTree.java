@@ -33,7 +33,7 @@ public class BinarySearchTree {
             } else if (compare > 0) {
                 node.right = insert(node.right, value);
             } else {
-                // nothing
+                // value exists, nothing to do
             }
             return node;
         }

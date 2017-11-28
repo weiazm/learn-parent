@@ -8,7 +8,7 @@ import com.baijia.yunying.hag.dal.bo.Resource;
 import com.baijia.yunying.hag.dal.bo.Role;
 import com.baijia.yunying.hag.service.HagService;
 
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 import com.hongyan.learn.config.HagConfig;
 
 import org.junit.Test;
